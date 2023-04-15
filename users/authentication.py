@@ -1,5 +1,5 @@
-from rest_framework.authentication import BaseAuthentication
 import jwt
+from rest_framework.authentication import BaseAuthentication
 from django.conf import settings
 from django.contrib.auth import get_user_model
 User = get_user_model()

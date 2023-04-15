@@ -1,0 +1,1809 @@
+[
+  {
+    "model": "ingredients.ingredient",
+    "pk": 1,
+    "fields": {
+      "name": "fresh root ginger",
+      "plural": "fresh root ginger",
+      "category": "fresh veg",
+      "substitutes": "Galangal, ground ginger, ginger paste",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 2,
+    "fields": {
+      "name": "garlic clove",
+      "plural": "garlic cloves",
+      "category": "fresh veg",
+      "substitutes": "Garlic powder, minced garlic, shallots",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 3,
+    "fields": {
+      "name": "spring onion",
+      "plural": "spring onions",
+      "category": "fresh veg",
+      "substitutes": "Scallions, shallots, leeks",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 4,
+    "fields": {
+      "name": "fresh red chilli",
+      "plural": "fresh red chillies",
+      "category": "fresh veg",
+      "substitutes": "Cayenne pepper, red pepper flakes, jalapeño",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 5,
+    "fields": {
+      "name": "cashew nut",
+      "plural": "cashew nuts",
+      "category": "other",
+      "substitutes": "Almonds, pine nuts, macadamia nuts",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 6,
+    "fields": {
+      "name": "lime leaf",
+      "plural": "lime leaves",
+      "category": "fresh veg",
+      "substitutes": "Lime zest, lemon zest, kaffir lime leaves",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 7,
+    "fields": {
+      "name": "ground turmeric",
+      "plural": "ground turmeric",
+      "category": "spices",
+      "substitutes": "Fresh turmeric, curry powder, saffron",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 8,
+    "fields": {
+      "name": "fish sauce",
+      "plural": "fish sauce",
+      "category": "other",
+      "substitutes": "Soy sauce, Worcestershire sauce, miso paste",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": false
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 9,
+    "fields": {
+      "name": "oyster mushroom",
+      "plural": "oyster mushrooms",
+      "category": "fresh veg",
+      "substitutes": "Shiitake mushrooms, button mushrooms, portobello mushrooms",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 10,
+    "fields": {
+      "name": "mango",
+      "plural": "mangos",
+      "category": "fresh fruit",
+      "substitutes": "Papaya, peach, apricot",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 11,
+    "fields": {
+      "name": "chicken breast",
+      "plural": "chicken breasts",
+      "category": "fish & meat",
+      "substitutes": "Turkey breast, tofu, seitan",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 12,
+    "fields": {
+      "name": "olive oil",
+      "plural": "olive oil",
+      "category": "other",
+      "substitutes": "Canola oil, sunflower oil, avocado oil",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 13,
+    "fields": {
+      "name": "green bean",
+      "plural": "green beans",
+      "category": "fresh veg",
+      "substitutes": "Asparagus, sugar snap peas, snow peas",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 14,
+    "fields": {
+      "name": "lime",
+      "plural": "limes",
+      "category": "fresh fruit",
+      "substitutes": "Lemon, grapefruit, orange",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 15,
+    "fields": {
+      "name": "400ml tin(s) light coconut milk",
+      "plural": "400ml tin(s) light coconut milk",
+      "category": "other",
+      "substitutes": "Heavy cream, almond milk, soy milk",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 16,
+    "fields": {
+      "name": "basmati rice",
+      "plural": "basmati rice",
+      "category": "other",
+      "substitutes": "Jasmine rice, white rice, brown rice",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 17,
+    "fields": {
+      "name": "purple kale",
+      "plural": "purple kale",
+      "category": "fresh veg",
+      "substitutes": "Swiss chard, spinach, collard greens",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 18,
+    "fields": {
+      "name": "lemongrass",
+      "plural": "lemongrass",
+      "category": "fresh veg",
+      "substitutes": "Lemon zest, lemon juice, lime juice",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 19,
+    "fields": {
+      "name": "chestnut mushroom",
+      "plural": "chestnut mushrooms",
+      "category": "fresh veg",
+      "substitutes": "Shiitake mushrooms, portobello mushrooms, cremini mushrooms",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 20,
+    "fields": {
+      "name": "onion",
+      "plural": "onions",
+      "category": "fresh veg",
+      "substitutes": "Shallots, scallions, leeks",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 21,
+    "fields": {
+      "name": "tomato",
+      "plural": "tomatoes",
+      "category": "fresh veg",
+      "substitutes": "Sun-dried tomatoes, roasted tomatoes, tomato sauce",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 22,
+    "fields": {
+      "name": "groundnut oil",
+      "plural": "groundnut oil",
+      "category": "other",
+      "substitutes": "Peanut oil, canola oil, sunflower oil",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 23,
+    "fields": {
+      "name": "turmeric",
+      "plural": "turmeric",
+      "category": "spices",
+      "substitutes": "Curry powder, cumin, coriander",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 24,
+    "fields": {
+      "name": "fenugreek",
+      "plural": "fenugreek",
+      "category": "spices",
+      "substitutes": "Mustard seeds, cumin, coriander",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 25,
+    "fields": {
+      "name": "black mustard seeds",
+      "plural": "black mustard seeds",
+      "category": "spices",
+      "substitutes": "Yellow mustard seeds, brown mustard seeds, mustard powder",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 26,
+    "fields": {
+      "name": "medium curry powder",
+      "plural": "medium curry powder",
+      "category": "spices",
+      "substitutes": "Garam masala, turmeric, cumin",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 27,
+    "fields": {
+      "name": "mango chutney",
+      "plural": "mango chutney",
+      "category": "other",
+      "substitutes": "Peach chutney, apricot chutney, apple chutney",
+      "vegan": false,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 28,
+    "fields": {
+      "name": "paneer",
+      "plural": "paneer",
+      "category": "dairy",
+      "substitutes": "Tofu, halloumi, feta cheese",
+      "vegan": false,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 29,
+    "fields": {
+      "name": "brown basmati rice",
+      "plural": "brown basmati rice",
+      "category": "other",
+      "substitutes": "Brown jasmine rice, brown long-grain rice, brown wild rice",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 30,
+    "fields": {
+      "name": "fresh coriander",
+      "plural": "fresh coriander",
+      "category": "fresh veg",
+      "substitutes": "Fresh parsley, fresh basil, fresh mint",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 31,
+    "fields": {
+      "name": "butternut squash",
+      "plural": "butternut squash",
+      "category": "fresh veg",
+      "substitutes": "Acorn squash, pumpkin, sweet potato",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 32,
+    "fields": {
+      "name": "coriander seeds",
+      "plural": "coriander seeds",
+      "category": "spices",
+      "substitutes": "Cumin seeds, fennel seeds, caraway seeds",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 33,
+    "fields": {
+      "name": "fenugreek seeds",
+      "plural": "fenugreek seeds",
+      "category": "spices",
+      "substitutes": "Mustard seeds, cumin seeds, coriander seeds",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 34,
+    "fields": {
+      "name": "cherry tomato",
+      "plural": "cherry tomatoes",
+      "category": "fresh veg",
+      "substitutes": "Grape tomatoes, plum tomatoes, Roma tomatoes",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 35,
+    "fields": {
+      "name": "tinned pineapple ring in juice",
+      "plural": "tinned pineapple rings in juice",
+      "category": "other",
+      "substitutes": "Fresh pineapple, canned mango, canned papaya",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 36,
+    "fields": {
+      "name": "400g tin(s) chickpeas",
+      "plural": "400g tin(s) chickpeas",
+      "category": "other",
+      "substitutes": "Navy beans, cannellini beans, kidney beans",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 37,
+    "fields": {
+      "name": "buttermilk",
+      "plural": "buttermilk",
+      "category": "dairy",
+      "substitutes": "Yogurt, sour cream, milk with vinegar or lemon juice",
+      "vegan": false,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 38,
+    "fields": {
+      "name": "panko breadcrumbs",
+      "plural": "panko breadcrumbs",
+      "category": "other",
+      "substitutes": "Regular breadcrumbs, crushed crackers, cornmeal",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": false
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 39,
+    "fields": {
+      "name": "creamed coconut",
+      "plural": "creamed coconuts",
+      "category": "other",
+      "substitutes": "Coconut milk, coconut cream, coconut oil",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 40,
+    "fields": {
+      "name": "vegetable oil",
+      "plural": "vegetable oil",
+      "category": "other",
+      "substitutes": "Canola oil, sunflower oil, olive oil",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 41,
+    "fields": {
+      "name": "carrot",
+      "plural": "carrots",
+      "category": "fresh veg",
+      "substitutes": "Sweet potato, parsnip, butternut squash",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 42,
+    "fields": {
+      "name": "garam masala",
+      "plural": "garam masala",
+      "category": "spices",
+      "substitutes": "Curry powder, cumin, coriander",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 43,
+    "fields": {
+      "name": "plain flour",
+      "plural": "plain flour",
+      "category": "other",
+      "substitutes": "Gluten-free flour, almond flour, coconut flour",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": false
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 44,
+    "fields": {
+      "name": "red onion",
+      "plural": "red onions",
+      "category": "fresh veg",
+      "substitutes": "Shallots, scallions, leeks",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 45,
+    "fields": {
+      "name": "lemon",
+      "plural": "lemons",
+      "category": "fresh fruit",
+      "substitutes": "Lime, grapefruit, orange",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 46,
+    "fields": {
+      "name": "raw king prawn",
+      "plural": "raw king prawns",
+      "category": "fish & meat",
+      "substitutes": "shrimp, scallops, white fish",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 47,
+    "fields": {
+      "name": "natural yoghurt",
+      "plural": "natural yoghurt",
+      "category": "dairy",
+      "substitutes": "Greek yogurt, sour cream, coconut yogurt",
+      "vegan": false,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 48,
+    "fields": {
+      "name": "chicken thigh",
+      "plural": "chicken thighs",
+      "category": "fish & meat",
+      "substitutes": "Turkey thigh, chicken legs, turkey legs",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 49,
+    "fields": {
+      "name": "salt",
+      "plural": "salt",
+      "category": "spices",
+      "substitutes": "Mint, rosemary, nutmeg",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 50,
+    "fields": {
+      "name": "rapeseed oil",
+      "plural": "rapeseed oil",
+      "category": "other",
+      "substitutes": "Canola oil, vegetable oil, sunflower oil",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 51,
+    "fields": {
+      "name": "fresh flat-leaf parsley",
+      "plural": "fresh flat-leaves parsley",
+      "category": "fresh veg",
+      "substitutes": "Fresh cilantro, fresh basil, fresh mint",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 52,
+    "fields": {
+      "name": "cayenne pepper",
+      "plural": "cayenne pepper",
+      "category": "spices",
+      "substitutes": "Red pepper flakes, paprika, chili powder",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 53,
+    "fields": {
+      "name": "Dijon mustard",
+      "plural": "Dijon mustard",
+      "category": "other",
+      "substitutes": "Yellow mustard, honey mustard, whole-grain mustard",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 54,
+    "fields": {
+      "name": "red pepper",
+      "plural": "red peppers",
+      "category": "fresh veg",
+      "substitutes": "Green pepper, yellow pepper, orange pepper",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 55,
+    "fields": {
+      "name": "chicken stock",
+      "plural": "chicken stock",
+      "category": "other",
+      "substitutes": "Vegetable stock, beef stock, mushroom stock",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": false
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 56,
+    "fields": {
+      "name": "fresh thyme",
+      "plural": "fresh thyme",
+      "category": "fresh veg",
+      "substitutes": "Dried thyme, dried rosemary, dried oregano",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 57,
+    "fields": {
+      "name": "bay leaf",
+      "plural": "bay leaves",
+      "category": "spices",
+      "substitutes": "Thyme, rosemary, oregano",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 58,
+    "fields": {
+      "name": "scotch bonnet chilli",
+      "plural": "scotch bonnet chillies",
+      "category": "fresh veg",
+      "substitutes": "Habanero pepper, cayenne pepper, jalapeño pepper",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 59,
+    "fields": {
+      "name": "black pepper",
+      "plural": "black pepper",
+      "category": "spices",
+      "substitutes": "White pepper, red pepper, pink pepper",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 60,
+    "fields": {
+      "name": "chilli powder",
+      "plural": "chilli powder",
+      "category": "spices",
+      "substitutes": "Cayenne pepper, paprika, red pepper flakes",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 61,
+    "fields": {
+      "name": "coconut oil",
+      "plural": "coconut oil",
+      "category": "other",
+      "substitutes": "Palm oil, vegetable oil, butter",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 62,
+    "fields": {
+      "name": "plum tomato",
+      "plural": "plum tomatoes",
+      "category": "fresh veg",
+      "substitutes": "Cherry tomato, grape tomato, Roma tomato",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 63,
+    "fields": {
+      "name": "fish stock",
+      "plural": "fish stock",
+      "category": "other",
+      "substitutes": "Vegetable stock, chicken stock, mushroom stock",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": false
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 64,
+    "fields": {
+      "name": "400ml tin(s) coconut milk",
+      "plural": "400ml tin(s) coconut milk",
+      "category": "other",
+      "substitutes": "Heavy cream, almond milk, soy milk",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 65,
+    "fields": {
+      "name": "tamarind paste",
+      "plural": "tamarind paste",
+      "category": "other",
+      "substitutes": "Lime juice, lemon juice, vinegar",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 66,
+    "fields": {
+      "name": "large raw king prawn",
+      "plural": "large raw king prawns",
+      "category": "fish & meat",
+      "substitutes": "Cooked shrimp, scallops, white fish",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 67,
+    "fields": {
+      "name": "halloumi",
+      "plural": "halloumi",
+      "category": "dairy",
+      "substitutes": "Paneer, feta cheese, queso blanco",
+      "vegan": false,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 68,
+    "fields": {
+      "name": "cornflour",
+      "plural": "cornflour",
+      "category": "other",
+      "substitutes": "Arrowroot starch, potato starch, rice flour",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 69,
+    "fields": {
+      "name": "smoked paprika",
+      "plural": "smoked paprika",
+      "category": "spices",
+      "substitutes": "Paprika, cayenne pepper, chili powder",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 70,
+    "fields": {
+      "name": "garlic granules",
+      "plural": "garlic granules",
+      "category": "spices",
+      "substitutes": "Garlic powder, minced garlic, shallots",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 71,
+    "fields": {
+      "name": "fresh basil leaf",
+      "plural": "fresh basil leaves",
+      "category": "fresh veg",
+      "substitutes": "Fresh parsley, fresh cilantro, fresh mint",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 72,
+    "fields": {
+      "name": "red Romano pepper",
+      "plural": "red Romano peppers",
+      "category": "fresh veg",
+      "substitutes": "Red bell pepper, green bell pepper, yellow bell pepper",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 73,
+    "fields": {
+      "name": "chilli flakes",
+      "plural": "chilli flakes",
+      "category": "spices",
+      "substitutes": "Cayenne pepper, paprika, red pepper flakes",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 74,
+    "fields": {
+      "name": "quinoa",
+      "plural": "quinoa",
+      "category": "other",
+      "substitutes": "Brown rice, barley, couscous",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 75,
+    "fields": {
+      "name": "fresh jalapeno chilli",
+      "plural": "fresh jalapeno chillies",
+      "category": "fresh veg",
+      "substitutes": "Fresh serrano pepper, fresh cayenne pepper, canned green chilies",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 76,
+    "fields": {
+      "name": "cumin seeds",
+      "plural": "cumin seeds",
+      "category": "spices",
+      "substitutes": "Coriander seeds, fennel seeds, caraway seeds",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 77,
+    "fields": {
+      "name": "400g tin(s) black bean",
+      "plural": "400g tin(s) black beans",
+      "category": "other",
+      "substitutes": "Kidney beans, pinto beans, navy beans",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 78,
+    "fields": {
+      "name": "white wine vinegar",
+      "plural": "white wine vinegar",
+      "category": "other",
+      "substitutes": "Red wine vinegar, apple cider vinegar, rice vinegar",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 79,
+    "fields": {
+      "name": "golden caster sugar",
+      "plural": "golden caster sugar",
+      "category": "other",
+      "substitutes": "Brown sugar, granulated sugar, honey",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 80,
+    "fields": {
+      "name": "Extra virgin olive oil",
+      "plural": "Extra virgin olive oil",
+      "category": "other",
+      "substitutes": "Olive oil, avocado oil, canola oil",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 81,
+    "fields": {
+      "name": "large egg",
+      "plural": "large eggs",
+      "category": "dairy",
+      "substitutes": "Applesauce, banana, flax egg",
+      "vegan": false,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 82,
+    "fields": {
+      "name": "avocado",
+      "plural": "avocados",
+      "category": "fresh veg",
+      "substitutes": "Hummus, guacamole, tahini",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 83,
+    "fields": {
+      "name": "fresh mint",
+      "plural": "fresh mint",
+      "category": "fresh veg",
+      "substitutes": "Fresh basil, fresh parsley, fresh cilantro",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 84,
+    "fields": {
+      "name": "Hot chilli sauce",
+      "plural": "Hot chilli sauce",
+      "category": "other",
+      "substitutes": "Sriracha sauce, Tabasco sauce, harissa sauce",
+      "vegan": false,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 85,
+    "fields": {
+      "name": "potato",
+      "plural": "potatoes",
+      "category": "fresh veg",
+      "substitutes": "Sweet potato, yam, turnip",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 86,
+    "fields": {
+      "name": "haddock fillet",
+      "plural": "haddock fillets",
+      "category": "fish & meat",
+      "substitutes": "Cod fillet, tilapia fillet, salmon fillet",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 87,
+    "fields": {
+      "name": "milk",
+      "plural": "milk",
+      "category": "dairy",
+      "substitutes": "Almond milk, soy milk, coconut milk",
+      "vegan": false,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 88,
+    "fields": {
+      "name": "fennel seeds",
+      "plural": "fennel seeds",
+      "category": "spices",
+      "substitutes": "Coriander seeds, cumin seeds, caraway seeds",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 89,
+    "fields": {
+      "name": "sunflower oil",
+      "plural": "sunflower oil",
+      "category": "other",
+      "substitutes": "Canola oil, vegetable oil, olive oil",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 90,
+    "fields": {
+      "name": "mixed seeds",
+      "plural": "mixed seeds",
+      "category": "other",
+      "substitutes": "Sunflower seeds, pumpkin seeds, sesame seeds",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 91,
+    "fields": {
+      "name": "sirloin steak",
+      "plural": "sirloin steaks",
+      "category": "fish & meat",
+      "substitutes": "Flank steak, ribeye steak, filet mignon",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 92,
+    "fields": {
+      "name": "Maris Piper potato",
+      "plural": "Maris Piper potatoes",
+      "category": "fresh veg",
+      "substitutes": "Yukon Gold potato, Russet potato, red potato",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 93,
+    "fields": {
+      "name": "fresh green chilli",
+      "plural": "fresh green chillies",
+      "category": "fresh veg",
+      "substitutes": "Serrano pepper, jalapeño pepper, Anaheim pepper",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 94,
+    "fields": {
+      "name": "unsalted peanut",
+      "plural": "unsalted peanuts",
+      "category": "other",
+      "substitutes": "Almonds, cashews, pecans",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 95,
+    "fields": {
+      "name": "sesame seeds",
+      "plural": "sesame seeds",
+      "category": "other",
+      "substitutes": "Flax seeds, chia seeds, sunflower seeds",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 96,
+    "fields": {
+      "name": "dried oregano",
+      "plural": "dried oregano",
+      "category": "spices",
+      "substitutes": "Dried thyme, dried basil, dried rosemary",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 97,
+    "fields": {
+      "name": "dried smoked chipotle chilli",
+      "plural": "dried smoked chipotle chillies",
+      "category": "spices",
+      "substitutes": "Ancho chili, smoked paprika, cayenne pepper",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 98,
+    "fields": {
+      "name": "tequila",
+      "plural": "tequila",
+      "category": "other",
+      "substitutes": "Mezcal, vodka, gin",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 99,
+    "fields": {
+      "name": "jar roasted pepper",
+      "plural": "jar roasted peppers",
+      "category": "other",
+      "substitutes": "Fresh roasted pepper, canned tomato, sun-dried tomato",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 100,
+    "fields": {
+      "name": "400g tin(s) cannellini bean",
+      "plural": "400g tin(s) cannellini beans",
+      "category": "other",
+      "substitutes": "Navy beans, chickpeas, kidney beans",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 101,
+    "fields": {
+      "name": "400g tin(s) kidney bean",
+      "plural": "400g tin(s) kidney beans",
+      "category": "other",
+      "substitutes": "Black beans, pinto beans, chickpeas",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 102,
+    "fields": {
+      "name": "ground cumin",
+      "plural": "ground cumin",
+      "category": "spices",
+      "substitutes": "Ground coriander, chili powder, garam masala",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 103,
+    "fields": {
+      "name": "ground coriander",
+      "plural": "ground coriander",
+      "category": "spices",
+      "substitutes": "Ground cumin, chili powder, garam masala",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 104,
+    "fields": {
+      "name": "dried chipotle chilli",
+      "plural": "dried chipotle chillies",
+      "category": "spices",
+      "substitutes": "Ancho chili, smoked paprika, cayenne pepper",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 105,
+    "fields": {
+      "name": "400g tin(s) chopped tomato",
+      "plural": "400g tin(s) chopped tomatoes",
+      "category": "other",
+      "substitutes": "Crushed tomatoes, tomato puree, tomato sauce",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 106,
+    "fields": {
+      "name": "flour tortilla",
+      "plural": "flour tortilla",
+      "category": "other",
+      "substitutes": "Corn tortilla, wheat wrap, lettuce wrap",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": false
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 107,
+    "fields": {
+      "name": "gem lettuce",
+      "plural": "gem lettuce",
+      "category": "fresh veg",
+      "substitutes": "Romaine lettuce, butter lettuce, iceberg lettuce",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 108,
+    "fields": {
+      "name": "Greek yoghurt",
+      "plural": "Greek yoghurt",
+      "category": "dairy",
+      "substitutes": "Sour cream, coconut yogurt, almond yogurt",
+      "vegan": false,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 109,
+    "fields": {
+      "name": "paprika",
+      "plural": "paprika",
+      "category": "spices",
+      "substitutes": "Cayenne pepper, smoked paprika, chili powder",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 110,
+    "fields": {
+      "name": "picanha",
+      "plural": "picanha",
+      "category": "fish & meat",
+      "substitutes": "Sirloin steak, flank steak, ribeye steak",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 111,
+    "fields": {
+      "name": "fresh rosemary",
+      "plural": "fresh rosemary",
+      "category": "fresh veg",
+      "substitutes": "Dried rosemary, dried thyme, dried oregano",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 112,
+    "fields": {
+      "name": "sweet paprika",
+      "plural": "sweet paprika",
+      "category": "spices",
+      "substitutes": "Paprika, smoked paprika, cayenne pepper",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 113,
+    "fields": {
+      "name": "sherry vinegar",
+      "plural": "sherry vinegar",
+      "category": "other",
+      "substitutes": "Red wine vinegar, apple cider vinegar, balsamic vinegar",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 114,
+    "fields": {
+      "name": "butter",
+      "plural": "butter",
+      "category": "dairy",
+      "substitutes": "Margarine, coconut oil, vegetable oil",
+      "vegan": false,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 115,
+    "fields": {
+      "name": "double cream",
+      "plural": "double cream",
+      "category": "dairy",
+      "substitutes": "Heavy cream, whipping cream, coconut cream",
+      "vegan": false,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 116,
+    "fields": {
+      "name": "grated Parmesan cheese",
+      "plural": "grated Parmesan cheese",
+      "category": "dairy",
+      "substitutes": "Grated Pecorino Romano cheese, grated Asiago cheese, nutritional yeast",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 117,
+    "fields": {
+      "name": "rasher streaky bacon",
+      "plural": "rashers streaky bacon",
+      "category": "fish & meat",
+      "substitutes": "Pancetta, prosciutto, ham",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 118,
+    "fields": {
+      "name": "chestnut",
+      "plural": "chestnuts",
+      "category": "other",
+      "substitutes": "Hazelnut, almond, macadamia",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 119,
+    "fields": {
+      "name": "courgette",
+      "plural": "courgettes",
+      "category": "fresh veg",
+      "substitutes": "Zucchini, yellow squash, eggplant",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 120,
+    "fields": {
+      "name": "tomato passata",
+      "plural": "tomato passata",
+      "category": "other",
+      "substitutes": "Canned tomatoes, tomato puree, tomato sauce",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 121,
+    "fields": {
+      "name": "aubergine",
+      "plural": "aubergines",
+      "category": "fresh veg",
+      "substitutes": "Eggplant, zucchini, bell pepper",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 122,
+    "fields": {
+      "name": "dried lasagne sheets",
+      "plural": "dried lasagne sheets",
+      "category": "other",
+      "substitutes": "Fresh lasagne sheets, no-boil lasagne sheets, zucchini or eggplant slices",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": false
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 123,
+    "fields": {
+      "name": "unsalted butter",
+      "plural": "unsalted butter",
+      "category": "dairy",
+      "substitutes": "Margarine, coconut oil, vegetable oil",
+      "vegan": false,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 124,
+    "fields": {
+      "name": "whole milk",
+      "plural": "whole milk",
+      "category": "dairy",
+      "substitutes": "Almond milk, soy milk, coconut milk",
+      "vegan": false,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 125,
+    "fields": {
+      "name": "grated Parmesan",
+      "plural": "grated Parmesan",
+      "category": "dairy",
+      "substitutes": "Grated Pecorino Romano cheese, grated Asiago cheese, nutritional yeast",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 126,
+    "fields": {
+      "name": "minced beef",
+      "plural": "minced beef",
+      "category": "fish & meat",
+      "substitutes": "Ground turkey, ground chicken, tofu",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 127,
+    "fields": {
+      "name": "red wine",
+      "plural": "red wine",
+      "category": "other",
+      "substitutes": "Red wine vinegar, balsamic vinegar, beef broth",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 128,
+    "fields": {
+      "name": "280g jar sun-dried tomato",
+      "plural": "280g jar sun-dried tomatoes",
+      "category": "other",
+      "substitutes": "Roasted red pepper, cherry tomatoes, fresh tomatoes",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 129,
+    "fields": {
+      "name": "400g tin(s) plum tomato",
+      "plural": "400g tin(s) plum tomatoes",
+      "category": "other",
+      "substitutes": "Cherry tomato, grape tomato, Roma tomato",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 130,
+    "fields": {
+      "name": "dried spaghetti",
+      "plural": "dried spaghetti",
+      "category": "other",
+      "substitutes": "Fresh spaghetti, linguine, fettuccine",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": false
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 131,
+    "fields": {
+      "name": "fresh lasagne sheets",
+      "plural": "fresh lasagne sheets",
+      "category": "other",
+      "substitutes": "Dried lasagne sheets, no-boil lasagne sheets, zucchini or eggplant slices",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": false
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 132,
+    "fields": {
+      "name": "button mushroom",
+      "plural": "button mushrooms",
+      "category": "fresh veg",
+      "substitutes": "Cremini mushroom, shiitake mushroom, portobello mushroom",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 133,
+    "fields": {
+      "name": "egg",
+      "plural": "eggs",
+      "category": "dairy",
+      "substitutes": "Applesauce, banana, flax egg",
+      "vegan": false,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 134,
+    "fields": {
+      "name": "fresh basil",
+      "plural": "fresh basil",
+      "category": "fresh veg",
+      "substitutes": "Fresh parsley, fresh cilantro, fresh mint",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 135,
+    "fields": {
+      "name": "red wine vinegar",
+      "plural": "red wine vinegar",
+      "category": "other",
+      "substitutes": "White wine vinegar, apple cider vinegar, balsamic vinegar",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 136,
+    "fields": {
+      "name": "lamb steak",
+      "plural": "lamb steaks",
+      "category": "fish & meat",
+      "substitutes": "Beef steak, pork steak, tofu",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 137,
+    "fields": {
+      "name": "fresh bay leaf",
+      "plural": "fresh bay leaves",
+      "category": "fresh veg",
+      "substitutes": "Dried bay leaf, thyme, rosemary",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 138,
+    "fields": {
+      "name": "saffron",
+      "plural": "saffron",
+      "category": "spices",
+      "substitutes": "Turmeric, paprika, annatto powder",
+      "vegan": true,
+      "vegetarian": true,
+      "gluten_free": true
+    }
+  },
+  {
+    "model": "ingredients.ingredient",
+    "pk": 139,
+    "fields": {
+      "name": "flatbread",
+      "plural": "flatbreads",
+      "category": "other",
+      "substitutes": "Pita bread, naan bread, tortilla",
+      "vegan": false,
+      "vegetarian": false,
+      "gluten_free": false
+    }
+  }
+]
