@@ -5,7 +5,6 @@ from lib.exceptions import exceptions
 
 from .models import Recipe
 from .serializers.common import RecipeSerializer
-# from .serializers.populated import PopulatedSpeciesSerializer
 
 class RecipesListView(APIView):
     # GET RECIPES: GET /api/
