@@ -48,7 +48,7 @@ class LoginView(APIView):
     
 class IngredientsView(APIView):
     permission_classes = (IsAdminUser,)
-    # CREATE INGREDIENTS: GET /api/admin
+    # GET INGREDIENTS: GET /api/admin
     @exceptions
     def get(self, request):
         ingredients = Ingredient.objects.filter(owner=request.user)
