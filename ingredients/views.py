@@ -17,10 +17,12 @@ class FridgeView(APIView):
         serialized_ingredients = FridgeIngredientSerializer(ingredients, many=True)
         return Response(serialized_ingredients.data)
     
+    # POST INGREDIENTS: POST /api/fridge/
+    # filters recipes and only those including ingredients
     @exceptions
     def post(self, request):
-        print('REQUEST DATA ->', request.data.values())
         ingredient_ids = request.data.values()
+        print('REQUEST DATA ->', ingredient_ids)
         recipes = Recipe.objects.all()
         for ingredient_id in ingredient_ids:
             recipes = recipes.filter(ingredients__id=ingredient_id)

@@ -64,15 +64,8 @@ class ProfileView(APIView):
     
     @exceptions
     def delete(self, request):
-        recipes_owned = Recipe.objects.filter(owner=request.user)
-        recipes_liked = Recipe.objects.filter(likes_received=request.user)
-        recipes = (recipes_owned | recipes_liked).distinct()
-        serialized_recipes = ProfilePageSerializer(recipes, many=True)
-        return Response(serialized_recipes.data)
-    
-    @exceptions
-    def delete(self, request):
-        recipe_id = request.data["liked_recipe_id"]
+        # recipe_id will be sent from the front end in the request body
+        recipe_id = request.data["recipe_id"]
         recipe_to_delete = Recipe.objects.get(pk=recipe_id)
         if recipe_to_delete.owner != request.user:
             raise PermissionDenied()

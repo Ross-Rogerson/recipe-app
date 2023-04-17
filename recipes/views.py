@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from lib.exceptions import exceptions, PermissionDenied
 
 from .models import Recipe
-from .serializers.common import LandingPageSerializer, RecipeSerializer
+from .serializers.common import LandingPageSerializer, RecipeSerializer, FridgeRecipeSerializer
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -57,7 +57,19 @@ class EditRecipeView(APIView):
     @exceptions
     def put(self, request, pk):
         recipe = Recipe.objects.get(pk=pk)
+        if recipe.owner != request.user:
+            raise PermissionDenied()
         serialized_recipe = Recipe(recipe, request.data, partial=True)
         serialized_recipe.is_valid(raise_exception=True)
         serialized_recipe.save()
         return Response(serialized_recipe.data)
+    
+class RecipesInList(APIView):
+    @exceptions
+    def post(self, request):
+        # Array of recipe IDs will be sent from front end
+        recipe_ids = request.data.get("recipes", [])
+        print('PRINTED THIS ->', recipe_ids)
+        recipes = Recipe.objects.filter(id__in=recipe_ids)
+        serialized_recipes = FridgeRecipeSerializer(recipes, many=True)
+        return Response(serialized_recipes.data)
