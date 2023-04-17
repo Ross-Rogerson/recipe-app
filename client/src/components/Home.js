@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
 const Home = () => {
   useEffect(() => {
@@ -10,6 +12,8 @@ const Home = () => {
     getData()
   })
 
+  // !Liked styling below
+  // <FontAwesomeIcon icon={faHeart} style={{color: "#ff4763",}} />
   return (
     <main>
       <h1>Hello World</h1>

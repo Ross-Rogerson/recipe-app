@@ -1,9 +1,10 @@
 import { useLocation, useNavigate, Link } from 'react-router-dom'
 import { authenticated, getUserID, isAuthenticated, removeToken } from '../../helpers/auth'
 import { useState, useEffect, useRef } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass, faSliders } from '@fortawesome/free-solid-svg-icons'
 
-
-const Navbar = ({ openModal, openRegisterModal }) => {
+const Navbar = () => {
 
   const location = useLocation()
   const navigate = useNavigate()
@@ -22,8 +23,14 @@ const Navbar = ({ openModal, openRegisterModal }) => {
         <div id="logo">
           <Link to={'/'}>Recipe-App</Link>
         </div>
-        <ul>
-        </ul>
+        <div id="nav-search">
+          <button id="search-button">
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </button>
+          <button id="filters">
+            <FontAwesomeIcon icon={faSliders} />
+          </button>
+        </div>
       </nav>
     </header >
   )

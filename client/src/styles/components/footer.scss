@@ -6,16 +6,35 @@ footer {
   background-color: white;
   font-size: 2em;
   border-top: 1px solid black;
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 10px;
+  }
 }
 
-ul {
-  list-style-type: none;
-  cursor: pointer;
-  margin: 0;
-  padding: 0;
-
-  li {
-    display: inline;
-    margin: 0.25em;
+div {
+  a {
+    width: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+}
+
+#fridge, #add, #list, #home {
+  height: 39px;
+  a {
+    height: inherit;
+    color: black;
+    img {
+      height: inherit;
+    }
+  }
+}
+
+svg {
+  color: black;
 }

@@ -34,6 +34,7 @@ class RegisterView(APIView):
 class LoginView(APIView):
     @exceptions
     def post(self, request):
+        print('LOGIN ATTEMPT RECEIVED')
         email = request.data['email']
         password = request.data['password']
         user_to_login = User.objects.get(email=email)

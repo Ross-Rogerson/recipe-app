@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer'
 import axios from 'axios'
 
-const tokenName = 'WANDERLUST-TOKEN'
+const tokenName = 'RECIPE-TOKEN'
 
 export const getPayload = () => {
   const token = localStorage.getItem(tokenName) // get full token from localStorage

@@ -29,19 +29,3 @@ def exceptions(func):
             print(e)
             return Response(e.__dict__ if e.__dict__ else { 'detail': str(e) }, status.HTTP_500_INTERNAL_SERVER_ERROR)
     return wrapper
-
-# def auth_decorator(func):
-#     @wraps(func)
-#     def wrapper(request, *args, **kwargs):
-#         if not request.headers:
-#             return Response({'detail': 'Login to like posts.'}, status=status.HTTP_401_UNAUTHORIZED)
-        
-#         auth_header = request.headers.get('Authorization')
-
-#         if not auth_header:
-#             return Response({'detail': 'Login to like posts.'}, status=status.HTTP_401_UNAUTHORIZED)
-
-#         if not auth_header or not auth_header.startswith('Token '):
-#             return Response({'detail': 'Login to like posts.'}, status=status.HTTP_401_UNAUTHORIZED)
-#         # return func(request, *args, **kwargs)
-#     return wrapper

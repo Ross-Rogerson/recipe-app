@@ -10,6 +10,9 @@ class JWTAuthentication(BaseAuthentication):
         if not request.headers:
             return None
         
+        
+        print('AUTHENTICATION ATTEMPTED')
+        print(request.headers)
         auth_header = request.headers.get('Authorization')
         if not auth_header:
             return None
