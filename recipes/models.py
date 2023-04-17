@@ -21,12 +21,19 @@ class Recipe(models.Model):
     method = models.TextField(blank=False)
     ingredients = models.ManyToManyField(Ingredient, through='Constituent')
     date_posted = models.DateTimeField(default=timezone.now)
+    owner = models.ForeignKey(
+        'users.User',
+        on_delete=models.CASCADE,
+        related_name='recipes',
+        default=1
+    )
+    likes_received = models.ManyToManyField('users.User', related_name='liked_by_user')
 
     def __str__(self):
         return self.name
 
 class Constituent(models.Model):
-    name = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    ingredient_detail = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     qty = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)
     unit = models.CharField(max_length=20, null=True, blank=True)

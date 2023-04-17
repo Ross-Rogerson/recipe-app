@@ -9,8 +9,6 @@ class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     password_confirmation = serializers.CharField(write_only=True)
 
-    # default validation is run
-    # custom validate method is executed second
     def validate(self, data):
         password = data.pop('password')
         password_confirmation = data.pop('password_confirmation')
@@ -20,7 +18,6 @@ class UserSerializer(serializers.ModelSerializer):
         data['password'] = hashers.make_password(password)
         return data
 
-    # Meta with selected fields
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'profile_image', 'password', 'password_confirmation')

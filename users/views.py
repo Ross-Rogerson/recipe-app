@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers.common import UserSerializer
 from rest_framework import status
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
 from datetime import datetime, timedelta
 from django.conf import settings
@@ -14,6 +14,9 @@ from lib.exceptions import exceptions
 from ingredients.models import Ingredient
 from ingredients.serializers.common import IngredientSerializer
 from ingredients.serializers.populated import PopulatedIngredientSerializer
+
+from recipes.models import Recipe
+from recipes.serializers.common import ProfilePageSerializer
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -45,6 +48,36 @@ class LoginView(APIView):
         print('TOKEN ->', token)
 
         return Response({'message': f"Welcome back, {user_to_login.username}", 'token': token})
+
+    
+class ProfileView(APIView):
+    permission_classes = (IsAuthenticated,)
+    # GET RECIPES: GET /api/profile/
+    # Gets both recipes liked and owned
+    @exceptions
+    def get(self, request):
+        recipes_owned = Recipe.objects.filter(owner=request.user)
+        recipes_liked = Recipe.objects.filter(likes_received=request.user)
+        recipes = (recipes_owned | recipes_liked).distinct()
+        serialized_recipes = ProfilePageSerializer(recipes, many=True)
+        return Response(serialized_recipes.data)
+    
+    @exceptions
+    def delete(self, request):
+        recipes_owned = Recipe.objects.filter(owner=request.user)
+        recipes_liked = Recipe.objects.filter(likes_received=request.user)
+        recipes = (recipes_owned | recipes_liked).distinct()
+        serialized_recipes = ProfilePageSerializer(recipes, many=True)
+        return Response(serialized_recipes.data)
+    
+    @exceptions
+    def delete(self, request):
+        recipe_id = request.data["liked_recipe_id"]
+        recipe_to_delete = Recipe.objects.get(pk=recipe_id)
+        if recipe_to_delete.owner != request.user:
+            raise PermissionDenied()
+        recipe_to_delete.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
     
 class IngredientsView(APIView):
     permission_classes = (IsAdminUser,)
@@ -78,7 +111,7 @@ class IngredientsDetailedView(APIView):
         serialized_ingredient = PopulatedIngredientSerializer(ingredient)
         return Response(serialized_ingredient.data)
     
-    # PUT INGREDIENT: GET /api/profile/admin/:pk
+    # PUT INGREDIENT: PUT /api/profile/admin/:pk
     @exceptions
     def put(self, request, pk):
         ingredient = Ingredient.objects.get(pk=pk)
@@ -91,9 +124,6 @@ class IngredientsDetailedView(APIView):
     @exceptions
     def delete(self, request, pk):
         ingredient_to_delete = Ingredient.objects.get(pk=pk)
-        # print('INGREDIENT OWNER ->', ingredient_to_delete.owner)
-        # print('REQUEST USER ->', request.user)
-        # print('MATCH?', request.user == ingredient_to_delete.owner)
         if ingredient_to_delete.owner != request.user:
             raise PermissionDenied()
         ingredient_to_delete.delete()
