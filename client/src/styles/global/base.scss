@@ -1,0 +1,23 @@
+main {
+  background: rgb(255, 255, 255);
+  position: relative;
+  height: 84svh;
+  width: 100%;
+  z-index: 300;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+nav {
+  width: 100vw;
+}
+
+#logo {
+  width: 150px;
+
+  a {
+    width: 150px;
+  }
+}

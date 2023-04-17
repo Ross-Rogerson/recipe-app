@@ -1,0 +1,48 @@
+header {
+  height: 8svh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  position: relative;
+  font-size: 2em;
+  z-index: 400;
+  border-bottom: 1px solid black;
+
+  &>#logo {
+    font-family: $brand-font;
+    color: $brand-colour;
+  }
+
+  &>nav {
+    font-family: $main-font;
+    font-size: 0.5em;
+  }
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: inherit;
+  width: 150px;
+}
+
+ul {
+  list-style-type: none;
+  cursor: pointer;
+
+  li {
+    display: inline;
+    text-decoration: none;
+  }
+
+  .profile {
+    margin-right: 10px;
+  }
+
+  #register {
+    margin-left: 10px;
+  }
+}
