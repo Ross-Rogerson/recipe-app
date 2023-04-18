@@ -28,7 +28,7 @@ const Navbar = () => {
       <nav>
 
         <div id="home">
-          <Link to={'/'}>
+          <Link to={'/recipes/'}>
             <img src={home} alt="listIcon" />
           </Link>
         </div>
@@ -58,7 +58,7 @@ const Navbar = () => {
         </div>
 
         <div id="profile">
-          <Link to={isAuthenticated() ? '/profile/' : '/login/'}>
+          <Link to={isAuthenticated() ? `/profile/${getUserID()}/` : '/login/'}>
             <FontAwesomeIcon icon={faCircleUser} />
           </Link>
         </div>

@@ -2,7 +2,8 @@ import jwt
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers.common import UserSerializer
+from .serializers.common import UserSerializer, ProfileSerializer
+from .serializers.populated import PopulatedUserSerializer
 from rest_framework import status
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
@@ -34,7 +35,6 @@ class RegisterView(APIView):
 class LoginView(APIView):
     @exceptions
     def post(self, request):
-        print('LOGIN ATTEMPT RECEIVED')
         email = request.data['email']
         password = request.data['password']
         user_to_login = User.objects.get(email=email)
@@ -46,21 +46,20 @@ class LoginView(APIView):
 
         token = jwt.encode({'sub':  user_to_login.id, 'exp': int(
             dt.strftime('%s'))}, settings.SECRET_KEY, algorithm='HS256')
-        print('TOKEN ->', token)
-
-        return Response({'message': f"Welcome back, {user_to_login.username}", 'token': token})
+        return Response({'message': f"Welcome back, {user_to_login.username}", 'token': token, 'id': {user_to_login.id}})
 
     
 class ProfileView(APIView):
     permission_classes = (IsAuthenticated,)
-    # GET RECIPES: GET /api/profile/
+    # GET RECIPES: GET /api/profile/<int:pk>/
     # Gets both recipes liked and owned
     @exceptions
-    def get(self, request):
-        recipes_owned = Recipe.objects.filter(owner=request.user)
-        recipes_liked = Recipe.objects.filter(likes_received=request.user)
+    def get(self, request, pk):
+        logged_in_user = User.objects.get(pk=pk)
+        recipes_owned = Recipe.objects.filter(owner=logged_in_user)
+        recipes_liked = Recipe.objects.filter(likes_received=logged_in_user)
         recipes = (recipes_owned | recipes_liked).distinct()
-        serialized_recipes = ProfilePageSerializer(recipes, many=True)
+        serialized_recipes = PopulatedUserSerializer(logged_in_user)
         return Response(serialized_recipes.data)
     
     @exceptions

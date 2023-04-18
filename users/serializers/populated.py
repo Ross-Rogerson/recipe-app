@@ -1,5 +1,6 @@
-from .common import UserSerializer
+from .common import ProfileSerializer
 from recipes.serializers.common import RecipeSerializer
 
-class PopulatedUserSerializer(UserSerializer):
-    likes_received = RecipeSerializer(many=True)
+class PopulatedUserSerializer(ProfileSerializer):
+    liked_by_user = RecipeSerializer(many=True)
+    recipes = RecipeSerializer(many=True)

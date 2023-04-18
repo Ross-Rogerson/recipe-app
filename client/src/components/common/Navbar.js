@@ -2,7 +2,7 @@ import { useLocation, useNavigate, Link } from 'react-router-dom'
 import { authenticated, getUserID, isAuthenticated, removeToken } from '../../helpers/auth'
 import { useState, useEffect, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass, faSliders } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faSliders, faBars } from '@fortawesome/free-solid-svg-icons'
 
 const Navbar = () => {
 
@@ -10,10 +10,9 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   const handleLogOut = () => {
-    (location.pathname === '/admin' || location.pathname === `/profile/${getUserID()}`) ? navigate('/') : navigate(location)
-    console.log(getUserID())
-    console.log(location === `/profile/${getUserID()}`)
-    console.log(location)
+    (location.pathname === '/admin' || location.pathname === '/profile/')
+      ? navigate('/login/')
+      : navigate(location)
     removeToken()
   }
 
@@ -21,15 +20,31 @@ const Navbar = () => {
     <header>
       <nav>
         <div id="logo">
-          <Link to={'/'}>Recipe-App</Link>
+          <Link to={'/recipes/'}>Recipe-App</Link>
         </div>
         <div id="nav-search">
-          <button id="search-button">
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </button>
-          <button id="filters">
-            <FontAwesomeIcon icon={faSliders} />
-          </button>
+
+          {
+            location.pathname === '/recipes/' ?
+              <>
+                <button id="search-button">
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
+                <button id="menu">
+                  <FontAwesomeIcon icon={faSliders} />
+                </button>
+              </>
+              :
+              (location.pathname === '/admin/' || location.pathname === `/profile/${getUserID()}/`) ?
+                <>
+                  <button id="filters">
+                    <FontAwesomeIcon icon={faBars} />
+                  </button>
+                </>
+                :
+                <>
+                </>
+          }
         </div>
       </nav>
     </header >

@@ -6,5 +6,5 @@ urlpatterns = [
     path('login/', LoginView.as_view()),
     path('admin/', IngredientsView.as_view()),
     path('admin/<int:pk>/', IngredientsDetailedView.as_view()),
-    path('', ProfileView.as_view()),
+    path('<int:pk>/', ProfileView.as_view()),
 ]
