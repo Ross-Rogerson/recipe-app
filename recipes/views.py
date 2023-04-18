@@ -4,7 +4,8 @@ from rest_framework.response import Response
 from lib.exceptions import exceptions, PermissionDenied
 
 from .models import Recipe
-from .serializers.common import LandingPageSerializer, RecipeSerializer, FridgeRecipeSerializer
+from .serializers.common import RecipeSerializer, FridgeRecipeSerializer
+from .serializers.populated import PopulatedRecipeSerializer
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -14,7 +15,7 @@ class RecipesListView(APIView):
     @exceptions
     def get(self, request):
         recipes = Recipe.objects.all()
-        serialized_recipes = LandingPageSerializer(recipes, many=True)
+        serialized_recipes = PopulatedRecipeSerializer(recipes, many=True)
         return Response(serialized_recipes.data)
     
     # POST LIKE: POST /api/recipes

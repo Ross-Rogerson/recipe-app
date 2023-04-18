@@ -1,4 +1,5 @@
 footer {
+  width: 100vw;
   height: 8svh;
   display: flex;
   justify-content: space-between;
@@ -6,8 +7,11 @@ footer {
   background-color: white;
   font-size: 2em;
   border-top: 1px solid black;
+  position: fixed;
 
   nav {
+    width: calc(100% - 20px);
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;

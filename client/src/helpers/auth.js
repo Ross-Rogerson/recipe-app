@@ -35,18 +35,6 @@ export const authenticated = axios.create({
   },
 })
 
-export const isAdmin = async () => {
-  try {
-    const { data: { isAdmin } } = await authenticated.get('/api/profile')
-    console.log(isAdmin)
-    return isAdmin
-  } catch (err) {
-    console.log(err)
-  }
-  // return currentTime < payload.exp // finally we check if the expiry is bigger than the current timestamp, if it is, it's valid
-}
-
 export const removeToken = () => {
   localStorage.removeItem(tokenName)
-  // axios.delete.headers['Authorization']
 }

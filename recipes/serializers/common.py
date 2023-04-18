@@ -22,6 +22,7 @@ class LandingPageSerializer(ModelSerializer):
     class Meta:
         model = Recipe
         fields = (
+            'id',
             'name', 
             'description', 
             'continent', 
@@ -29,6 +30,7 @@ class LandingPageSerializer(ModelSerializer):
             'protein', 
             'carbohydrates',
             'image',
+            'owner',
             'likes_received'
             )
         

@@ -1,0 +1,99 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+#post-owner {
+  width: inherit;
+  height: 9vw;
+  display: flex;
+  align-items: center;
+  margin: 4px 0;
+}
+
+#post-owner-img {
+  width: 8vw;
+  height: 8vw;
+  margin-left: 10px;
+  border-radius: 100px;
+  
+  img {
+    border: 1px solid black;
+    border-radius: 100px;
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+  }
+}
+
+#post-recipe-owner {
+  margin-left: 10px;
+}
+
+#recipe-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+
+  img {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+  }
+}
+
+#recipe-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 5px;
+  padding-left: 10px;
+}
+
+#recipe-likes-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+
+  button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    width: 6vw;
+    height: 6vw;
+
+    svg{
+      width: inherit;
+      height: inherit;
+    }
+  }
+}
+
+#feed-liked {
+  color: rgb(255, 85, 85);
+}
+
+#feed-like-count {
+  margin-left: 10px;
+}
+
+#feed-recipe-name {
+  margin-bottom: 5px;
+}
+
+#feed-recipe-description {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+#feed-recipe-date {
+  font-size: 11px;
+}

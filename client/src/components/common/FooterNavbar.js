@@ -15,14 +15,6 @@ const Navbar = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
-  const handleLogOut = () => {
-    (location.pathname === '/admin' || location.pathname === `/profile/${getUserID()}`) ? navigate('/') : navigate(location)
-    console.log(getUserID())
-    console.log(location === `/profile/${getUserID()}`)
-    console.log(location)
-    removeToken()
-  }
-
   return (
     <footer>
       <nav>

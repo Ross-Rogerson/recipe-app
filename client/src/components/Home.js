@@ -1,22 +1,78 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faDisplay, faHeart as liked } from '@fortawesome/free-solid-svg-icons'
+import { faHeart } from '@fortawesome/free-regular-svg-icons'
+import { Link } from 'react-router-dom'
+import { getUserID } from '../helpers/auth'
 
 const Home = () => {
+  const [recipes, setRecipes] = useState([])
+  const [error, setError] = useState('')
+
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios.get('/api/recipes/') // * <-- replace with your endpoint
-      console.log(data)
+      try {
+        const { data } = await axios.get('/api/recipes/')
+        setRecipes(data)
+        console.log(data)
+      } catch (err) {
+        console.log('error', err)
+        setError(err.response.data.message)
+      }
     }
     getData()
-  })
+  }, [])
 
   // !Liked styling below
   // <FontAwesomeIcon icon={faHeart} style={{color: "#ff4763",}} />
   return (
     <main>
-      <h1>Hello World</h1>
+      {recipes.length > 0 ?
+        recipes.map(recipe => {
+          const {
+            id, name, description, continent, image, likesReceived = recipe['likes_received'],
+            userImg = recipe.owner['profile_image'], username = recipe.owner.username, datePosted = recipe['date_posted'] }
+            = recipe
+          const displayDate = new Date(datePosted).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+          return (
+            <div key={id} className="post" >
+              <div id="post-owner">
+                <div id="post-owner-img">
+                  <img src={userImg} />
+                </div>
+                <div id="post-recipe-owner">{username}</div>
+              </div>
+              <Link to={`/${id}`}>
+                <div id="recipe-image">
+                  <img src={image} alt={name} />
+                </div>
+              </Link>
+              <div id="recipe-content">
+                <div id="recipe-likes-content">
+                  <button id="feed-like-button" value={id}>
+                    {
+                      likesReceived.map(like => like.id).includes(getUserID()) ?
+                        <FontAwesomeIcon icon={liked} id="feed-liked"/>
+                        :
+                        <FontAwesomeIcon icon={faHeart} />
+                    }
+                  </button>
+                  <div id="feed-like-count">{likesReceived.length}</div>
+                </div>
+                <div id="feed-recipe-name">{name}</div>
+                {/* <div id="feed-recipe-origin">{continent}</div> */}
+                <div id="feed-recipe-description">{description}</div>
+                <div id="feed-recipe-date">{displayDate}</div>
+              </div>
+            </div>
+          )
+        })
+        :
+        <>
+          {/* {console.log('error')} */}
+        </>
+      }
     </main>
   )
 }
