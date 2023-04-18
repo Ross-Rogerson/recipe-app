@@ -58,10 +58,18 @@
   padding-left: 10px;
 }
 
+#content-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  width: calc(100% - 20px);
+}
+
 #recipe-likes-content {
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  justify-content: space-between;
 
   button {
     background-color: transparent;
@@ -83,6 +91,20 @@
 
 #feed-like-count {
   margin-left: 10px;
+}
+
+#feed-dietary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 6vw;
+  div {
+    text-align: center;
+    width: 7vw;
+  }
+  div:not(:last-child) {
+    border-right: 2px solid rgb(67, 67, 67);
+  }
 }
 
 #feed-recipe-name {

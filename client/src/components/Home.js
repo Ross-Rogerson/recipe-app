@@ -25,14 +25,14 @@ const Home = () => {
   }, [])
 
   // !Liked styling below
-  // <FontAwesomeIcon icon={faHeart} style={{color: "#ff4763",}} />
   return (
     <main>
       {recipes.length > 0 ?
         recipes.map(recipe => {
           const {
             id, name, description, continent, image, likesReceived = recipe['likes_received'],
-            userImg = recipe.owner['profile_image'], username = recipe.owner.username, datePosted = recipe['date_posted'] }
+            userImg = recipe.owner['profile_image'], username = recipe.owner.username, datePosted = recipe['date_posted'],
+            vegan = recipe['is_vegan'], vegetarian = recipe['is_vegetarian'], glutenFree = recipe['is_gluten_free'] }
             = recipe
           const displayDate = new Date(datePosted).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
           return (
@@ -49,16 +49,35 @@ const Home = () => {
                 </div>
               </Link>
               <div id="recipe-content">
-                <div id="recipe-likes-content">
-                  <button id="feed-like-button" value={id}>
-                    {
-                      likesReceived.map(like => like.id).includes(getUserID()) ?
-                        <FontAwesomeIcon icon={liked} id="feed-liked"/>
-                        :
-                        <FontAwesomeIcon icon={faHeart} />
+                <div id="content-top-row">
+                  <div id="recipe-likes-content">
+                    <button id="feed-like-button" value={id}>
+                      {
+                        likesReceived.map(like => like.id).includes(getUserID()) ?
+                          <FontAwesomeIcon icon={liked} id="feed-liked" />
+                          :
+                          <FontAwesomeIcon icon={faHeart} />
+                      }
+                    </button>
+                    <div id="feed-like-count">{likesReceived.length}</div>
+                  </div>
+                  <div id="feed-dietary">
+                    {vegetarian ?
+                      <div id="feed-vegetarian">V</div>
+                      :
+                      ''
                     }
-                  </button>
-                  <div id="feed-like-count">{likesReceived.length}</div>
+                    {vegan ?
+                      <div id="feed-vegan">Ve</div>
+                      :
+                      ''
+                    }
+                    {glutenFree ?
+                      <div id="feed-gluten-free">GF</div>
+                      :
+                      ''
+                    }
+                  </div>
                 </div>
                 <div id="feed-recipe-name">{name}</div>
                 {/* <div id="feed-recipe-origin">{continent}</div> */}
