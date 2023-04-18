@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer, SerializerMethodField
+from rest_framework.serializers import ModelSerializer, SerializerMethodField, BooleanField
 from ..models import Recipe, Constituent
 from ingredients.serializers.common import IngredientSerializer
 
@@ -13,6 +13,10 @@ class ConstituentSerializer(ModelSerializer):
 
 class RecipeSerializer(ModelSerializer):
     ingredients = ConstituentSerializer(source='constituent_set', many=True)
+    is_vegan = BooleanField(read_only=True)
+    is_vegetarian = BooleanField(read_only=True)
+    is_gluten_free = BooleanField(read_only=True)
+
 
     class Meta:
         model = Recipe

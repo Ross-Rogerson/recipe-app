@@ -29,6 +29,18 @@ class Recipe(models.Model):
     )
     likes_received = models.ManyToManyField('users.User', related_name='liked_by_user')
 
+    @property
+    def is_vegan(self):
+        return all(ingredient.vegan for ingredient in self.ingredients.all())
+    
+    @property
+    def is_vegetarian(self):
+        return all(ingredient.vegetarian for ingredient in self.ingredients.all())
+    
+    @property
+    def is_gluten_free(self):
+        return all(ingredient.gluten_free for ingredient in self.ingredients.all())
+
     def __str__(self):
         return self.name
 
