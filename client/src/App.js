@@ -4,6 +4,7 @@ import Navbar from './components/common/Navbar'
 import FooterNavbar from './components/common/FooterNavbar'
 import Login from './components/auth/login'
 import Profile from './components/profile/profile'
+import Admin from './components/profile/admin'
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route path="/Recipes" element={<Home />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Profile/:userId/" element={<Profile />} />
+          <Route path="/Profile/:userId/admin" element={<Admin />} />
         </Routes>
         <FooterNavbar />
       </BrowserRouter>

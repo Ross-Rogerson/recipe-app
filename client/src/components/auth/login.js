@@ -26,7 +26,6 @@ const Login = () => {
     try {
       const { data } = await axios.post('/api/auth/login/', formFields)
       localStorage.setItem('RECIPE-TOKEN', data.token)
-      console.log('USER DATA ->', data)
       navigate(`/profile/${data.id}/`)
     } catch (err) {
       console.log('error', err)

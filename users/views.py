@@ -3,7 +3,7 @@ import jwt
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers.common import UserSerializer, ProfileSerializer
-from .serializers.populated import PopulatedUserSerializer
+from .serializers.populated import PopulatedUserSerializer, PopulatedAdminSerializer
 from rest_framework import status
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
@@ -51,16 +51,13 @@ class LoginView(APIView):
     
 class ProfileView(APIView):
     permission_classes = (IsAuthenticated,)
-    # GET RECIPES: GET /api/profile/<int:pk>/
+    # GET RECIPES: GET /api/profile/:pk/
     # Gets both recipes liked and owned
     @exceptions
     def get(self, request, pk):
         logged_in_user = User.objects.get(pk=pk)
-        recipes_owned = Recipe.objects.filter(owner=logged_in_user)
-        recipes_liked = Recipe.objects.filter(likes_received=logged_in_user)
-        recipes = (recipes_owned | recipes_liked).distinct()
-        serialized_recipes = PopulatedUserSerializer(logged_in_user)
-        return Response(serialized_recipes.data)
+        serialized_user = PopulatedUserSerializer(logged_in_user)
+        return Response(serialized_user.data)
     
     @exceptions
     def delete(self, request):
@@ -74,15 +71,18 @@ class ProfileView(APIView):
     
 class IngredientsView(APIView):
     permission_classes = (IsAdminUser,)
-    # GET INGREDIENTS: GET /api/admin
+    # GET INGREDIENTS: GET api/profile/:pk>/admin/
     @exceptions
-    def get(self, request):
-        ingredients = Ingredient.objects.filter(owner=request.user)
-        serialized_ingredients = IngredientSerializer(ingredients, many=True)
+    def get(self, request, pk):
+        # ingredients = Ingredient.objects.filter(owner=request.user)
+        logged_in_user = User.objects.get(pk=pk)
+        serialized_admin = PopulatedAdminSerializer(logged_in_user)
         print('REQUEST DATA ->', request.user)
-        return Response(serialized_ingredients.data)
+        return Response(serialized_admin.data)
 
-    # CREATE INGREDIENTS: POST /api/admin
+class CreateIngredientView(APIView):
+    permission_classes = (IsAdminUser,)
+    # CREATE INGREDIENTS: POST api/profile/admin/ingredients/add/
     @exceptions
     def post(self, request):
         print('REQUEST DATA ->', { **request.data, 'owner': request.user.id })
@@ -94,7 +94,7 @@ class IngredientsView(APIView):
 class IngredientsDetailedView(APIView):
     permission_classes = (IsAdminUser,)
 
-    # GET INGREDIENT: GET /api/profile/admin/:pk
+    # GET INGREDIENT: GET /api/profile/admin/ingredients/:pk/
     @exceptions
     def get(self, request, pk):
         print('REQUEST->', request.data)
@@ -104,7 +104,7 @@ class IngredientsDetailedView(APIView):
         serialized_ingredient = PopulatedIngredientSerializer(ingredient)
         return Response(serialized_ingredient.data)
     
-    # PUT INGREDIENT: PUT /api/profile/admin/:pk
+    # PUT INGREDIENT: PUT /api/profile/admin/ingredients/:pk/
     @exceptions
     def put(self, request, pk):
         ingredient = Ingredient.objects.get(pk=pk)
@@ -113,7 +113,7 @@ class IngredientsDetailedView(APIView):
         serialized_ingredient.save()
         return Response(serialized_ingredient.data)
     
-    # DELETE INGREDIENT: DELETE /api/profile/admin/:pk
+    # DELETE INGREDIENT: DELETE /api/profile/admin/ingredients/:pk/
     @exceptions
     def delete(self, request, pk):
         ingredient_to_delete = Ingredient.objects.get(pk=pk)

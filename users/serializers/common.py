@@ -29,3 +29,9 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'profile_image', 'is_staff', 'is_superuser', 'liked_by_user', 'recipes')
+
+
+class AdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'is_staff', 'is_superuser', 'ingredients')

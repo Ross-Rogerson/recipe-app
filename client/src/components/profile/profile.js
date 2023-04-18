@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getToken, removeToken } from '../../helpers/auth'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, Link, useNavigate, useLocation } from 'react-router-dom'
 
 const Profile = () => {
   const [error, setError] = useState('')
@@ -9,6 +9,7 @@ const Profile = () => {
 
   const { userId } = useParams()
   const navigate = useNavigate()
+  const location = useLocation()
 
   // Get profile data on mount
   useEffect(() => {
@@ -22,6 +23,7 @@ const Profile = () => {
           .get(`/api/profile/${userId}`)
         setProfileData(data)
         console.log(data)
+        
       } catch (err) {
         console.log(err)
         setError(err.message)
@@ -45,7 +47,12 @@ const Profile = () => {
         <>
           <h1>Profile Page</h1>
           {
-            (profileData.is_staff || profileData.is_superuser) ? <button id='admin-button'>Admin</button> : ''
+            (profileData.is_staff || profileData.is_superuser) ?
+              <Link to={'admin/'}>
+                <button id='admin-button'>Admin</button>
+              </Link>
+              :
+              ''
           }
           <button onClick={handleLogOut}>Logout</button>
         </>
