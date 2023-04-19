@@ -43,13 +43,28 @@ class RecipeDetailedView(APIView):
     def get(self, request, pk):
         print('REQUEST->', request.data)
         recipe = Recipe.objects.get(pk=pk)
-        serialized_ingredient = RecipeSerializer(recipe)
-        return Response(serialized_ingredient.data)
+        serialized_recipe = PopulatedRecipeSerializer(recipe)
+        return Response(serialized_recipe.data)
+
+    # GET RECIPE: GET /api/recipes/:pk
+    @exceptions
+    def post(self, request, pk):
+        print('RECEIVED')
+        # recipe_id = request.data["liked_recipe_id"]
+        recipe = Recipe.objects.get(pk=pk)
+        if recipe.likes_received.filter(id=request.user.id).exists():
+            recipe.likes_received.remove(request.user)
+        else:
+            recipe.likes_received.add(request.user)
+        recipe.save()
+        print(recipe)
+        return Response()
 
 
 class AddRecipeView(APIView):
     permission_classes = (IsAuthenticated,)
     # POST RECIPE: POST /api/recipes/add
+
     @exceptions
     def post(self, request):
         recipe_to_create = RecipeSerializer(
@@ -63,6 +78,7 @@ class EditRecipeView(APIView):
     # Edit recipe owned from recipe detailed view
     permission_classes = (IsAuthenticated,)
     # PUT RECIPE: PUT /api/recipes/:pk/edit
+
     @exceptions
     def put(self, request, pk):
         recipe = Recipe.objects.get(pk=pk)

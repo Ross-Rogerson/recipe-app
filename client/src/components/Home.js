@@ -17,6 +17,7 @@ const Home = () => {
     const getData = async () => {
       try {
         const { data } = await axios.get('/api/recipes/')
+        // console.log(data)
         setRecipes(data)
       } catch (err) {
         console.log('error', err)
@@ -46,7 +47,7 @@ const Home = () => {
   // Handle like
   const handleLike = (value) => {
     if (likes.includes(value)) {
-      setLikes(likes.filter((likeId) => likeId !== value))
+      setLikes(likes.filter(likeId => likeId !== value))
       setLikesReceivedCounts({
         ...likesReceivedCounts,
         [value]: likesReceivedCounts[value] - 1,
@@ -97,7 +98,7 @@ const Home = () => {
                 </div>
                 <div id="post-recipe-owner">{username}</div>
               </div>
-              <Link to={`/${id}`}>
+              <Link to={`/recipes/${id}/`}>
                 <div id="recipe-image">
                   <img src={image} alt={name} />
                 </div>

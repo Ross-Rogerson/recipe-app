@@ -3,7 +3,7 @@ import axios from 'axios'
 import { getToken, removeToken } from '../../helpers/auth'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 
-const Profile = () => {
+const Admin = () => {
   const [error, setError] = useState('')
   const [adminData, setAdminData] = useState(null)
 
@@ -41,4 +41,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default Admin
