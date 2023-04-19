@@ -4,18 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDisplay, faHeart as liked } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
 import { Link } from 'react-router-dom'
-import { getUserID } from '../helpers/auth'
+import { getUserID, isAuthenticated, getToken } from '../helpers/auth'
 
 const Home = () => {
   const [recipes, setRecipes] = useState([])
   const [error, setError] = useState('')
+  const [likes, setLikes] = useState([])
+  const [likesReceivedCounts, setLikesReceivedCounts] = useState({})
 
+  // Get data on mount
   useEffect(() => {
     const getData = async () => {
       try {
         const { data } = await axios.get('/api/recipes/')
         setRecipes(data)
-        console.log(data)
       } catch (err) {
         console.log('error', err)
         setError(err.response.data.message)
@@ -24,7 +26,59 @@ const Home = () => {
     getData()
   }, [])
 
-  // !Liked styling below
+  // Initially set likes and recipe like counts
+  useEffect(() => {
+    const likedRecipes = []
+    recipes.forEach(recipe => {
+      if (recipe.likes_received.map(like => like.id).includes(getUserID())) {
+        likedRecipes.push(recipe.id)
+      }
+    })
+    setLikes(likedRecipes)
+
+    const initialLikesReceivedCounts = {}
+    recipes.forEach(recipe => {
+      initialLikesReceivedCounts[recipe.id] = recipe['likes_received'].length
+    })
+    setLikesReceivedCounts(initialLikesReceivedCounts)
+  }, [recipes])
+
+  // Handle like
+  const handleLike = (value) => {
+    if (likes.includes(value)) {
+      setLikes(likes.filter((likeId) => likeId !== value))
+      setLikesReceivedCounts({
+        ...likesReceivedCounts,
+        [value]: likesReceivedCounts[value] - 1,
+      })
+    } else {
+      setLikes([...likes, value])
+      setLikesReceivedCounts({
+        ...likesReceivedCounts,
+        [value]: likesReceivedCounts[value] + 1,
+      })
+    }
+    postLike(value)
+  }
+
+  useEffect(() => {
+    // postLike()
+  }, [likes])
+
+  const postLike = async (value) => {
+    try {
+      await axios.post('/api/recipes/',
+        { 'liked_recipe_id': value },
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        })
+    } catch (err) {
+      setError(err)
+    }
+  }
+
   return (
     <main>
       {recipes.length > 0 ?
@@ -51,15 +105,15 @@ const Home = () => {
               <div id="recipe-content">
                 <div id="content-top-row">
                   <div id="recipe-likes-content">
-                    <button id="feed-like-button" value={id}>
+                    <button id="feed-like-button" value={id} onClick={() => handleLike(id)} disabled={!isAuthenticated()}>
                       {
-                        likesReceived.map(like => like.id).includes(getUserID()) ?
+                        likes.includes(id) ?
                           <FontAwesomeIcon icon={liked} id="feed-liked" />
                           :
                           <FontAwesomeIcon icon={faHeart} />
                       }
                     </button>
-                    <div id="feed-like-count">{likesReceived.length}</div>
+                    <div id="feed-like-count">{likesReceivedCounts[id]}</div>
                   </div>
                   <div id="feed-dietary">
                     {vegetarian ?
