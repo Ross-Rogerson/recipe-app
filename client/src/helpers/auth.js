@@ -1,39 +1,31 @@
 import { Buffer } from 'buffer'
-import axios from 'axios'
 
 const tokenName = 'RECIPE-TOKEN'
 
 export const getPayload = () => {
-  const token = localStorage.getItem(tokenName) // get full token from localStorage
+  const token = localStorage.getItem(tokenName) 
   if (!token) return
-  const splitToken = token.split('.') // split token into 3 parts using split
-  const payloadString = splitToken[1] // take the middle payload string and save it to a variable
+  const splitToken = token.split('.') 
+  const payloadString = splitToken[1] 
   return JSON.parse(Buffer.from(payloadString, 'base64'))
 }
 
 export const isAuthenticated = () => {
-  const payload = getPayload() // get payload object containing the expiry date under the exp key
-  if (!payload) return false // if it's undefined, it doesn't exist and so we return false
-  const currentTime = Date.now() / 1000 // we get the current time by using Date.now() but need to convert to seconds from miliseconds so divide by 1000
-  return currentTime < payload.exp // finally we check if the expiry is bigger than the current timestamp, if it is, it's valid
+  const payload = getPayload() 
+  if (!payload) return false 
+  const currentTime = Date.now() / 1000 
+  return currentTime < payload.exp 
 }
 
 export const getUserID = () => {
-  const payload = getPayload() // get payload object containing the expiry date under the exp key
-  if (!payload) return false // if it's undefined, it doesn't exist and so we return false
-  return payload.sub // finally we check if the expiry is bigger than the current timestamp, if it is, it's valid
+  const payload = getPayload()
+  if (!payload) return false
+  return payload.sub
 }
 
 export const getToken = () => {
   return localStorage.getItem(tokenName)
 }
-
-export const authenticated = axios.create({
-  baseURL: '',
-  headers: {
-    Authorization: `Bearer ${getToken()}`,
-  },
-})
 
 export const removeToken = () => {
   localStorage.removeItem(tokenName)

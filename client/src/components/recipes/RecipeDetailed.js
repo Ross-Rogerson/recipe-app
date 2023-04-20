@@ -10,6 +10,7 @@ const RecipeDetailed = () => {
   const [error, setError] = useState('')
   const [recipe, setRecipe] = useState()
   const [likes, setLikes] = useState([])
+  const [list, setList] = useState([])
 
   const { recipeId } = useParams()
   const navigate = useNavigate()
@@ -19,7 +20,7 @@ const RecipeDetailed = () => {
   const ingredientsRef = useRef(null)
   const methodRef = useRef(null)
 
-  // Get profile data on mount
+  // Get data on mount
   useEffect(() => {
     const getData = async () => {
       try {
@@ -32,13 +33,18 @@ const RecipeDetailed = () => {
       }
     }
     getData()
+
+    // Set shopping list: if falsey, empty array
+    const initialList = localStorage.getItem('SHOPPING-LIST') ? JSON.parse(localStorage.getItem('SHOPPING-LIST')) : []
+    setList(initialList)
+
   }, [])
 
   // Initially set likes and recipe like counts
   useEffect(() => {
     const likedRecipes = []
     if (recipe) {
-      if (recipe.likes_received.includes(getUserID())) {
+      if (recipe.likes_received.map(user => user.id).includes(getUserID())) {
         likedRecipes.push(getUserID())
       }
       setLikes(likedRecipes)
@@ -57,7 +63,6 @@ const RecipeDetailed = () => {
     }
   }
 
-
   const postLike = async () => {
     try {
       await axios.post(`/api/recipes/${recipeId}/`,
@@ -73,28 +78,56 @@ const RecipeDetailed = () => {
   }
 
   const handleAddToShoppingList = () => {
-    // localStorage.setItem('SHOPPING-LIST', data.token)
+    if (recipe.ingredients) {
+      const ingredientsToAdd = recipe.ingredients.map(ingredient => {
+        const { detail = ingredient['ingredient_detail'], unit, qty } = ingredient
+        const { name, plural, substitutes } = detail
+
+        const itemObject = {}
+        const existingIndex = list.findIndex(ingredient => ingredient.name === name && ingredient.unit === unit)
+        if (existingIndex !== -1) {
+          const existingItem = list[existingIndex]
+          itemObject.qty = qty ? parseInt(qty) + parseInt(existingItem.qty) : qty
+          list.splice(existingIndex, 1)
+        } else {
+          itemObject.qty = qty ? parseInt(qty) : qty
+        }
+        itemObject.unit = unit
+        itemObject.name = name
+        itemObject.plural = plural
+        itemObject.substitutes = substitutes
+
+        return itemObject
+      })
+
+      const newList = [...list, ...ingredientsToAdd]
+
+      setList(newList)
+    }
   }
+
+  useEffect(() => {
+    localStorage.setItem('SHOPPING-LIST', JSON.stringify(list))
+    console.log(list)
+  }, [list])
 
   const displayIngredients = () => {
     if (recipe.ingredients) {
       return recipe.ingredients.map((ingredient, i) => {
         const { detail = ingredient['ingredient_detail'], unit, qty } = ingredient
-        const { name, plural, substitutes } = detail
+        const { name, plural } = detail
         return (
-          <>
-            <div key={i} >
-              <div id="recipe-ingredient-qty">
-                {Math.round(qty, 0)}
-              </div>
-              <div id="recipe-ingredient-unit">
-                {unit}
-              </div>
-              <div id="recipe-ingredient-name">
-                {qty > 1 ? plural : name}
-              </div>
+          <div key={i} >
+            <div id="recipe-ingredient-qty">
+              {qty ? Math.round(qty, 0) : ''}
             </div>
-          </>
+            <div id="recipe-ingredient-unit">
+              {unit}
+            </div>
+            <div id="recipe-ingredient-name">
+              {qty > 1 ? plural : name}
+            </div>
+          </div>
         )
       })
     }
@@ -105,11 +138,9 @@ const RecipeDetailed = () => {
       const splitMethod = recipe.method.split('.')
       return splitMethod.map((step, i) => {
         return (
-          <>
-            <div key={i} id="recipe-method-step">
-              {step}.
-            </div>
-          </>
+          <div key={i} id="recipe-method-step">
+            {step}.
+          </div>
         )
       })
     }
@@ -129,7 +160,6 @@ const RecipeDetailed = () => {
     ingredientsRef.current.style.display = 'none'
     methodRef.current.style.display = 'block'
   }
-
 
   return (
     <main>
@@ -177,10 +207,10 @@ const RecipeDetailed = () => {
               </div>
             </div>
           </div>
-          {/* <section id="toggle-view-buttons"> */}
-          <button id="method-view-button" onClick={handleShowMethod}>Method</button>
-          <button id="ingredients-view-button" onClick={handleShowIngredients}>Ingredients</button>
-          {/* </section> */}
+          <section id="toggle-view-buttons">
+            <button id="method-view-button" onClick={handleShowMethod}>Method</button>
+            <button id="ingredients-view-button" onClick={handleShowIngredients}>Ingredients</button>
+          </section>
           <section id="recipe-details">
             <section id="recipe-method" ref={methodRef} style={{ display: showMethod ? 'block' : 'none' }}>
               {recipe && displayMethod()}
