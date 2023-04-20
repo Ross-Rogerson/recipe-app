@@ -1,37 +1,137 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { getToken, removeToken } from '../../helpers/auth'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { Link, useFetcher, useNavigate } from 'react-router-dom'
 
 const Shopping = () => {
   const [error, setError] = useState('')
-  const [ recipe, setRecipe ] = useState()
+  const [list, setList] = useState([])
+  const [recipeList, setRecipeList] = useState([])
+  const [itemsToRemove, setItemsToRemove] = useState([])
 
-  const { recipeId } = useParams()
-  const navigate = useNavigate()
+  const [showRecipes, setShowRecipes] = useState(false)
+  const [showShoppingList, setShowShoppingList] = useState(true)
+  const recipesRef = useRef(null)
+  const shoppingRef = useRef(null)
 
-  // Get profile data on mount
   useEffect(() => {
-    const getData = async () => {
-      try {
-        // const { data } = await axios.get('/api/recipes/add/')
-        // console.log(data)
-        // setRecipe(data)
-      } catch (err) {
-        console.log('error', err)
-        setError(err.response.data.message)
-      }
-    }
-    getData()
+    // Set lists: if falsey, empty array
+    const initialList = localStorage.getItem('SHOPPING-LIST') ? JSON.parse(localStorage.getItem('SHOPPING-LIST')) : []
+    setList(initialList)
+
+    const initialRecipeList = localStorage.getItem('RECIPE-LIST') ? JSON.parse(localStorage.getItem('RECIPE-LIST')) : []
+    setRecipeList(initialRecipeList)
   }, [])
+
+  useEffect(() => {
+    console.log('SHOPPING LIST ->', list)
+    console.log('RECIPES ->', recipeList)
+  }, [list, recipeList])
+
+  // Show/Hide Display & Ingredients
+  const handleShowShoppingList = () => {
+    setShowShoppingList(true)
+    setShowRecipes(false)
+    recipesRef.current.style.display = 'none'
+    shoppingRef.current.style.display = 'block'
+  }
+
+  const handleShowRecipes = () => {
+    setShowShoppingList(false)
+    setShowRecipes(true)
+    recipesRef.current.style.display = 'block'
+    shoppingRef.current.style.display = 'none'
+  }
+
+  const handleSelectIngredient = (value) => {
+    if (itemsToRemove.includes(value)) {
+      setItemsToRemove(itemsToRemove.filter(itemId => itemId !== value))
+    } else {
+      setItemsToRemove([...itemsToRemove, value])
+    }
+  }
+
+  useEffect(() => {
+    console.log(itemsToRemove)
+  }, [itemsToRemove])
+
+  const displayShoppingList = () => {
+    return list.map(item => {
+      const { name, plural, unit, qty, substitutes, id } = item
+      return (
+        <div id="shopping-list-item" key={id} >
+          <input type="checkbox" id={`item${id}`} name={`item${id}`} onClick={() => handleSelectIngredient(id)}/>
+          <label id="shopping-list-item-qty" htmlFor={`item${id}`}>
+            <div id="shopping-list-item-qty" >
+              {qty ? Math.round(qty, 0) : ''}
+            </div>
+            <div id="shopping-list-item-unit">
+              {(qty && !unit) ? `${unit} x` : unit}
+            </div>
+            <div id="shopping-list-item-name">
+              {qty > 1 ? plural : name}
+            </div>
+          </label>
+          <button>
+            Substitutes
+          </button>
+          <div id="shopping-list-item-subs">
+            {substitutes}
+          </div>
+        </div>
+      )
+    })
+  }
+
+  const displayRecipes = () => {
+    return recipeList.map(recipe => {
+      const { name, id, image } = recipe
+      return (
+        <Link key={id} to={`/recipes/${id}/`}>
+          <div id="recipe-on-list" >
+            <div id="shopping-list-recipe-img">
+              <img src={image} alt={name} />
+            </div>
+            <div id="shopping-list-recipe-name">
+              {name}
+            </div>
+          </div>
+        </Link>
+      )
+    })
+  }
+
+  const handleRemoveSelected = () => {
+
+  }
+
+  const handleClearList = () => {
+    setList([])
+    setRecipeList([])
+    localStorage.setItem('SHOPPING-LIST', JSON.stringify([]))
+    localStorage.setItem('RECIPE-LIST', JSON.stringify([]))
+  }
 
   return (
     <main>
-      {
-        <>
-          <h1>Shopping Page</h1>
-        </>
-      }
+      <section id="shopping-view-buttons">
+        <button id="shopping-list-view-button" onClick={handleShowShoppingList}>Shopping List</button>
+        <button id="recipe-view-button" onClick={handleShowRecipes}>Recipes</button>
+      </section>
+      <section id="shopping-display">
+        <section id="shopping-list" ref={shoppingRef} style={{ display: showShoppingList ? 'block' : 'none' }}>
+          {displayShoppingList()}
+          <button id="remove-selected-button" onClick={handleRemoveSelected}>
+            Remove selected items
+          </button>
+          <button id="clear-list-button" onClick={handleClearList}>
+            Clear shopping list
+          </button>
+        </section>
+        <section id="shopping-recipes" ref={recipesRef} style={{ display: showRecipes ? 'block' : 'none' }}>
+          {displayRecipes()}
+        </section>
+      </section>
     </main >
   )
 }

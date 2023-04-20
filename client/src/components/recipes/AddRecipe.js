@@ -5,7 +5,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 
 const AddRecipe = () => {
   const [error, setError] = useState('')
-  const [ recipe, setRecipe ] = useState()
+  const [recipe, setRecipe] = useState()
 
   const { recipeId } = useParams()
   const navigate = useNavigate()
@@ -27,11 +27,7 @@ const AddRecipe = () => {
 
   return (
     <main>
-      {
-        <>
-          <h1>Add Recipe Page</h1>
-        </>
-      }
+      <h1>Add Recipe</h1>
     </main >
   )
 }

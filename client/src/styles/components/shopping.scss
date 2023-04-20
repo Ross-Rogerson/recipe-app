@@ -1,0 +1,14 @@
+#shopping-list-recipe-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+
+  img {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+  }
+}

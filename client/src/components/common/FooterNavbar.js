@@ -1,5 +1,5 @@
 import { useLocation, useNavigate, Link } from 'react-router-dom'
-import { authenticated, getUserID, isAuthenticated, removeToken } from '../../helpers/auth'
+import { getUserID, isAuthenticated, removeToken } from '../../helpers/auth'
 import { useState, useEffect, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faListCheck } from '@fortawesome/free-solid-svg-icons'
@@ -26,7 +26,7 @@ const Navbar = () => {
         </div>
 
         <div id="list">
-          <Link to={'/Shopping/'}>
+          <Link to={'/shopping/'}>
             <img src={list} alt="listIcon" />
           </Link>
         </div>

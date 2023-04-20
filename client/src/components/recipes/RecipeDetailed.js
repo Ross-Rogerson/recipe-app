@@ -11,9 +11,9 @@ const RecipeDetailed = () => {
   const [recipe, setRecipe] = useState()
   const [likes, setLikes] = useState([])
   const [list, setList] = useState([])
+  const [recipeList, setRecipeList] = useState([])
 
   const { recipeId } = useParams()
-  const navigate = useNavigate()
 
   const [showMethod, setShowMethod] = useState(true)
   const [showIngredients, setShowIngredients] = useState(false)
@@ -34,9 +34,12 @@ const RecipeDetailed = () => {
     }
     getData()
 
-    // Set shopping list: if falsey, empty array
+    // Set lists: if falsey, empty array
     const initialList = localStorage.getItem('SHOPPING-LIST') ? JSON.parse(localStorage.getItem('SHOPPING-LIST')) : []
     setList(initialList)
+
+    const initialRecipeList = localStorage.getItem('RECIPE-LIST') ? JSON.parse(localStorage.getItem('RECIPE-LIST')) : []
+    setRecipeList(initialRecipeList)
 
   }, [])
 
@@ -81,7 +84,7 @@ const RecipeDetailed = () => {
     if (recipe.ingredients) {
       const ingredientsToAdd = recipe.ingredients.map(ingredient => {
         const { detail = ingredient['ingredient_detail'], unit, qty } = ingredient
-        const { name, plural, substitutes } = detail
+        const { name, plural, substitutes, id } = detail
 
         const itemObject = {}
         const existingIndex = list.findIndex(ingredient => ingredient.name === name && ingredient.unit === unit)
@@ -96,6 +99,7 @@ const RecipeDetailed = () => {
         itemObject.name = name
         itemObject.plural = plural
         itemObject.substitutes = substitutes
+        itemObject.id = id
 
         return itemObject
       })
@@ -103,12 +107,21 @@ const RecipeDetailed = () => {
       const newList = [...list, ...ingredientsToAdd]
 
       setList(newList)
+
+      const newRecipeList = recipeList.map(recipe => recipe.id).includes(recipe.id) ?
+        recipeList
+        :
+        [...recipeList, { id: recipe.id, name: recipe.name, image: recipe.image }]
+
+      setRecipeList(newRecipeList)
     }
   }
 
   useEffect(() => {
     localStorage.setItem('SHOPPING-LIST', JSON.stringify(list))
+    localStorage.setItem('RECIPE-LIST', JSON.stringify(recipeList))
     console.log(list)
+    console.log('RECIPES ->', recipeList)
   }, [list])
 
   const displayIngredients = () => {
@@ -207,7 +220,7 @@ const RecipeDetailed = () => {
               </div>
             </div>
           </div>
-          <section id="toggle-view-buttons">
+          <section id="recipe-view-buttons">
             <button id="method-view-button" onClick={handleShowMethod}>Method</button>
             <button id="ingredients-view-button" onClick={handleShowIngredients}>Ingredients</button>
           </section>
