@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { getToken, removeToken, isAuthenticated, getUserID } from '../../helpers/auth'
 import { useParams, Link, useNavigate, useFetcher } from 'react-router-dom'
@@ -13,6 +13,11 @@ const RecipeDetailed = () => {
 
   const { recipeId } = useParams()
   const navigate = useNavigate()
+
+  const [showMethod, setShowMethod] = useState(false)
+  const [showIngredients, setShowIngredients] = useState(false)
+  const ingredientsRef = useRef(null)
+  const methodRef = useRef(null)
 
   // Get profile data on mount
   useEffect(() => {
@@ -68,7 +73,7 @@ const RecipeDetailed = () => {
   }
 
   const handleAddToShoppingList = () => {
-    // localStorage.setItem('SHOPPIN-LIST', data.token)
+    // localStorage.setItem('SHOPPING-LIST', data.token)
   }
 
   const displayIngredients = () => {
@@ -78,14 +83,16 @@ const RecipeDetailed = () => {
         const { name, plural, substitutes } = detail
         return (
           <>
-            <div key={i} id="recipe-ingredient-qty">
-              {Math.round(qty, 0)}
-            </div>
-            <div id="recipe-ingredient-unit">
-              {unit}
-            </div>
-            <div id="recipe-ingredient-name">
-              {qty > 1 ? plural : name}
+            <div key={i} >
+              <div id="recipe-ingredient-qty">
+                {Math.round(qty, 0)}
+              </div>
+              <div id="recipe-ingredient-unit">
+                {unit}
+              </div>
+              <div id="recipe-ingredient-name">
+                {qty > 1 ? plural : name}
+              </div>
             </div>
           </>
         )
@@ -96,23 +103,33 @@ const RecipeDetailed = () => {
   const displayMethod = () => {
     if (recipe.method) {
       const splitMethod = recipe.method.split('.')
-      console.log(splitMethod)
-      // return recipe.ingredients.map((ingredient, i) => {
-      //   return (
-      //     <>
-      //       <div key={i} id="recipe-ingredient-qty">
-      //         {Math.round(qty, 0)}
-      //       </div>
-      //       <div id="recipe-ingredient-unit">
-      //         {unit}
-      //       </div>
-      //       <div id="recipe-ingredient-name">
-      //         {qty > 1 ? plural : name}
-      //       </div>
-      //     </>
-      //   )
-      // })
+      return splitMethod.map((step, i) => {
+        return (
+          <>
+            <div key={i} id="recipe-method-step">
+              {step}.
+              <br />
+              <br />
+            </div>
+          </>
+        )
+      })
     }
+  }
+
+  // Show/Hide Display & Ingredients
+  const handleShowIngredients = () => {
+    setShowIngredients(true)
+    setShowMethod(false)
+    ingredientsRef.current.style.display = 'block'
+    methodRef.current.style.display = 'none'
+  }
+
+  const handleShowMethod = () => {
+    setShowIngredients(false)
+    setShowMethod(true)
+    ingredientsRef.current.style.display = 'none'
+    methodRef.current.style.display = 'block'
   }
 
 
@@ -162,18 +179,21 @@ const RecipeDetailed = () => {
               </div>
             </div>
           </div>
+          {/* <section id="toggle-view-buttons"> */}
+          <button id="method-view-button" onClick={handleShowMethod}>Method</button>
+          <button id="ingredients-view-button" onClick={handleShowIngredients}>Ingredients</button>
+          {/* </section> */}
           <section id="recipe-details">
-            <section id="recipe-method">
+            <section id="recipe-method" ref={methodRef} style={{ display: showMethod ? 'block' : 'none' }}>
               {recipe && displayMethod()}
             </section>
-            <section id="recipe-ingredients">
+            <section id="recipe-ingredients" ref={ingredientsRef} style={{ display: showIngredients ? 'block' : 'none' }}>
               {recipe && displayIngredients()}
               <button id="add-to-shopping-list" onClick={() => handleAddToShoppingList()}>
                 Add to shopping list
               </button>
             </section>
           </section>
-
         </>
         :
         <>

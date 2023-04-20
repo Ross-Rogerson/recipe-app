@@ -41,7 +41,6 @@ class RecipeDetailedView(APIView):
     # GET RECIPE: GET /api/recipes/:pk
     @exceptions
     def get(self, request, pk):
-        print('REQUEST->', request.data)
         recipe = Recipe.objects.get(pk=pk)
         serialized_recipe = PopulatedRecipeSerializer(recipe)
         return Response(serialized_recipe.data)
