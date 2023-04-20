@@ -14,7 +14,7 @@ const RecipeDetailed = () => {
   const { recipeId } = useParams()
   const navigate = useNavigate()
 
-  const [showMethod, setShowMethod] = useState(false)
+  const [showMethod, setShowMethod] = useState(true)
   const [showIngredients, setShowIngredients] = useState(false)
   const ingredientsRef = useRef(null)
   const methodRef = useRef(null)
