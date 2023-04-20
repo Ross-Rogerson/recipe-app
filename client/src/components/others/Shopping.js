@@ -1,6 +1,4 @@
 import { useEffect, useState, useRef } from 'react'
-import axios from 'axios'
-import { getToken, removeToken } from '../../helpers/auth'
 import { Link, useFetcher, useNavigate } from 'react-router-dom'
 
 const Shopping = () => {
@@ -8,6 +6,8 @@ const Shopping = () => {
   const [list, setList] = useState([])
   const [recipeList, setRecipeList] = useState([])
   const [itemsToRemove, setItemsToRemove] = useState([])
+  const [checked, setChecked] = useState({})
+
 
   const [showRecipes, setShowRecipes] = useState(false)
   const [showShoppingList, setShowShoppingList] = useState(true)
@@ -43,24 +43,26 @@ const Shopping = () => {
     shoppingRef.current.style.display = 'none'
   }
 
-  const handleSelectIngredient = (value) => {
-    if (itemsToRemove.includes(value)) {
-      setItemsToRemove(itemsToRemove.filter(itemId => itemId !== value))
+  const handleSelectIngredient = (item) => {
+    console.log(item)
+    if (itemsToRemove.includes(item)) {
+      setItemsToRemove(itemsToRemove.filter(itemId => itemId !== item))
     } else {
-      setItemsToRemove([...itemsToRemove, value])
+      setItemsToRemove([...itemsToRemove, item])
     }
+    setChecked({ ...checked, [item.id]: !checked[item.id] })
   }
 
   useEffect(() => {
-    console.log(itemsToRemove)
+    console.log('ITEMS TO REMOVE->', itemsToRemove)
   }, [itemsToRemove])
 
   const displayShoppingList = () => {
-    return list.map(item => {
+    return list.map((item, i) => {
       const { name, plural, unit, qty, substitutes, id } = item
       return (
-        <div id="shopping-list-item" key={id} >
-          <input type="checkbox" id={`item${id}`} name={`item${id}`} onClick={() => handleSelectIngredient(id)}/>
+        <div id="shopping-list-item" key={i} >
+          <input type="checkbox" id={`item${id}`} name={`item${id}`} onClick={() => handleSelectIngredient(item)} checked={checked[id]}/>
           <label id="shopping-list-item-qty" htmlFor={`item${id}`}>
             <div id="shopping-list-item-qty" >
               {qty ? Math.round(qty, 0) : ''}
@@ -102,12 +104,24 @@ const Shopping = () => {
   }
 
   const handleRemoveSelected = () => {
-
+    const newList = list.filter(item => {
+      const existingIndex = itemsToRemove.findIndex(ingredient => ingredient.name === item.name && ingredient.unit === item.unit)
+      if (existingIndex === -1) return item
+    })
+    setList(newList)
+    setItemsToRemove([])
+    setChecked({})
   }
+
+  useEffect(() => {
+    localStorage.setItem('SHOPPING-LIST', JSON.stringify(list))
+  }, [list])
 
   const handleClearList = () => {
     setList([])
     setRecipeList([])
+    setItemsToRemove([])
+    setChecked({})
     localStorage.setItem('SHOPPING-LIST', JSON.stringify([]))
     localStorage.setItem('RECIPE-LIST', JSON.stringify([]))
   }
