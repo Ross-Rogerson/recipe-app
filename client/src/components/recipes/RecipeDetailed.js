@@ -108,8 +108,6 @@ const RecipeDetailed = () => {
           <>
             <div key={i} id="recipe-method-step">
               {step}.
-              <br />
-              <br />
             </div>
           </>
         )

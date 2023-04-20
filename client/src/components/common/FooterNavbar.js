@@ -26,7 +26,7 @@ const Navbar = () => {
         </div>
 
         <div id="list">
-          <Link to={'/'}>
+          <Link to={'/Shopping/'}>
             <img src={list} alt="listIcon" />
           </Link>
         </div>
@@ -38,13 +38,13 @@ const Navbar = () => {
         </div> */}
 
         <div id="add">
-          <Link to={'/'}>
+          <Link to={'/recipes/add/'}>
             <img src={add} alt="addIcon" />
           </Link>
         </div>
 
         <div id="fridge">
-          <Link to={'/'}>
+          <Link to={'/fridge/'}>
             <img src={fridge} alt="fridgeIcon" />
           </Link>
         </div>
