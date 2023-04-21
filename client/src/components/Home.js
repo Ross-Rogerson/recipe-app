@@ -62,10 +62,6 @@ const Home = () => {
     postLike(value)
   }
 
-  useEffect(() => {
-    // postLike()
-  }, [likes])
-
   const postLike = async (value) => {
     try {
       await axios.post('/api/recipes/',
