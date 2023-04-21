@@ -63,14 +63,16 @@ const Home = () => {
   }
 
   const postLike = async (value) => {
+    const requestBody = {
+      'liked_recipe_id': value,
+    }
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    }
     try {
-      await axios.post('/api/recipes/',
-        { 'liked_recipe_id': value },
-        {
-          headers: {
-            Authorization: `Bearer ${getToken()}`,
-          },
-        })
+      await axios.post(`/api/recipes/${value}/`, requestBody, headers)
     } catch (err) {
       setError(err)
     }

@@ -105,7 +105,8 @@ const Shopping = () => {
 
   const handleRemoveSelected = () => {
     const newList = list.filter(item => {
-      const existingIndex = itemsToRemove.findIndex(ingredient => ingredient.name === item.name && ingredient.unit === item.unit)
+      const existingIndex = itemsToRemove.findIndex(ingredient => ingredient.name === item.name 
+        && ingredient.unit === item.unit)
       if (existingIndex === -1) return item
     })
     setList(newList)

@@ -13,6 +13,7 @@ const Fridge = () => {
     category: 'All',
     search: '',
   })
+  const [recipeRequest, setRecipeRequest] = useState({})
 
   const [showRecipes, setShowRecipes] = useState(false)
   const [showIngredients, setShowIngredients] = useState(true)
@@ -33,6 +34,18 @@ const Fridge = () => {
       }
     }
     getIngredients()
+
+    // Set lists: if falsey, empty array
+    const initialList = localStorage.getItem('FRIDGE-ITEMS') ? JSON.parse(localStorage.getItem('FRIDGE-ITEMS')) : []
+    setFridgeItems(initialList)
+
+    // Set recipe request
+    const initialRecipeRequest = initialList.reduce((obj, item) => {
+      obj[item.name] = item.id
+      return obj
+    }, {})
+    
+    setRecipeRequest(initialRecipeRequest)
   }, [])
 
   // Display Ingredients on mount
@@ -50,22 +63,7 @@ const Fridge = () => {
     )
   }
 
-  // useEffect(() => {
-  //   const getRecipes = async () => {
-  //     try {
-  //       const { data } = await axios.post('/api/fridge/')
-  //       console.log(data)
-  //       setRecipes(data)
-  //     } catch (err) {
-  //       console.log('error', err)
-  //       setError(err.response.data.message)
-  //     }
-  //   }
-  //   getRecipes()
-  // }, [])
-  
-
-  // Show/Hide Display & Ingredients
+  // Show/Hide  Ingredients/Fridge/Recipes
   const handleShowIngredients = () => {
     setShowIngredients(true)
     setShowRecipes(false)
@@ -93,6 +91,7 @@ const Fridge = () => {
     fridgeRef.current.style.display = 'block'
   }
 
+  // Filters
   const handleChange = (e) => {
     const newFilters = { ...filters, [e.target.name]: e.target.value }
     setFilters(newFilters)
@@ -106,31 +105,92 @@ const Fridge = () => {
     setFilteredIngredients(newFilteredIngredients)
   }, [filters, ingredients])
 
+  // Add to fridge
   const handleAddToFridge = (item) => {
     if (fridgeItems.map(fridgeItem => fridgeItem.id).includes(item.id)) {
       setFridgeItems(fridgeItems.filter(fridgeItem => fridgeItem.id !== item.id))
+      const newRecipeRequest = { ...recipeRequest }
+      delete newRecipeRequest[item.name]
+      setRecipeRequest(newRecipeRequest)
     } else {
       setFridgeItems([...fridgeItems, item])
+      setRecipeRequest({ ...recipeRequest, [item.name]: item.id })
     }
   }
 
+  // Display fridge
   const displayFridgeItems = () => {
+    if (fridgeItems.length === 0) {
+      return <div id="no-items-in-fridge">Your fridge is empty. Add items in the Ingredients section.</div>
+    }
     return (
       fridgeItems.map(item => {
         const { name, plural, id, category } = item
         return (
-          <button key={id} id="fridge-item-button" >
+          <div key={id} id="fridge-item-button" >
+            <button id="remove-ingredient-button" onClick={() => handleAddToFridge(item)}>Remove</button>
             <h3 id="fridge-item-name">{plural}</h3>
             <h4 id="fridge-item-cat">{category}</h4>
-          </button>
+          </div>
         )
       })
     )
   }
 
   useEffect(() => {
-    console.log(fridgeItems)
+    localStorage.setItem('FRIDGE-ITEMS', JSON.stringify(fridgeItems))
+    console.log('FRIDGE ITEMS ->', fridgeItems)
+    if (fridgeItems.length === 0) {
+      setRecipes([])
+    } else {
+      const getRecipes = async () => {
+        try {
+          const { data } = await axios.post('/api/fridge/', recipeRequest)
+          console.log('RECIPES ->', data)
+          setRecipes(data)
+        } catch (err) {
+          setError(err)
+        }
+      }
+      getRecipes()
+    }
   }, [fridgeItems])
+
+  useEffect(() => {
+    console.log('RECIPES ->', recipes)
+  }, [recipes])
+
+  const displayRecipes = () => {
+    if (fridgeItems.length === 0) {
+      return <div id="no-recipes">Add ingredients to fridge to find recipes.</div>
+    }
+
+    if (recipes.length === 0) {
+      return <div id="no-recipes">None of our recipes contained all of the items in your fridge.</div>
+    }
+
+    return recipes.map(recipe => {
+      const { name, id, image } = recipe
+      return (
+        <Link key={id} to={`/recipes/${id}/`}>
+          <div id="recipe-in-fridge" >
+            <div id="fridge-recipe-img">
+              <img src={image} alt={name} />
+            </div>
+            <div id="firdge-recipe-name">
+              {name}
+            </div>
+          </div>
+        </Link>
+      )
+    })
+  }
+
+  const handleEmptyFridge = () => {
+    setRecipeRequest({})
+    setRecipes([])
+    setFridgeItems([])
+  }
 
   return (
     <main>
@@ -142,7 +202,7 @@ const Fridge = () => {
             <button id="recipe-view-button" onClick={handleShowRecipes}>Recipes</button>
           </section>
           <section id='fridge-ingredients' ref={ingredientsRef} style={{ display: showIngredients ? 'block' : 'none' }}>
-            <section className="filters">
+            <section className="fridge-filters">
               <select name="category" value={filters.category} onChange={handleChange}>
                 <option value="All">All</option>
                 {ingredients &&
@@ -151,17 +211,24 @@ const Fridge = () => {
                   })}
               </select>
               <input type="text" name="search" placeholder='Search...' onChange={handleChange} value={filters.search} />
-              <button>
-                That&#39;s everything!
-              </button>
+              <button id="thats-everything-button">That&#39;s everything!</button>
+              <button id="ingredients-empty-fridge-button" alt="clear selections" onClick={handleEmptyFridge}>Empty fridge</button>
             </section>
             {ingredients && displayIngredients()}
           </section>
-          <section id='fridge-items-in' ref={fridgeRef} style={{ display: showFridge ? 'block' : 'none' }}>
-            {fridgeItems && displayFridgeItems()}
+          <section id="fridge-items-in" ref={fridgeRef} style={{ display: showFridge ? 'block' : 'none' }}>
+            <div id="fridge-buttons">
+              {
+                fridgeItems.length > 0 ?
+                  <button id="empty-fridge-button" alt="clear selections" onClick={handleEmptyFridge}>Empty fridge</button>
+                  :
+                  ''
+              }
+            </div>
+            {ingredients && displayFridgeItems()}
           </section>
-          <section id='fridge-recipes' ref={recipesRef} style={{ display: showRecipes ? 'block' : 'none' }}>
-            recipes
+          <section id="fridge-recipes" ref={recipesRef} style={{ display: showRecipes ? 'block' : 'none' }}>
+            {ingredients && displayRecipes()}
           </section>
         </>
       }
