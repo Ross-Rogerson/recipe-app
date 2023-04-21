@@ -9,4 +9,4 @@ class IngredientSerializer(ModelSerializer):
 class FridgeIngredientSerializer(ModelSerializer):
     class Meta:
         model = Ingredient
-        fields = ('name', 'plural')
+        fields = ('name', 'plural', 'id', 'category')

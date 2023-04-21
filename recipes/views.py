@@ -63,7 +63,6 @@ class RecipeDetailedView(APIView):
 class AddRecipeView(APIView):
     permission_classes = (IsAuthenticated,)
     # POST RECIPE: POST /api/recipes/add
-
     @exceptions
     def post(self, request):
         recipe_to_create = RecipeSerializer(
@@ -91,6 +90,7 @@ class EditRecipeView(APIView):
 
 class RecipesInList(APIView):
     # Recipes in shopping list
+    # POST RECIPE: POST /api/shopping/
     @exceptions
     def post(self, request):
         # Array of recipe IDs will be sent from front end
