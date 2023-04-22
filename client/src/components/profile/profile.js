@@ -128,25 +128,11 @@ const Profile = () => {
           <section id="recipes-display">
             <section id="liked-recipes" ref={likedRecipesRef} style={{ display: showLikedRecipes ? 'block' : 'none' }}>
               {displayLikedRecipes()}
-              {/* <button id="remove-selected-button" onClick={handleRemoveSelected}>
-                Remove selected items
-              </button>
-              <button id="clear-list-button" onClick={handleClearList}>
-                Clear shopping list
-              </button> */}
             </section>
             <section id="owned-recipes" ref={ownedRecipesRef} style={{ display: showOwnedRecipes ? 'block' : 'none' }}>
               {displayOwnedRecipes()}
             </section>
           </section>
-          {
-            // (profileData.is_staff || profileData.is_superuser) ?
-            //   <Link to={'admin/'}>
-            //     <button id='admin-button'>Admin</button>
-            //   </Link>
-            //   :
-            //   ''
-          }
           <button onClick={handleLogOut}>Logout</button>
         </>
 
