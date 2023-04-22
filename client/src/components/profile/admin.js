@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { getToken, removeToken } from '../../helpers/auth'
+import { getToken, removeToken, userTokenFunction } from '../../helpers/auth'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 
 const Admin = () => {
@@ -14,12 +14,7 @@ const Admin = () => {
   useEffect(() => {
     const getProfile = async () => {
       try {
-        const { data } = await axios.create({
-          headers: {
-            Authorization: `Bearer ${getToken()}`,
-          },
-        })
-          .get(`/api/profile/${userId}/admin`)
+        const { data } = await axios.create(userTokenFunction()).get(`/api/profile/${userId}/admin`)
         setAdminData(data)
         console.log(data)
       } catch (err) {

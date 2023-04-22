@@ -27,7 +27,7 @@ class Recipe(models.Model):
         related_name='recipes',
         default=1
     )
-    likes_received = models.ManyToManyField('users.User', related_name='liked_by_user')
+    likes_received = models.ManyToManyField('users.User', related_name='liked_by_user', blank=True)
 
     @property
     def is_vegan(self):

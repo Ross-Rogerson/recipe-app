@@ -60,7 +60,7 @@ class ProfileView(APIView):
         return Response(serialized_user.data)
     
     @exceptions
-    def delete(self, request):
+    def delete(self, request, pk):
         # recipe_id will be sent from the front end in the request body
         recipe_id = request.data["recipe_id"]
         recipe_to_delete = Recipe.objects.get(pk=recipe_id)

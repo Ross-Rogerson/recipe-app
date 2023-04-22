@@ -17,7 +17,7 @@ const Fridge = () => {
 
   const [showRecipes, setShowRecipes] = useState(false)
   const [showIngredients, setShowIngredients] = useState(true)
-  const [showFridge, setShowFridge] = useState(true)
+  const [showFridge, setShowFridge] = useState(false)
   const recipesRef = useRef(null)
   const fridgeRef = useRef(null)
   const ingredientsRef = useRef(null)

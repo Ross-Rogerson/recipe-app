@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { getToken, removeToken } from '../../helpers/auth'
+import { getToken, removeToken, userTokenFunction, isAuthenticated, getUserID } from '../../helpers/auth'
 import { useParams, Link, useNavigate, useLocation } from 'react-router-dom'
 
 const Profile = () => {
@@ -11,16 +11,16 @@ const Profile = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
+  useEffect(() => {
+    console.log(getUserID()) &
+    !isAuthenticated() && navigate('/login')
+  }, [navigate])
+
   // Get profile data on mount
   useEffect(() => {
     const getProfile = async () => {
       try {
-        const { data } = await axios.create({
-          headers: {
-            Authorization: `Bearer ${getToken()}`,
-          },
-        })
-          .get(`/api/profile/${userId}`)
+        const { data } = await axios.create(userTokenFunction()).get(`/api/profile/${getUserID()}`)
         setProfileData(data)
         console.log(data)
         

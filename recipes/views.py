@@ -4,9 +4,12 @@ from rest_framework.response import Response
 from lib.exceptions import exceptions, PermissionDenied
 
 from .models import Recipe
-from .serializers.common import RecipeSerializer, FridgeRecipeSerializer
+from .serializers.common import CreateRecipeSerializer, FridgeRecipeSerializer
 from .serializers.populated import PopulatedRecipeSerializer
 from rest_framework.permissions import IsAdminUser, IsAuthenticated, IsAuthenticatedOrReadOnly
+
+from ingredients.models import Ingredient
+from ingredients.serializers.common import IngredientSerializer
 
 from users.serializers.populated import PopulatedUserSerializer
 
@@ -59,18 +62,24 @@ class RecipeDetailedView(APIView):
         print(recipe)
         return Response()
 
-
 class AddRecipeView(APIView):
     permission_classes = (IsAuthenticated,)
     # POST RECIPE: POST /api/recipes/add
+    # GET RECIPES: GET /api/recipe/add
+    @exceptions
+    def get(self, request):
+        ingredients = Ingredient.objects.all()
+        serialized_ingredients = IngredientSerializer(ingredients, many=True)
+        return Response(serialized_ingredients.data)
+    
     @exceptions
     def post(self, request):
-        recipe_to_create = RecipeSerializer(
+        print(request.data)
+        recipe_to_create = CreateRecipeSerializer(
             data={**request.data, 'owner': request.user.id})
         recipe_to_create.is_valid(raise_exception=True)
         recipe_to_create.save()
         return Response(recipe_to_create.data, status.HTTP_201_CREATED)
-
 
 class EditRecipeView(APIView):
     # Edit recipe owned from recipe detailed view

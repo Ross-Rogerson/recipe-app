@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from lib.exceptions import exceptions
 
 from .models import Ingredient
-from .serializers.common import FridgeIngredientSerializer
+from .serializers.common import FridgeIngredientSerializer, IngredientSerializer
 
 from recipes.models import Recipe
 from recipes.serializers.common import FridgeRecipeSerializer
