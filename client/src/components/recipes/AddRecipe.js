@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { getToken, removeToken, userTokenFunction, isAuthenticated } from '../../helpers/auth'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { userTokenFunction, isAuthenticated } from '../../helpers/auth'
+import { useNavigate } from 'react-router-dom'
 
 const AddRecipe = () => {
   const [error, setError] = useState('')
   const [ingredients, setIngredients] = useState([])
   const [ingredientCount, setIngredientCount] = useState()
-  const [filteredIngredients, setFilteredIngredients] = useState([])
-  const [filters, setFilters] = useState({})
   const [recipeNutrition, setRecipeNutrition] = useState({
     calories: '',
     fat: '',
@@ -51,35 +49,6 @@ const AddRecipe = () => {
     }
     getIngredients()
   }, [])
-
-  // Ingredients Filters
-  // const handleDisabled = (index) => {
-  //   if (recipeIngredients.length > index) {
-  //     return true
-  //   } else {
-  //     return false
-  //   }
-  // }
-
-  // const handleFilterChange = (index, e) => {
-  //   const newFilters = { ...filters, [index]: e.target.value }
-  //   setFilters(newFilters)
-  // }
-
-  // useEffect(() => {
-  //   const newFilteredIngredients = ingredients.filter(ingredient => {
-  //     return (ingredient.category === filters.category || filters.category === 'All')
-  //   }).sort((a, b) => a.name > b.name ? 1 : -1)
-  //   setFilteredIngredients(newFilteredIngredients)
-  // }, [filters, ingredients])
-
-  {/* <select name="category" value={filters.category} onChange={(e) => handleFilterChange(index, e)}>
-            <option value="All" disabled={recipeIngredients.length > index ? true : false}>All</option>
-            {ingredients &&
-              [...new Set(ingredients.map(ingredient => ingredient.category))].sort().map(category => {
-                return <option key={category} value={category}>{category}</option>
-              })}
-          </select> */}
 
   const handleIngredientChange = (e, index) => {
     // If new additional ingredient, add ingredient object to recipeIngredients array so all fields are created
@@ -224,8 +193,6 @@ const AddRecipe = () => {
         <section className="ingredients-form">
           {generateIngredientsForm()
           }
-          <button type="button" >Add Ingredient</button>
-          {/* onClick={addIngredient} */}
         </section>
         <section className="nutrition-form">
           <label>Calories

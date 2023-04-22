@@ -3,8 +3,8 @@ import Home from './components/Home'
 import Navbar from './components/common/Navbar'
 import FooterNavbar from './components/common/FooterNavbar'
 import Login from './components/auth/Login'
-import Profile from './components/profile/Profile'
-import Admin from './components/profile/Admin'
+import Profile from './components/profile/profile'
+import Admin from './components/profile/admin'
 import RecipeDetailed from './components/recipes/RecipeDetailed'
 import EditRecipe from './components/recipes/EditRecipe'
 import AddRecipe from './components/recipes/AddRecipe'
@@ -17,7 +17,7 @@ const App = () => {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/Recipes" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Fridge/" element={<Fridge />} />
           <Route path="/Shopping/" element={<Shopping />} />

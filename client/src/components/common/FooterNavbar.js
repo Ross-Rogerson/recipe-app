@@ -20,7 +20,7 @@ const Navbar = () => {
       <nav>
 
         <div id="home">
-          <Link to={'/recipes/'}>
+          <Link to={'/'}>
             <img src={home} alt="listIcon" />
           </Link>
         </div>

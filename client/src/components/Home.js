@@ -16,7 +16,7 @@ const Home = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await axios.get('/api/recipes/')
+        const { data } = await axios.get('/api/')
         // console.log(data)
         setRecipes(data)
       } catch (err) {
