@@ -23,6 +23,8 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 # REGISTER ROUTE: POST /api/auth/register/
+
+
 class RegisterView(APIView):
     @exceptions
     def post(self, request):
@@ -32,6 +34,8 @@ class RegisterView(APIView):
         return Response(user_to_add.data, status.HTTP_201_CREATED)
 
 # LOGIN ROUTE: POST /api/auth/login/
+
+
 class LoginView(APIView):
     @exceptions
     def post(self, request):
@@ -48,19 +52,22 @@ class LoginView(APIView):
             dt.strftime('%s'))}, settings.SECRET_KEY, algorithm='HS256')
         return Response({'message': f"Welcome back, {user_to_login.username}", 'token': token, 'id': {user_to_login.id}})
 
-    
+
 class ProfileView(APIView):
     permission_classes = (IsAuthenticated,)
     # GET RECIPES: GET /api/profile/:pk/
     # Gets both recipes liked and owned
+
     @exceptions
     def get(self, request, pk):
         logged_in_user = User.objects.get(pk=pk)
         serialized_user = PopulatedUserSerializer(logged_in_user)
         return Response(serialized_user.data)
-    
+
     @exceptions
     def delete(self, request, pk):
+        print('USER NOT OWNER')
+        # print('REDIPE TO DELETE ID ->', request.data)
         # recipe_id will be sent from the front end in the request body
         recipe_id = request.data["recipe_id"]
         recipe_to_delete = Recipe.objects.get(pk=recipe_id)

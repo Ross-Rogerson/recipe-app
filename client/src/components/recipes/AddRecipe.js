@@ -156,7 +156,7 @@ const AddRecipe = () => {
 
   return (
     <main>
-      <h1>Add Recipe</h1>
+      <h1>Post a recipe</h1>
       <form id="addForm" onSubmit={submitAdd}>
         <section className="standard-form">
           <label>Name

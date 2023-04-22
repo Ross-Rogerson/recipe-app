@@ -1,4 +1,13 @@
+#wrapper {
+  // max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   padding-top: 8svh;
   margin-bottom: 9svh;

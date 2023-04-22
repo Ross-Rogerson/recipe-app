@@ -1,4 +1,5 @@
 .post {
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,6 +9,8 @@
 }
 
 #post-owner {
+  max-width: 600px;
+  max-height: 50px;
   width: inherit;
   height: 9vw;
   display: flex;
@@ -16,12 +19,16 @@
 }
 
 #post-owner-img {
+  max-width: 45px;
+  max-height: 45px;
   width: 8vw;
   height: 8vw;
   margin-left: 10px;
   border-radius: 100px;
   
   img {
+    max-width: 45px;
+    max-height: 45px;
     border: 1px solid black;
     border-radius: 100px;
     width: inherit;
@@ -35,6 +42,7 @@
 }
 
 #recipe-image {
+  max-width: 600px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,6 +51,7 @@
   overflow: hidden;
 
   img {
+    max-width: 600px;
     width: inherit;
     height: inherit;
     object-fit: cover;
@@ -50,6 +59,7 @@
 }
 
 #recipe-content {
+  max-width: 600px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -59,6 +69,8 @@
 }
 
 #content-top-row {
+  max-width: 600px;
+  max-height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -67,11 +79,14 @@
 }
 
 #recipe-likes-content {
+  max-width: 600px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   button {
+    max-width: 35px;
+    max-height: 35px;
     background-color: transparent;
     border: none;
     padding: 0;
@@ -79,6 +94,8 @@
     height: 6vw;
 
     svg{
+      max-width: 35px;
+      max-height: 35px;
       width: inherit;
       height: inherit;
     }
@@ -94,11 +111,13 @@
 }
 
 #feed-dietary {
+  max-width: 120px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 6vw;
   div {
+    max-width: 40px;
     text-align: center;
     width: 7vw;
   }
@@ -112,6 +131,7 @@
 }
 
 #feed-recipe-description {
+  max-width: 600px;
   font-size: 12px;
   margin-bottom: 5px;
 }

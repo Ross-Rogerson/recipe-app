@@ -1,4 +1,5 @@
 footer {
+  max-width: 600px;
   width: 100vw;
   height: 8svh;
   display: flex;
@@ -11,6 +12,7 @@ footer {
   bottom: 0;
 
   nav {
+    max-width: inherit;
     width: calc(100% - 20px);
     display: flex;
     align-items: center;

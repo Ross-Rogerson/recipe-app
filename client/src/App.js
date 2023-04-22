@@ -25,7 +25,7 @@ const App = () => {
           <Route path="/Profile/:userId/admin" element={<Admin />} />
           <Route path="/Recipes/:recipeId/" element={<RecipeDetailed />} />
           <Route path="/Recipes/:recipeId/edit" element={<EditRecipe />} />
-          <Route path="/Recipes/add" element={<AddRecipe />} />
+          <Route path="/Recipes/add/" element={<AddRecipe />} />
 
         </Routes>
         <FooterNavbar />

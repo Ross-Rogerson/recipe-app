@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
-import { getToken, removeToken, isAuthenticated, getUserID } from '../../helpers/auth'
+import { getToken, userTokenFunction, isAuthenticated, getUserID } from '../../helpers/auth'
 import { useParams, Link, useNavigate, useFetcher } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDisplay, faHeart as liked } from '@fortawesome/free-solid-svg-icons'
@@ -70,13 +70,8 @@ const RecipeDetailed = () => {
     const requestBody = {
       'liked_recipe_id': recipeId,
     }
-    const headers = {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    }
     try {
-      await axios.post(`/api/recipes/${recipeId}/`, requestBody, headers)
+      await axios.post(`/api/recipes/${recipeId}/`, requestBody, userTokenFunction())
     } catch (err) {
       setError(err)
     }
