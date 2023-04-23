@@ -3,8 +3,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from lib.exceptions import exceptions, PermissionDenied
 
-from .models import Recipe
-from .serializers.common import CreateRecipeSerializer, FridgeRecipeSerializer
+from .models import Recipe, Constituent
+from .serializers.common import CreateRecipeSerializer, FridgeRecipeSerializer, UpdateRecipeSerializer
 from .serializers.populated import PopulatedRecipeSerializer
 from rest_framework.permissions import IsAdminUser, IsAuthenticated, IsAuthenticatedOrReadOnly
 
@@ -62,16 +62,18 @@ class RecipeDetailedView(APIView):
         print(recipe)
         return Response()
 
+
 class AddRecipeView(APIView):
     permission_classes = (IsAuthenticated,)
     # POST RECIPE: POST /api/recipes/add
     # GET RECIPES: GET /api/recipe/add
+
     @exceptions
     def get(self, request):
         ingredients = Ingredient.objects.all()
         serialized_ingredients = IngredientSerializer(ingredients, many=True)
         return Response(serialized_ingredients.data)
-    
+
     @exceptions
     def post(self, request):
         print(request.data)
@@ -81,21 +83,39 @@ class AddRecipeView(APIView):
         recipe_to_create.save()
         return Response(recipe_to_create.data, status.HTTP_201_CREATED)
 
+
 class EditRecipeView(APIView):
     # Edit recipe owned from recipe detailed view
     permission_classes = (IsAuthenticated,)
     # PUT RECIPE: PUT /api/recipes/:pk/edit
-
     @exceptions
-    def put(self, request, pk):
+    def get(self, request, pk):
         recipe = Recipe.objects.get(pk=pk)
         if recipe.owner != request.user:
             raise PermissionDenied()
-        serialized_recipe = Recipe(recipe, request.data, partial=True)
+        serialized_recipe = PopulatedRecipeSerializer(recipe)
+
+        ingredients = Ingredient.objects.all()
+        serialized_ingredients = IngredientSerializer(ingredients, many=True)
+
+        response_data = {
+            'recipe': serialized_recipe.data,
+            'ingredients': serialized_ingredients.data
+        }
+        return Response(response_data)
+
+    @exceptions
+    def put(self, request, pk):
+        print(request.data)
+        recipe = Recipe.objects.get(pk=pk)
+        if recipe.owner != request.user:
+            raise PermissionDenied()
+
+        serialized_recipe = UpdateRecipeSerializer(recipe, data=request.data, partial=True)
         serialized_recipe.is_valid(raise_exception=True)
         serialized_recipe.save()
-        return Response(serialized_recipe.data)
 
+        return Response(serialized_recipe.data)
 
 class RecipesInList(APIView):
     # Recipes in shopping list

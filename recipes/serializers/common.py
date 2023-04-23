@@ -101,3 +101,33 @@ class CreateRecipeSerializer(ModelSerializer):
 
         return recipe
 
+class UpdateRecipeSerializer(ModelSerializer):
+    ingredients = ListField(child=DictField(), write_only=True, required=False)
+
+    class Meta:
+        model = Recipe
+        fields = '__all__'
+
+    def update(self, instance, validated_data):
+        ingredients_data = validated_data.pop('ingredients', [])
+
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+
+        instance.constituent_set.all().delete()
+
+        for ingredient_data in ingredients_data:
+            ingredient_id = ingredient_data['ingredient_detail']
+            ingredient_detail = Ingredient.objects.get(id=ingredient_id)
+            qty = ingredient_data['qty']
+            unit = ingredient_data['unit']
+
+            Constituent.objects.create(
+                recipe=instance,
+                ingredient_detail=ingredient_detail,
+                qty=qty,
+                unit=unit
+            )
+
+        return instance

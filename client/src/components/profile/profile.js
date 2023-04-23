@@ -13,8 +13,8 @@ const Profile = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const [showOwnedRecipes, setShowOwnedRecipes] = useState(false)
-  const [showLikedRecipes, setShowLikedRecipes] = useState(true)
+  const [showOwnedRecipes, setShowOwnedRecipes] = useState(true)
+  const [showLikedRecipes, setShowLikedRecipes] = useState(false)
   const likedRecipesRef = useRef(null)
   const ownedRecipesRef = useRef(null)
 
@@ -108,7 +108,7 @@ const Profile = () => {
             </div>
           </Link>
           <button id="delete-recipe-btn" onClick={() => handleDelete(id)}>Delete</button>
-          <Link id="edit-recipe-btn" to={`/recipes/${id}/edit`}>
+          <Link id="edit-recipe-btn" to={`/recipes/${id}/edit/`}>
             <div id="edit-recipe-div" >Edit</div>
           </Link>
         </div >

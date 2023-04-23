@@ -144,7 +144,6 @@ const AddRecipe = () => {
 
     console.log(addBody)
 
-
     try {
       await axios.post('/api/recipes/add/', addBody, userTokenFunction())
     } catch (err) {
