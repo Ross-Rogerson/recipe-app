@@ -10,7 +10,7 @@
 
 #post-owner {
   max-width: 600px;
-  max-height: 50px;
+  max-height: 40px;
   width: inherit;
   height: 9vw;
   display: flex;
@@ -19,22 +19,26 @@
 }
 
 #post-owner-img {
-  max-width: 45px;
-  max-height: 45px;
+  max-width: 35px;
+  max-height: 35px;
   width: 8vw;
   height: 8vw;
   margin-left: 10px;
   border-radius: 100px;
   
   img {
-    max-width: 45px;
-    max-height: 45px;
+    max-width: 35px;
+    max-height: 35px;
     border: 1px solid black;
     border-radius: 100px;
     width: inherit;
     height: inherit;
     object-fit: cover;
   }
+}
+
+.post:not(:first-child) {
+  border-top: 1px solid rgb(0, 0, 0,0.1);
 }
 
 #post-recipe-owner {
@@ -85,8 +89,8 @@
   justify-content: space-between;
 
   button {
-    max-width: 35px;
-    max-height: 35px;
+    max-width: 25px;
+    max-height: 25px;
     background-color: transparent;
     border: none;
     padding: 0;
@@ -94,8 +98,8 @@
     height: 6vw;
 
     svg{
-      max-width: 35px;
-      max-height: 35px;
+      max-width: 25px;
+      max-height: 25px;
       width: inherit;
       height: inherit;
     }
@@ -138,4 +142,14 @@
 
 #feed-recipe-date {
   font-size: 11px;
+}
+
+@media only screen and (min-width: 500px) {
+  #content-top-row {
+    margin-bottom: 0;
+  }
+
+  #recipe-content {
+    margin-top: 0;
+  }
 }

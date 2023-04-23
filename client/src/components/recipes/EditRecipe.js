@@ -27,8 +27,8 @@ const EditRecipe = () => {
     image: '',
     method: '',
   })
-  const [editedIngredients, setEditedIngredients] = useState([])
   const [recipeIngredients, setRecipeIngredients] = useState([])
+  const [currentIngredients, setCurrentIngredients] = useState([])
 
   const navigate = useNavigate()
   const { recipeId } = useParams()
@@ -44,6 +44,7 @@ const EditRecipe = () => {
         const { data } = await axios.create(userTokenFunction()).get(`/api/recipes/${recipeId}/edit`)
         setRecipe(data.recipe)
         setIngredients(data.ingredients)
+
       } catch (err) {
         console.log('error', err)
         setError(err.response.data.message)
@@ -53,17 +54,25 @@ const EditRecipe = () => {
   }, [])
 
   useEffect(() => {
+
+    console.log('INGREDIENTS -> ', ingredients)
+  },[ingredients])
+
+  useEffect(() => {
+
     setRecipeIngredients(recipe.ingredients)
+
+    // validation to remove null values
     const initialNutritionData = {
       ...nutritionData,
-      calories: recipe.calories,
-      carbohydrates: recipe.carbohydrates,
-      fat: recipe.fat,
-      fibre: recipe.fibre,
-      protein: recipe.protein,
-      salt: recipe.salt,
-      saturates: recipe.saturates,
-      sugars: recipe.sugars,
+      calories: recipe.calories ? recipe.calories : '',
+      carbohydrates: recipe.carbohydrates ? recipe.carbohydrates : '',
+      fat: recipe.fat ? recipe.fat : '',
+      fibre: recipe.fibre ? recipe.fibre : '',
+      protein: recipe.protein ? recipe.protein : '',
+      salt: recipe.salt ? recipe.salt : '',
+      saturates: recipe.saturates ? recipe.saturates : '',
+      sugars: recipe.sugars ? recipe.sugars : '',
     }
     setNutritionData(initialNutritionData)
 
@@ -89,9 +98,19 @@ const EditRecipe = () => {
 
     // Find and update correct ingredient object
     const updatedIngredients = newIngredientArray.map((item, i) => {
+      console.log(e.target.name)
+      console.log(e.target.value)
       if (i === index) {
         if (e.target.name === 'qty') {
           return { ...item, [e.target.name]: parseFloat(e.target.value) }
+        } else if (e.target.name === 'ingredient_detail') {
+          const lc = e.target.value.toLowerCase()
+          console.log(lc)
+          const ingredientObject = ingredients.filter(ingredient => ingredient.name === lc)[0]
+          console.log(ingredientObject)
+          return { ...item, 
+            [e.target.name]: ingredientObject,
+          }
         } else {
           return { ...item, [e.target.name]: e.target.value }
         }
@@ -103,43 +122,48 @@ const EditRecipe = () => {
 
   useEffect(() => {
     recipeIngredients && setIngredientCount(recipeIngredients.length + 1)
+    console.log(recipeIngredients)
   }, [recipeIngredients])
 
   const generateIngredientsForm = () => {
     if (recipeIngredients) {
-      return recipeIngredients.map((recipeIngredient, index) => {
-        const { name = recipeIngredient['ingredient_detail'].name, qty, unit  } = recipeIngredient
+      return [...recipeIngredients, { ingredient_detail: '', qty: '', unit: '' }].map((recipeIngredient, index) => {
+        const { name = recipeIngredient['ingredient_detail'].name, qty, unit } = recipeIngredient
+        const capitalised = name ? name.charAt(0).toUpperCase() + name.slice(1) : ''
+        const rounded = !qty ? qty : Number.isInteger(qty / 1) ? parseInt(qty) : qty
         return (
-          <div key={index}>
+          <div id="ingredient-div" key={index}>
             <label id="ingredient-label">Ingredient {index + 1}
-              <select name="ingredient_detail" value={recipeIngredients.ingredient_detail} defaultValue={name} onChange={(e) => handleIngredientChange(e, index)}>
-                {ingredients.length > 0 &&
-                  ingredients.map(ingredient => ingredient.name).sort().map(name => {
-                    return <option key={name} value={name} >{name}</option>
-                  })}
-              </select>
             </label>
+            <label id="name-label">Name</label>
+            <select id="ingredient-select" name="ingredient_detail" value={recipeIngredients.ingredient_detail} defaultValue={capitalised} onChange={(e) => handleIngredientChange(e, index)}>
+              <option>-- Select Ingredient --</option>
+              {ingredients.length > 0 &&
+                ingredients.map(ingredient => ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1)).sort().map(name => {
+                  return <option key={name} value={name} >{name}</option>
+                })}
+            </select>
             <label>Unit
-              <select name="unit" value={recipeIngredients.ingredient_unit} defaultValue={unit} onChange={(e) => handleIngredientChange(e, index)}>
-                <option>-- Select Unit --</option>
-                <option value='g' >g</option>
-                <option value='kg' >kg</option>
-                <option value='ml' >ml</option>
-                <option value='l' >l</option>
-                <option value='cm' >cm</option>
-                <option value='tsp' >tsp</option>
-                <option value='tbsp' >tbsp</option>
-                <option value='sprig(s)' >sprigs</option>
-                <option value='bunch(es)' >bunches</option>
-                <option value='handful(s)' >handfuls</option>
-                <option value='stick(s)' >sticks</option>
-                <option value='pinch(es)' >pinches</option>
-                <option value='' >-</option>
-              </select>
             </label>
+            <select id="unit-select" name="unit" value={recipeIngredients.ingredient_unit} defaultValue={unit} onChange={(e) => handleIngredientChange(e, index)}>
+              <option>-- Select Unit --</option>
+              <option value='g' >g</option>
+              <option value='kg' >kg</option>
+              <option value='ml' >ml</option>
+              <option value='l' >l</option>
+              <option value='cm' >cm</option>
+              <option value='tsp' >tsp</option>
+              <option value='tbsp' >tbsp</option>
+              <option value='sprig(s)' >Sprigs</option>
+              <option value='bunch(es)' >Bunches</option>
+              <option value='handful(s)' >Handfuls</option>
+              <option value='stick(s)' >Sticks</option>
+              <option value='pinch(es)' >Pinches</option>
+              <option value='' >-</option>
+            </select>
             <label>Qty/Weight
-              <input type="text" name="qty" pattern="[0-9]*\.?[0-9]+" placeholder="Enter amount" value={recipeIngredients.qty} defaultValue={qty} onChange={(e) => handleIngredientChange(e, index)} />
             </label>
+            <input id="qty-select" type="text" name="qty" pattern="[0-9]*\.?[0-9]+" placeholder="Enter amount" value={recipeIngredients.qty} defaultValue={rounded} onChange={(e) => handleIngredientChange(e, index)} />
           </div>
         )
       })
@@ -163,10 +187,10 @@ const EditRecipe = () => {
     const ingredientMap = {}
     recipeIngredients.forEach(ingredient => {
       const { detail = ingredient['ingredient_detail'] } = ingredient
-      const { name, id  } = detail
+      const { name, id } = detail
       ingredientMap[name] = id
     })
-    
+
     // Replace ingredient names with ids
     const ingredientsBody = recipeIngredients.map(ingredient => {
       return { ...ingredient, ingredient_detail: ingredientMap[ingredient.ingredient_detail.name] }
@@ -190,67 +214,54 @@ const EditRecipe = () => {
     <main>
       <h1>Edit recipe</h1>
       <form id="editForm" onSubmit={submitEdit}>
-        <section className="standard-form">
-          <label>Name
-            <input type="text" name="name" placeholder="Recipe name" value={standardData.name} onChange={handleStandardChange} />
-          </label>
-          <label>Description
-            <input type="text" name="description" placeholder="Recipe description" value={standardData.description} onChange={handleStandardChange} />
-          </label>
-          <label>Continent of Origin
-            <select name="continent" value={standardData.continent} onChange={handleStandardChange} >
-              <option >-- Select Continent --</option>
-              <option value='Africa' >Africa</option>
-              <option value='Antarctica' >Antarctica</option>
-              <option value='Asia' >Asia</option>
-              <option value='Australasia' >Australasia</option>
-              <option value='Europe' >Europe</option>
-              <option value='North America' >North America</option>
-              <option value='South America' >South America</option>
-            </select>
-          </label>
-          <label>Serves
-            <input type="text" name="serves" placeholder="Serves" value={standardData.serves} onChange={handleStandardChange} />
-          </label>
-          <label>Prep Time
-            <input type="text" name="cook_time" placeholder="Prep time (include cooking time)" value={standardData.cook_time} onChange={handleStandardChange} />
-          </label>
-          <label>Image
-            <input type="text" name="image" placeholder="Image URL" value={standardData.image} onChange={handleStandardChange} />
-          </label>
-          <label>Method
-            <input type="text" name="method" placeholder="Recipe method" value={standardData.method} onChange={handleStandardChange} />
-          </label>
+        <section id="standard-form">
+          <label>Name</label>
+          <input type="text" name="name" placeholder="Recipe name" value={standardData.name} onChange={handleStandardChange} />
+          <label>Description</label>
+          <input type="text" name="description" placeholder="Recipe description" value={standardData.description} onChange={handleStandardChange} />
+          <label>Continent of Origin</label>
+          <select name="continent" value={standardData.continent} onChange={handleStandardChange} >
+            <option >-- Select Continent --</option>
+            <option value='Africa' >Africa</option>
+            <option value='Antarctica' >Antarctica</option>
+            <option value='Asia' >Asia</option>
+            <option value='Australasia' >Australasia</option>
+            <option value='Europe' >Europe</option>
+            <option value='North America' >North America</option>
+            <option value='South America' >South America</option>
+          </select>
+          <label>Serves</label>
+          <input type="text" name="serves" placeholder="Serves" value={standardData.serves} onChange={handleStandardChange} />
+          <label>Prep Time</label>
+          <input type="text" name="cook_time" placeholder="Prep time (include cooking time)" value={standardData.cook_time} onChange={handleStandardChange} />
+          <label>Image</label>
+          <input type="text" name="image" placeholder="Image URL" value={standardData.image} onChange={handleStandardChange} />
+          <span>
+            <label>Method</label>
+            <textarea type="text" name="method" placeholder="Recipe method..." value={standardData.method} onChange={handleStandardChange} />
+          </span>
         </section>
-        <section className="ingredients-form">
+        <section id="ingredients-form">
           {generateIngredientsForm()
           }
         </section>
-        <section className="nutrition-form">
-          <label>Calories
-            <input type="text" name="calories" placeholder="Enter amount (kcal)" value={nutritionData.calories} onChange={handleNutritionChange} />
-          </label>
-          <label>Fat
-            <input type="text" name="fat" placeholder="Enter amount (g)" value={nutritionData.fat} onChange={handleNutritionChange} />
-          </label>
-          <label>Saturates
-            <input type="text" name="saturates" placeholder="Enter amount (g)" value={nutritionData.saturates} onChange={handleNutritionChange} />
-          </label>
-          <label>Sugars
-            <input type="text" name="sugars" placeholder="Enter amount (g)" value={nutritionData.sugars} onChange={handleNutritionChange} />
-          </label>
-          <label>Salt
-            <input type="text" name="salt" placeholder="Enter amount (g)" value={nutritionData.salt} onChange={handleNutritionChange} />
-          </label>
-          <label>Protein
-            <input type="text" name="protein" placeholder="Enter amount (g)" value={nutritionData.protein} onChange={handleNutritionChange} />
-          </label>
-          <label>Carbohydrates
-            <input type="text" name="carbohydrates" placeholder="Enter amount (g)" value={nutritionData.carbohydrates} onChange={handleNutritionChange} />
-          </label>
-          <label>Fibre
-            <input type="text" name="fibre" placeholder="Enter amount (g)" value={nutritionData.fibre} onChange={handleNutritionChange} />
-          </label>
+        <section id="nutrition-form">
+          <label>Calories</label>
+          <input type="text" name="calories" placeholder="Enter amount (kcal)" value={nutritionData.calories} onChange={handleNutritionChange} />
+          <label>Fat</label>
+          <input type="text" name="fat" placeholder="Enter amount (g)" value={nutritionData.fat} onChange={handleNutritionChange} />
+          <label>Saturates</label>
+          <input type="text" name="saturates" placeholder="Enter amount (g)" value={nutritionData.saturates} onChange={handleNutritionChange} />
+          <label>Sugars</label>
+          <input type="text" name="sugars" placeholder="Enter amount (g)" value={nutritionData.sugars} onChange={handleNutritionChange} />
+          <label>Salt</label>
+          <input type="text" name="salt" placeholder="Enter amount (g)" value={nutritionData.salt} onChange={handleNutritionChange} />
+          <label>Protein</label>
+          <input type="text" name="protein" placeholder="Enter amount (g)" value={nutritionData.protein} onChange={handleNutritionChange} />
+          <label>Carbohydrates</label>
+          <input type="text" name="carbohydrates" placeholder="Enter amount (g)" value={nutritionData.carbohydrates} onChange={handleNutritionChange} />
+          <label>Fibre</label>
+          <input type="text" name="fibre" placeholder="Enter amount (g)" value={nutritionData.fibre} onChange={handleNutritionChange} />
         </section>
         <button id="submitEdit" type="submit">Submit edit</button>
       </form>

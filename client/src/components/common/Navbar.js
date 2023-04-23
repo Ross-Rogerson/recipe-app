@@ -25,7 +25,7 @@ const Navbar = () => {
               :
               <>
                 <div id="logo">
-                  <Link to={'/recipes/'}>Recipe-App</Link>
+                  <Link to={'/'}>Recipe-App</Link>
                 </div>
                 <div id="nav-search">
                   {

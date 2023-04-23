@@ -79,37 +79,38 @@ const AddRecipe = () => {
   const generateIngredientsForm = () => {
     return [...Array(ingredientCount)].map((_, index) => {
       return (
-        <div key={index}>
+        <div id="ingredient-div" key={index}>
           <label id="ingredient-label">Ingredient {index + 1}
-            <select name="ingredient_detail" value={recipeIngredients.ingredient_detail} onChange={(e) => handleIngredientChange(e, index)}>
-              <option>-- Select Ingredient --</option>
-              {ingredients &&
-                ingredients.map(ingredient => ingredient.name).sort().map(name => {
-                  return <option key={name} value={name} >{name}</option>
-                })}
-            </select>
           </label>
+          <label id="name-label">Name</label>
+          <select id="ingredient-select" name="ingredient_detail" value={recipeIngredients.ingredient_detail} onChange={(e) => handleIngredientChange(e, index)}>
+            <option>-- Select Ingredient --</option>
+            {ingredients &&
+              ingredients.map(ingredient => ingredient.name).sort().map(name => {
+                return <option key={name} value={name} >{name}</option>
+              })}
+          </select>
           <label>Unit
-            <select name="unit" value={recipeIngredients.ingredient_unit} onChange={(e) => handleIngredientChange(e, index)}>
-              <option>-- Select Unit --</option>
-              <option value='g' >g</option>
-              <option value='kg' >kg</option>
-              <option value='ml' >ml</option>
-              <option value='l' >l</option>
-              <option value='cm' >cm</option>
-              <option value='tsp' >tsp</option>
-              <option value='tbsp' >tbsp</option>
-              <option value='sprig(s)' >sprigs</option>
-              <option value='bunch(es)' >bunches</option>
-              <option value='handful(s)' >handfuls</option>
-              <option value='stick(s)' >sticks</option>
-              <option value='pinch(es)' >pinches</option>
-              <option value='' >-</option>
-            </select>
           </label>
+          <select id="unit-select" name="unit" value={recipeIngredients.ingredient_unit} onChange={(e) => handleIngredientChange(e, index)}>
+            <option>-- Select Unit --</option>
+            <option value='g' >g</option>
+            <option value='kg' >kg</option>
+            <option value='ml' >ml</option>
+            <option value='l' >l</option>
+            <option value='cm' >cm</option>
+            <option value='tsp' >tsp</option>
+            <option value='tbsp' >tbsp</option>
+            <option value='sprig(s)' >sprigs</option>
+            <option value='bunch(es)' >bunches</option>
+            <option value='handful(s)' >handfuls</option>
+            <option value='stick(s)' >sticks</option>
+            <option value='pinch(es)' >pinches</option>
+            <option value='' >-</option>
+          </select>
           <label>Qty/Weight
-            <input type="text" name="qty" pattern="[0-9]*" placeholder="Enter amount" value={recipeIngredients.qty} onChange={(e) => handleIngredientChange(e, index)} />
           </label>
+          <input id="unit-select" type="text" name="qty" pattern="[0-9]*" placeholder="Enter amount" value={recipeIngredients.qty} onChange={(e) => handleIngredientChange(e, index)} />
         </div>
       )
     })
@@ -155,71 +156,58 @@ const AddRecipe = () => {
 
   return (
     <main>
-      <h1>Post a recipe</h1>
+      <h1>Create a recipe</h1>
       <form id="addForm" onSubmit={submitAdd}>
-        <section className="standard-form">
-          <label>Name
-            <input type="text" name="name" placeholder="Recipe name" value={recipeStandard.name} onChange={handleStandardChange} />
-          </label>
-          <label>Description
-            <input type="text" name="description" placeholder="Recipe description" value={recipeStandard.description} onChange={handleStandardChange} />
-          </label>
-          <label>Continent of Origin
-            <select name="continent" value={recipeStandard.continent} onChange={handleStandardChange} >
-              <option >-- Select Continent --</option>
-              <option value='Africa' >Africa</option>
-              <option value='Antarctica' >Antarctica</option>
-              <option value='Asia' >Asia</option>
-              <option value='Australasia' >Australasia</option>
-              <option value='Europe' >Europe</option>
-              <option value='North America' >North America</option>
-              <option value='South America' >South America</option>
-            </select>
-          </label>
-          <label>Serves
-            <input type="text" name="serves" placeholder="Serves" value={recipeStandard.serves} onChange={handleStandardChange} />
-          </label>
-          <label>Prep Time
-            <input type="text" name="cook_time" placeholder="Prep time (include cooking time)" value={recipeStandard.cook_time} onChange={handleStandardChange} />
-          </label>
-          <label>Image
-            <input type="text" name="image" placeholder="Image URL" value={recipeStandard.image} onChange={handleStandardChange} />
-          </label>
-          <label>Method
-            <input type="text" name="method" placeholder="Recipe method" value={recipeStandard.method} onChange={handleStandardChange} />
-          </label>
+        <section id="standard-form">
+          <label>Name</label>
+          <input type="text" name="name" placeholder="Recipe name" value={recipeStandard.name} onChange={handleStandardChange} />
+          <label>Description</label>
+          <input type="text" name="description" placeholder="Recipe description" value={recipeStandard.description} onChange={handleStandardChange} />
+          <label>Continent of Origin</label>
+          <select name="continent" value={recipeStandard.continent} onChange={handleStandardChange} >
+            <option >-- Select Continent --</option>
+            <option value='Africa' >Africa</option>
+            <option value='Antarctica' >Antarctica</option>
+            <option value='Asia' >Asia</option>
+            <option value='Australasia' >Australasia</option>
+            <option value='Europe' >Europe</option>
+            <option value='North America' >North America</option>
+            <option value='South America' >South America</option>
+          </select>
+          <label>Serves</label>
+          <input type="text" name="serves" placeholder="Serves" value={recipeStandard.serves} onChange={handleStandardChange} />
+          <label>Prep Time</label>
+          <input type="text" name="cook_time" placeholder="Prep time (include cooking time)" value={recipeStandard.cook_time} onChange={handleStandardChange} />
+          <label>Image</label>
+          <input type="text" name="image" placeholder="Image URL" value={recipeStandard.image} onChange={handleStandardChange} />
+          <span>
+            <label>Method</label>
+            <textarea type="text" name="method" placeholder="Recipe method..." value={recipeStandard.method} onChange={handleStandardChange} />
+          </span>
         </section>
-        <section className="ingredients-form">
+        <section id="ingredients-form">
           {generateIngredientsForm()
           }
         </section>
-        <section className="nutrition-form">
-          <label>Calories
-            <input type="text" name="calories" placeholder="Enter amount (kcal)" value={recipeNutrition.calories} onChange={handleNutritionChange} />
-          </label>
-          <label>Fat
-            <input type="text" name="fat" placeholder="Enter amount (g)" value={recipeNutrition.fat} onChange={handleNutritionChange} />
-          </label>
-          <label>Saturates
-            <input type="text" name="saturates" placeholder="Enter amount (g)" value={recipeNutrition.saturates} onChange={handleNutritionChange} />
-          </label>
-          <label>Sugars
-            <input type="text" name="sugars" placeholder="Enter amount (g)" value={recipeNutrition.sugars} onChange={handleNutritionChange} />
-          </label>
-          <label>Salt
-            <input type="text" name="salt" placeholder="Enter amount (g)" value={recipeNutrition.salt} onChange={handleNutritionChange} />
-          </label>
-          <label>Protein
-            <input type="text" name="protein" placeholder="Enter amount (g)" value={recipeNutrition.protein} onChange={handleNutritionChange} />
-          </label>
-          <label>Carbohydrates
-            <input type="text" name="carbohydrates" placeholder="Enter amount (g)" value={recipeNutrition.carbohydrates} onChange={handleNutritionChange} />
-          </label>
-          <label>Fibre
-            <input type="text" name="fibre" placeholder="Enter amount (g)" value={recipeNutrition.fibre} onChange={handleNutritionChange} />
-          </label>
+        <section id="nutrition-form">
+          <label>Calories</label>
+          <input type="text" name="calories" placeholder="Enter amount (kcal)" value={recipeNutrition.calories} onChange={handleNutritionChange} />
+          <label>Fat</label>
+          <input type="text" name="fat" placeholder="Enter amount (g)" value={recipeNutrition.fat} onChange={handleNutritionChange} />
+          <label>Saturates</label>
+          <input type="text" name="saturates" placeholder="Enter amount (g)" value={recipeNutrition.saturates} onChange={handleNutritionChange} />
+          <label>Sugars</label>
+          <input type="text" name="sugars" placeholder="Enter amount (g)" value={recipeNutrition.sugars} onChange={handleNutritionChange} />
+          <label>Salt</label>
+          <input type="text" name="salt" placeholder="Enter amount (g)" value={recipeNutrition.salt} onChange={handleNutritionChange} />
+          <label>Protein</label>
+          <input type="text" name="protein" placeholder="Enter amount (g)" value={recipeNutrition.protein} onChange={handleNutritionChange} />
+          <label>Carbohydrates</label>
+          <input type="text" name="carbohydrates" placeholder="Enter amount (g)" value={recipeNutrition.carbohydrates} onChange={handleNutritionChange} />
+          <label>Fibre</label>
+          <input type="text" name="fibre" placeholder="Enter amount (g)" value={recipeNutrition.fibre} onChange={handleNutritionChange} />
         </section>
-        <button id="submitEdit" type="submit">Create recipe</button>
+        <button id="submitEdit" type="submit">Post recipe</button>
       </form>
     </main >
   )
