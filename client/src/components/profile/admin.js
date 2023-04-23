@@ -16,9 +16,7 @@ const Admin = () => {
       try {
         const { data } = await axios.create(userTokenFunction()).get(`/api/profile/${userId}/admin`)
         setAdminData(data)
-        console.log(data)
       } catch (err) {
-        console.log(err)
         setError(err.message)
       }
     }

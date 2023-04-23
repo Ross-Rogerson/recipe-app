@@ -17,10 +17,8 @@ const Home = () => {
     const getData = async () => {
       try {
         const { data } = await axios.get('/api/')
-        // console.log(data)
         setRecipes(data)
       } catch (err) {
-        console.log('error', err)
         setError(err.response.data.message)
       }
     }
@@ -128,7 +126,6 @@ const Home = () => {
                   </div>
                 </div>
                 <div id="feed-recipe-name">{name}</div>
-                {/* <div id="feed-recipe-origin">{continent}</div> */}
                 <div id="feed-recipe-description">{description}</div>
                 <div id="feed-recipe-date">{displayDate}</div>
               </div>
@@ -137,7 +134,6 @@ const Home = () => {
         })
         :
         <>
-          {/* {console.log('error')} */}
         </>
       }
     </main>

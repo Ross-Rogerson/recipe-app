@@ -12,3 +12,12 @@
     object-fit: cover;
   }
 }
+
+#shopping-view-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 calc(50% - 140px);
+  padding-bottom: 10px;
+  padding-top: 15px;
+}

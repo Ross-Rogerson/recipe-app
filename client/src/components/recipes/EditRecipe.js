@@ -46,7 +46,6 @@ const EditRecipe = () => {
         setIngredients(data.ingredients)
 
       } catch (err) {
-        console.log('error', err)
         setError(err.response.data.message)
       }
     }
@@ -54,12 +53,6 @@ const EditRecipe = () => {
   }, [])
 
   useEffect(() => {
-
-    console.log('INGREDIENTS -> ', ingredients)
-  },[ingredients])
-
-  useEffect(() => {
-
     setRecipeIngredients(recipe.ingredients)
 
     // validation to remove null values
@@ -98,16 +91,12 @@ const EditRecipe = () => {
 
     // Find and update correct ingredient object
     const updatedIngredients = newIngredientArray.map((item, i) => {
-      console.log(e.target.name)
-      console.log(e.target.value)
       if (i === index) {
         if (e.target.name === 'qty') {
           return { ...item, [e.target.name]: parseFloat(e.target.value) }
         } else if (e.target.name === 'ingredient_detail') {
-          const lc = e.target.value.toLowerCase()
-          console.log(lc)
-          const ingredientObject = ingredients.filter(ingredient => ingredient.name === lc)[0]
-          console.log(ingredientObject)
+          const lowercase = e.target.value.toLowerCase()
+          const ingredientObject = ingredients.filter(ingredient => ingredient.name === lowercase)[0]
           return { ...item, 
             [e.target.name]: ingredientObject,
           }
@@ -122,7 +111,6 @@ const EditRecipe = () => {
 
   useEffect(() => {
     recipeIngredients && setIngredientCount(recipeIngredients.length + 1)
-    console.log(recipeIngredients)
   }, [recipeIngredients])
 
   const generateIngredientsForm = () => {
@@ -195,17 +183,13 @@ const EditRecipe = () => {
     const ingredientsBody = recipeIngredients.map(ingredient => {
       return { ...ingredient, ingredient_detail: ingredientMap[ingredient.ingredient_detail.name] }
     })
-    console.log(ingredientsBody)
 
     // Create request body
     const editBody = { ...standardData, ...nutritionData, ingredients: ingredientsBody }
 
-    // console.log(editBody)
-
     try {
       await axios.put(`/api/recipes/${recipeId}/edit/`, editBody, userTokenFunction())
     } catch (err) {
-      console.log('error', err)
       setError(err.response.data.message)
     }
   }

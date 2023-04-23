@@ -7,7 +7,10 @@ const Shopping = () => {
   const [recipeList, setRecipeList] = useState([])
   const [itemsToRemove, setItemsToRemove] = useState([])
   const [checked, setChecked] = useState({})
-
+  const [isActive, setIsActive] = useState({
+    shopping: true,
+    recipes: false,
+  })
 
   const [showRecipes, setShowRecipes] = useState(false)
   const [showShoppingList, setShowShoppingList] = useState(true)
@@ -23,17 +26,16 @@ const Shopping = () => {
     setRecipeList(initialRecipeList)
   }, [])
 
-  useEffect(() => {
-    console.log('SHOPPING LIST ->', list)
-    console.log('RECIPES ->', recipeList)
-  }, [list, recipeList])
-
   // Show/Hide Display & Ingredients
   const handleShowShoppingList = () => {
     setShowShoppingList(true)
     setShowRecipes(false)
     recipesRef.current.style.display = 'none'
     shoppingRef.current.style.display = 'block'
+    setIsActive({
+      shopping: true,
+      recipes: false,
+    })
   }
 
   const handleShowRecipes = () => {
@@ -41,10 +43,13 @@ const Shopping = () => {
     setShowRecipes(true)
     recipesRef.current.style.display = 'block'
     shoppingRef.current.style.display = 'none'
+    setIsActive({
+      shopping: false,
+      recipes: true,
+    })
   }
 
   const handleSelectIngredient = (item) => {
-    console.log(item)
     if (itemsToRemove.includes(item)) {
       setItemsToRemove(itemsToRemove.filter(itemId => itemId !== item))
     } else {
@@ -52,10 +57,6 @@ const Shopping = () => {
     }
     setChecked({ ...checked, [item.id]: !checked[item.id] })
   }
-
-  useEffect(() => {
-    console.log('ITEMS TO REMOVE->', itemsToRemove)
-  }, [itemsToRemove])
 
   const displayShoppingList = () => {
     return list.map((item, i) => {
@@ -130,8 +131,8 @@ const Shopping = () => {
   return (
     <main>
       <section id="shopping-view-buttons">
-        <button id="shopping-list-view-button" onClick={handleShowShoppingList}>Shopping List</button>
-        <button id="recipe-view-button" onClick={handleShowRecipes}>Recipes</button>
+        <button id="shopping-list-view-button" className={isActive.shopping ? 'view-button active' : 'view-button'} onClick={handleShowShoppingList}>Shopping List</button>
+        <button id="recipe-view-button" className={isActive.recipes ? 'view-button active' : 'view-button'} onClick={handleShowRecipes}>Recipes</button>
       </section>
       <section id="shopping-display">
         <section id="shopping-list" ref={shoppingRef} style={{ display: showShoppingList ? 'block' : 'none' }}>

@@ -12,6 +12,10 @@ const RecipeDetailed = () => {
   const [likes, setLikes] = useState([])
   const [list, setList] = useState([])
   const [recipeList, setRecipeList] = useState([])
+  const [isActive, setIsActive] = useState({
+    method: true,
+    ingredients: false,
+  })
 
   const { recipeId } = useParams()
 
@@ -25,10 +29,8 @@ const RecipeDetailed = () => {
     const getData = async () => {
       try {
         const { data } = await axios.get(`/api/recipes/${recipeId}/`)
-        console.log(data)
         setRecipe(data)
       } catch (err) {
-        console.log('error', err)
         setError(err.response.data.message)
       }
     }
@@ -117,8 +119,6 @@ const RecipeDetailed = () => {
   useEffect(() => {
     localStorage.setItem('SHOPPING-LIST', JSON.stringify(list))
     localStorage.setItem('RECIPE-LIST', JSON.stringify(recipeList))
-    console.log(list)
-    console.log('RECIPES ->', recipeList)
   }, [list])
 
   const displayIngredients = () => {
@@ -162,6 +162,11 @@ const RecipeDetailed = () => {
     setShowMethod(false)
     ingredientsRef.current.style.display = 'block'
     methodRef.current.style.display = 'none'
+    setIsActive({
+      method: false,
+      ingredients: true,
+    })
+  
   }
 
   const handleShowMethod = () => {
@@ -169,6 +174,11 @@ const RecipeDetailed = () => {
     setShowMethod(true)
     ingredientsRef.current.style.display = 'none'
     methodRef.current.style.display = 'block'
+    setIsActive({
+      method: true,
+      ingredients: false,
+    })
+  
   }
 
   return (
@@ -218,8 +228,8 @@ const RecipeDetailed = () => {
             </div>
           </div>
           <section id="recipe-view-buttons">
-            <button id="method-view-button" onClick={handleShowMethod}>Method</button>
-            <button id="ingredients-view-button" onClick={handleShowIngredients}>Ingredients</button>
+            <button id="method-view-button" className={isActive.method ? 'view-button active' : 'view-button'} onClick={handleShowMethod}>Method</button>
+            <button id="ingredients-view-button" className={isActive.ingredients ? 'view-button active' : 'view-button'} onClick={handleShowIngredients}>Ingredients</button>
           </section>
           <section id="recipe-details">
             <section id="recipe-method" ref={methodRef} style={{ display: showMethod ? 'block' : 'none' }}>
@@ -235,7 +245,6 @@ const RecipeDetailed = () => {
         </>
         :
         <>
-          {/* {console.log('error')} */}
         </>
       }
     </main>

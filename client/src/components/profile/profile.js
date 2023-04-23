@@ -8,6 +8,10 @@ const Profile = () => {
   const [profileData, setProfileData] = useState(null)
   const [ownedRecipes, setOwnedRecipes] = useState([])
   const [likedRecipes, setLikedRecipes] = useState([])
+  const [isActive, setIsActive] = useState({
+    owned: true,
+    liked: false,
+  })
 
   const { userId } = useParams()
   const navigate = useNavigate()
@@ -19,8 +23,7 @@ const Profile = () => {
   const ownedRecipesRef = useRef(null)
 
   useEffect(() => {
-    console.log(getUserID()) &
-      !isAuthenticated() && navigate('/login')
+    !isAuthenticated() && navigate('/login')
   }, [navigate])
 
   // Get profile data on mount
@@ -31,10 +34,8 @@ const Profile = () => {
         setProfileData(data)
         setLikedRecipes(data.liked_by_user)
         setOwnedRecipes(data.recipes)
-        console.log(data)
 
       } catch (err) {
-        console.log(err)
         setError(err.message)
       }
     }
@@ -55,30 +56,37 @@ const Profile = () => {
     setShowOwnedRecipes(true)
     setShowLikedRecipes(false)
     likedRecipesRef.current.style.display = 'none'
-    ownedRecipesRef.current.style.display = 'block'
+    ownedRecipesRef.current.style.display = 'flex'
+    setIsActive({
+      owned: true,
+      liked: false,
+    })
   }
 
   const handleShowLikedRecipes = () => {
     setShowOwnedRecipes(false)
     setShowLikedRecipes(true)
-    likedRecipesRef.current.style.display = 'block'
+    likedRecipesRef.current.style.display = 'flex'
     ownedRecipesRef.current.style.display = 'none'
+    setIsActive({
+      owned: false,
+      liked: true,
+    })
   }
 
   const displayLikedRecipes = () => {
     return likedRecipes.map(recipe => {
       const { name, id, image } = recipe
       return (
-        <Link key={id} to={`/recipes/${id}/`}>
-          <div id="recipe-on-list" >
-            <div id="shopping-list-recipe-img">
-              <img src={image} alt={name} />
-            </div>
-            <div id="shopping-list-recipe-name">
-              {name}
-            </div>
-          </div>
-        </Link>
+        <div id="liked-recipe" key={id} style={{ backgroundImage: `url('${image}')` }}>
+          <Link id="liked-recipe-card" key={id} to={`/recipes/${id}/`}>
+            <div id="liked-recipe-image" >
+              <div id="liked-recipe-name">
+                {name}
+              </div>
+            </div >
+          </Link>
+        </div>
       )
     })
   }
@@ -98,20 +106,21 @@ const Profile = () => {
     return ownedRecipes.map(recipe => {
       const { name, id, image } = recipe
       return (
-        <div key={id} id="owned-recipe">
-          <Link to={`/recipes/${id}/`}>
-            <div id="owned-recipe-img">
-              <img src={image} alt={name} />
-            </div>
-            <div id="owned-recipe-name">
-              {name}
-            </div>
-          </Link>
-          <button id="delete-recipe-btn" onClick={() => handleDelete(id)}>Delete</button>
-          <Link id="edit-recipe-btn" to={`/recipes/${id}/edit/`}>
-            <div id="edit-recipe-div" >Edit</div>
-          </Link>
-        </div >
+        <div id="owned-recipe" key={id} >
+          <div id="owned-recipe-image" style={{ backgroundImage: `url('${image}')` }}>
+            <Link to={`/recipes/${id}/`}>
+              <div id="owned-recipe-name">
+                {name}
+              </div>
+            </Link>
+          </div >
+          <div id="profile-recipe-buttons">
+            <button id="delete-recipe-btn" onClick={() => handleDelete(id)}>Delete</button>
+            <Link id="edit-recipe-btn" to={`/recipes/${id}/edit/`}>
+              <div id="edit-recipe-div" >Edit</div>
+            </Link>
+          </div>
+        </div>
       )
     })
   }
@@ -121,15 +130,15 @@ const Profile = () => {
       {profileData &&
         <>
           <h1>Profile Page</h1>
-          <section id="shopping-view-buttons">
-            <button id="shopping-list-view-button" onClick={handleShowOwnedRecipes}>Owned Recipes</button>
-            <button id="recipe-view-button" onClick={handleShowLikedRecipes}>Liked Recipes</button>
+          <section id="profile-view-buttons">
+            <button id="owned-recipes-view-button" className={isActive.owned ? 'view-button active' : 'view-button'} onClick={handleShowOwnedRecipes}>Owned Recipes</button>
+            <button id="liked-recipes-view-button" className={isActive.liked ? 'view-button active right' : 'view-button'} onClick={handleShowLikedRecipes}>Liked Recipes</button>
           </section>
           <section id="recipes-display">
-            <section id="liked-recipes" ref={likedRecipesRef} style={{ display: showLikedRecipes ? 'block' : 'none' }}>
+            <section id="liked-recipes" ref={likedRecipesRef} style={{ display: showLikedRecipes ? 'flex' : 'none' }}>
               {displayLikedRecipes()}
             </section>
-            <section id="owned-recipes" ref={ownedRecipesRef} style={{ display: showOwnedRecipes ? 'block' : 'none' }}>
+            <section id="owned-recipes" ref={ownedRecipesRef} style={{ display: showOwnedRecipes ? 'flex' : 'none' }}>
               {displayOwnedRecipes()}
             </section>
           </section>

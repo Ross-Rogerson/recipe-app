@@ -28,7 +28,6 @@ const Login = () => {
       localStorage.setItem('RECIPE-TOKEN', data.token)
       navigate(`/profile/${data.id}/`)
     } catch (err) {
-      console.log('error', err)
       setError(err.response.data.message)
     }
   }

@@ -1,3 +1,8 @@
+#fridge-title {
+  width: 100%;
+  text-align: center;
+}
+
 #fridge-recipe-img {
   max-width: 600px;
   display: flex;
@@ -12,4 +17,13 @@
     height: inherit;
     object-fit: cover;
   }
+}
+
+#fridge-view-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 calc(50% - 140px);
+  padding-bottom: 10px;
+  padding-top: 15px;
 }

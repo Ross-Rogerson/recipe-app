@@ -1,14 +1,85 @@
-#owned-recipe-img {
+#profile-view-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 calc(50% - 140px);
+  padding-bottom: 10px;
+}
+
+#recipes-display {
+  width: 100%;
+}
+
+#owned-recipes, #liked-recipes {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+
+#owned-recipe, #liked-recipe {
+  border: 0.5px solid black;
+  border-radius: 5px;
+  width: 49%;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin-bottom: 1%;
+  background-size: cover;
+}
+
+#owned-recipe-image, #liked-recipe-image, #liked-recipe-card {
+  width: 100%;
+  aspect-ratio: 1/1;
+  max-width: 600px;
+  background-size: cover;
+  color: white;
+  text-decoration: none;
+  display: flex;
+
+  a {
+    color: white;
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+}
+
+#liked-recipe-image {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
-  aspect-ratio: 1/1;
-  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
 
-  img {
-    width: inherit;
-    height: inherit;
-    object-fit: cover;
+#profile-recipe-buttons {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+
+  button {
+    background-color: transparent;
+    width: 50%;
+    border: none;
+    border-right: 0.5px solid black;
+    height: 100%;
+    padding: 2% 0;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  a {
+    color: black;
+    width: 50%;
+    border-left: 0.5px solid black;
+    padding: 2% 0;
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
   }
 }
+

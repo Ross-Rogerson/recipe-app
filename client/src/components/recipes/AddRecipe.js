@@ -40,10 +40,8 @@ const AddRecipe = () => {
     const getIngredients = async () => {
       try {
         const { data } = await axios.create(userTokenFunction()).get('/api/recipes/add/')
-        console.log(data)
         setIngredients(data)
       } catch (err) {
-        console.log('error', err)
         setError(err.response.data.message)
       }
     }
@@ -72,7 +70,6 @@ const AddRecipe = () => {
   }
 
   useEffect(() => {
-    console.log(recipeIngredients)
     setIngredientCount(recipeIngredients.length + 1)
   }, [recipeIngredients])
 
@@ -101,11 +98,11 @@ const AddRecipe = () => {
             <option value='cm' >cm</option>
             <option value='tsp' >tsp</option>
             <option value='tbsp' >tbsp</option>
-            <option value='sprig(s)' >sprigs</option>
-            <option value='bunch(es)' >bunches</option>
-            <option value='handful(s)' >handfuls</option>
-            <option value='stick(s)' >sticks</option>
-            <option value='pinch(es)' >pinches</option>
+            <option value='sprig(s)' >Sprigs</option>
+            <option value='bunch(es)' >Bunches</option>
+            <option value='handful(s)' >Handfuls</option>
+            <option value='stick(s)' >Sticks</option>
+            <option value='pinch(es)' >Pinches</option>
             <option value='' >-</option>
           </select>
           <label>Qty/Weight
@@ -143,12 +140,9 @@ const AddRecipe = () => {
     // Create request body
     const addBody = { ...recipeStandard, ...recipeNutrition, ingredients: ingredientsBody }
 
-    console.log(addBody)
-
     try {
       await axios.post('/api/recipes/add/', addBody, userTokenFunction())
     } catch (err) {
-      console.log('error', err)
       setError(err.response.data.message)
     }
   }

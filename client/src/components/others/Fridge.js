@@ -14,6 +14,11 @@ const Fridge = () => {
     search: '',
   })
   const [recipeRequest, setRecipeRequest] = useState({})
+  const [isActive, setIsActive] = useState({
+    ingredients: true,
+    fridge: false,
+    recipes: false,
+  })
 
   const [showRecipes, setShowRecipes] = useState(false)
   const [showIngredients, setShowIngredients] = useState(true)
@@ -29,7 +34,6 @@ const Fridge = () => {
         const { data } = await axios.get('/api/fridge/')
         setIngredients(data)
       } catch (err) {
-        console.log('error', err)
         setError(err.response.data.message)
       }
     }
@@ -44,7 +48,7 @@ const Fridge = () => {
       obj[item.name] = item.id
       return obj
     }, {})
-    
+
     setRecipeRequest(initialRecipeRequest)
   }, [])
 
@@ -71,6 +75,11 @@ const Fridge = () => {
     recipesRef.current.style.display = 'none'
     ingredientsRef.current.style.display = 'block'
     fridgeRef.current.style.display = 'none'
+    setIsActive({
+      ingredients: true,
+      fridge: false,
+      recipes: false,
+    })
   }
 
   const handleShowRecipes = () => {
@@ -80,6 +89,11 @@ const Fridge = () => {
     recipesRef.current.style.display = 'block'
     ingredientsRef.current.style.display = 'none'
     fridgeRef.current.style.display = 'none'
+    setIsActive({
+      ingredients: false,
+      fridge: false,
+      recipes: true,
+    })
   }
 
   const handleShowFridge = () => {
@@ -89,6 +103,11 @@ const Fridge = () => {
     recipesRef.current.style.display = 'none'
     ingredientsRef.current.style.display = 'none'
     fridgeRef.current.style.display = 'block'
+    setIsActive({
+      ingredients: false,
+      fridge: true,
+      recipes: false,
+    })
   }
 
   // Filters
@@ -139,14 +158,12 @@ const Fridge = () => {
 
   useEffect(() => {
     localStorage.setItem('FRIDGE-ITEMS', JSON.stringify(fridgeItems))
-    console.log('FRIDGE ITEMS ->', fridgeItems)
     if (fridgeItems.length === 0) {
       setRecipes([])
     } else {
       const getRecipes = async () => {
         try {
           const { data } = await axios.post('/api/fridge/', recipeRequest)
-          console.log('RECIPES ->', data)
           setRecipes(data)
         } catch (err) {
           setError(err)
@@ -155,10 +172,6 @@ const Fridge = () => {
       getRecipes()
     }
   }, [fridgeItems])
-
-  useEffect(() => {
-    console.log('RECIPES ->', recipes)
-  }, [recipes])
 
   const displayRecipes = () => {
     if (fridgeItems.length === 0) {
@@ -197,9 +210,9 @@ const Fridge = () => {
       {
         <>
           <section id="fridge-view-buttons">
-            <button id="ingredients-list-button" onClick={handleShowIngredients}>Ingredients</button>
-            <button id="fridge-ingredients-view-button" onClick={handleShowFridge}>Fridge</button>
-            <button id="recipe-view-button" onClick={handleShowRecipes}>Recipes</button>
+            <button id="ingredients-list-button" className={isActive.ingredients ? 'view-button active' : 'view-button'} onClick={handleShowIngredients}>Ingredients</button>
+            <button id="fridge-ingredients-view-button" className={isActive.fridge ? 'view-button active' : 'view-button'} onClick={handleShowFridge}>Fridge</button>
+            <button id="recipe-view-button" className={isActive.recipes ? 'view-button active' : 'view-button'} onClick={handleShowRecipes}>Recipes</button>
           </section>
           <section id='fridge-ingredients' ref={ingredientsRef} style={{ display: showIngredients ? 'block' : 'none' }}>
             <section className="fridge-filters">
