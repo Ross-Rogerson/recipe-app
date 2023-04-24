@@ -127,13 +127,20 @@
 }
 
 #recipe-details {
+  display: flex;
+  justify-content: center;
   width: 100%;
   padding: 0 5px;
 }
 
 #recipe-method-step {
+  max-width: 450px;
   margin-bottom: 15px;
   text-align: center;
+}
+
+#recipe-ingredients-section {
+  width: 100%;
 }
 
 #recipe-ingredients {
@@ -156,7 +163,7 @@ padding-left: 7px;
 }
 
 .add-margin {
-  padding-left: 7px;
+  padding-left: 6px;
 }
 
 #add-to-shopping-list {

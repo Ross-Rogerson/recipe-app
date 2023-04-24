@@ -239,16 +239,14 @@ const RecipeDetailed = () => {
               {recipe && displayMethod()}
             </section>
             <section id="recipe-ingredients-section" ref={ingredientsRef} style={{ display: showIngredients ? 'block' : 'none' }}>
-
               <section id="recipe-ingredients"></section>
               {recipe && displayIngredients()}
+              <div id="button-container">
+                <button id="add-to-shopping-list" onClick={() => handleAddToShoppingList()}>
+                  Add to shopping list
+                </button>
+              </div>
             </section>
-            <div id="button-container">
-
-              <button id="add-to-shopping-list" onClick={() => handleAddToShoppingList()}>
-                Add to shopping list
-              </button>
-            </div>
           </section>
         </>
         :

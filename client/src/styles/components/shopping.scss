@@ -13,6 +13,11 @@
   }
 }
 
+#shopping-list {
+  width: 100%;
+  max-width: 500px;
+}
+
 #shopping-view-buttons {
   display: flex;
   justify-content: space-between;
@@ -20,4 +25,134 @@
   padding: 0 calc(50% - 140px);
   padding-bottom: 10px;
   padding-top: 15px;
+}
+
+#clear-list-button {
+  border-radius: 6px;
+  margin-bottom: 2px;
+  color: black;
+  font-weight: bold;
+  height: 22px;
+  color: rgb(218, 1, 1);
+  background-color: transparent;
+  border: none;
+  margin-right: 3px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+#remove-selected-button {
+  border-radius: 6px;
+  margin-bottom: 2px;
+  padding: 3px 5px;
+  color: rgb(233, 171, 0);
+  font-weight: bold;
+  text-align: center;
+  height: 44px;
+  width: 70px;
+  background-color: transparent;
+  border: none;
+  margin-right: 3px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+}
+
+#clear-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#shopping-list-item {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.nameMargin {
+  margin-left: 7px;
+}
+
+#shopping-list-item-details {
+  width: 100%;
+  display: flex;
+  padding-left: 15px;
+}
+
+#shopping-display {
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+  flex-direction: column;
+  align-items: center;
+
+  a {
+    width: 70%;
+    text-decoration: none;
+    background-size: cover;
+    margin: 1%;
+  }
+}
+
+#subs-button {
+  border-radius: 6px;
+  margin-bottom: 2px;
+  padding: 3px 5px;
+  color: black;
+  // font-weight: bold;
+  height: 22px;
+  background-color: rgb(255, 255, 255);
+  // border: 0.5px solid rgb(0, 0, 0);
+  border: 0;
+  margin-right: 3px;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+}
+
+
+#shopping-recipes {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  a {
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.500);
+    border: 1px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+
+    div {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.500);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-position: center;
+    }
+  }
+}
+
+#recipe-on-list {
+  color: white;
+  width: 100%;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
 }

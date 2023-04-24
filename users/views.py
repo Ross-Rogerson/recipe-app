@@ -66,9 +66,6 @@ class ProfileView(APIView):
 
     @exceptions
     def delete(self, request, pk):
-        print('USER NOT OWNER')
-        # print('REDIPE TO DELETE ID ->', request.data)
-        # recipe_id will be sent from the front end in the request body
         recipe_id = request.data["recipe_id"]
         recipe_to_delete = Recipe.objects.get(pk=recipe_id)
         if recipe_to_delete.owner != request.user:

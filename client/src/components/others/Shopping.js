@@ -41,7 +41,7 @@ const Shopping = () => {
   const handleShowRecipes = () => {
     setShowShoppingList(false)
     setShowRecipes(true)
-    recipesRef.current.style.display = 'block'
+    recipesRef.current.style.display = 'flex'
     shoppingRef.current.style.display = 'none'
     setIsActive({
       shopping: false,
@@ -55,30 +55,34 @@ const Shopping = () => {
     } else {
       setItemsToRemove([...itemsToRemove, item])
     }
-    setChecked({ ...checked, [item.id]: !checked[item.id] })
   }
 
   const displayShoppingList = () => {
     return list.map((item, i) => {
       const { name, plural, unit, qty, substitutes, id } = item
+      const margin = unit.length > 5 & unit !== ''
+      const nameMargin = !unit & !qty
+      const selected = itemsToRemove.includes(item)
       return (
-        <div id="shopping-list-item" key={i} >
-          <input type="checkbox" id={`item${id}`} name={`item${id}`} onClick={() => handleSelectIngredient(item)} checked={checked[id]}/>
-          <label id="shopping-list-item-qty" htmlFor={`item${id}`}>
-            <div id="shopping-list-item-qty" >
+        <div id="shopping-list-item" key={i} className={i}>
+          <input type="checkbox" id={`item${id}`} name={`item${id}`} onChange={() => handleSelectIngredient(item)} checked={itemsToRemove.includes(item)} />
+          <label id="shopping-list-item-details" htmlFor={`item${id}`}>
+            <div id="shopping-list-item-qty" className={selected ? 'strikethrough' : ''} >
               {qty ? Math.round(qty, 0) : ''}
             </div>
-            <div id="shopping-list-item-unit">
-              {(qty && !unit) ? `${unit} x` : unit}
+            <div id="shopping-list-item-unit" className={margin & selected ? 'add-margin strikethrough' : margin ? 'add-margin' : selected ? 'strikethrough' : ''}>
+              {unit}
             </div>
-            <div id="shopping-list-item-name">
+            <div id="shopping-list-item-name" className={!nameMargin & selected ? 'add-margin  strikethrough' : !nameMargin ? 'add-margin' : selected ? 'strikethrough' : ''}>
               {qty > 1 ? plural : name}
             </div>
           </label>
-          <button>
-            Substitutes
-          </button>
-          <div id="shopping-list-item-subs">
+          <div id="substitutes-container">
+            <button id="subs-button">
+              Substitutes
+            </button>
+          </div>
+          <div id="shopping-list-item-subs" style={{ display: showShoppingList ? 'none' : 'none' }}>
             {substitutes}
           </div>
         </div>
@@ -91,10 +95,10 @@ const Shopping = () => {
       const { name, id, image } = recipe
       return (
         <Link key={id} to={`/recipes/${id}/`}>
-          <div id="recipe-on-list" >
-            <div id="shopping-list-recipe-img">
+          <div id="recipe-on-list" style={{ backgroundImage: `url('${image}')` }}>
+            {/* <div id="shopping-list-recipe-img">
               <img src={image} alt={name} />
-            </div>
+            </div> */}
             <div id="shopping-list-recipe-name">
               {name}
             </div>
@@ -106,7 +110,7 @@ const Shopping = () => {
 
   const handleRemoveSelected = () => {
     const newList = list.filter(item => {
-      const existingIndex = itemsToRemove.findIndex(ingredient => ingredient.name === item.name 
+      const existingIndex = itemsToRemove.findIndex(ingredient => ingredient.name === item.name
         && ingredient.unit === item.unit)
       if (existingIndex === -1) return item
     })
@@ -116,6 +120,7 @@ const Shopping = () => {
   }
 
   useEffect(() => {
+    if (list.length === 0) setRecipeList([])
     localStorage.setItem('SHOPPING-LIST', JSON.stringify(list))
   }, [list])
 
@@ -136,16 +141,28 @@ const Shopping = () => {
       </section>
       <section id="shopping-display">
         <section id="shopping-list" ref={shoppingRef} style={{ display: showShoppingList ? 'block' : 'none' }}>
+          {
+            list.length > 0 ?
+              <div id="clear-button-container">
+                <button id="remove-selected-button" onClick={handleRemoveSelected}>
+                  Remove selected
+                </button>
+                <button id="clear-list-button" onClick={handleClearList}>
+                  Clear shopping list
+                </button>
+              </div>
+              :
+              <div id="no-recipes">Your shopping list is currently empty.</div>
+          }
           {displayShoppingList()}
-          <button id="remove-selected-button" onClick={handleRemoveSelected}>
-            Remove selected items
-          </button>
-          <button id="clear-list-button" onClick={handleClearList}>
-            Clear shopping list
-          </button>
         </section>
-        <section id="shopping-recipes" ref={recipesRef} style={{ display: showRecipes ? 'block' : 'none' }}>
-          {displayRecipes()}
+        <section id="shopping-recipes" ref={recipesRef} style={{ display: showRecipes ? 'flex' : 'none' }}>
+          {
+            list.length > 0 ?
+              displayRecipes()
+              :
+              <div id="no-recipes">Go find some recipes you like and add the ingredients to your shopping list!</div>
+          }
         </section>
       </section>
     </main >

@@ -220,8 +220,8 @@ const Fridge = () => {
                       return <option key={category} value={category}>{category}</option>
                     })}
                 </select>
-                <input type="text" name="search" placeholder='Search...' onChange={handleChange} value={filters.search} />
-                <button id="find-recipes-button">Find recipes!</button>
+                <input type="text" name="search" placeholder='Search ingredients...' onChange={handleChange} value={filters.search} />
+                <button id="find-recipes-button" onClick={handleShowRecipes}>Find recipes!</button>
               </div>
               {/* <button id="ingredients-empty-fridge-button" alt="clear selections" onClick={handleEmptyFridge}>Empty fridge</button> */}
             </section>
