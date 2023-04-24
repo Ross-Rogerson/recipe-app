@@ -69,7 +69,7 @@
   flex-direction: column;
   align-items: flex-start;
   margin-top: 5px;
-  padding-left: 10px;
+  padding: 0 5px;
 }
 
 #content-top-row {
@@ -96,6 +96,7 @@
     padding: 0;
     width: 6vw;
     height: 6vw;
+    cursor: pointer;
 
     svg{
       max-width: 25px;

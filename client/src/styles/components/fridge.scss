@@ -7,7 +7,8 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 0 calc(50% - 140px);
+  max-width: 600px;
+  padding: 0 calc(33% - 140px);
   padding-bottom: 10px;
   padding-top: 15px;
 }
@@ -163,7 +164,6 @@
   margin: 10px;
   flex-direction: column;
   align-items: center;
-  // justify-content: space-evenly;
 
   a {
     width: 70%;
@@ -206,7 +206,6 @@
     width: 24%;
   }
   #find-recipes-button {
-    // margin-left: 20px;
     margin-right: 0px;
   }
   #fridge-filters {

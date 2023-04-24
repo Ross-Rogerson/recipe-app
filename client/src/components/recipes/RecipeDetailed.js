@@ -126,12 +126,13 @@ const RecipeDetailed = () => {
       return recipe.ingredients.map((ingredient, i) => {
         const { detail = ingredient['ingredient_detail'], unit, qty } = ingredient
         const { name, plural } = detail
+        const margin = unit.length > 5 && unit !== ''
         return (
-          <div key={i} >
+          <div id="recipe-ingredient" key={i} >
             <div id="recipe-ingredient-qty">
               {qty ? Math.round(qty, 0) : ''}
             </div>
-            <div id="recipe-ingredient-unit">
+            <div id="recipe-ingredient-unit" className={margin ? 'add-margin' : ''}>
               {unit}
             </div>
             <div id="recipe-ingredient-name">
@@ -166,7 +167,7 @@ const RecipeDetailed = () => {
       method: false,
       ingredients: true,
     })
-  
+
   }
 
   const handleShowMethod = () => {
@@ -178,7 +179,7 @@ const RecipeDetailed = () => {
       method: true,
       ingredients: false,
     })
-  
+
   }
 
   return (
@@ -186,29 +187,9 @@ const RecipeDetailed = () => {
       {recipe ?
         <>
           <section id="hero" style={{ backgroundImage: `url("${recipe.image}")` }}>
-            <h1>{recipe.name}</h1>
-            <div>{recipe.description}</div>
-            <div id="feed-recipe-origin">{recipe.continent}</div>
-          </section>
-          <div id="post-owner">
-            <div id="post-recipe-owner">{recipe.owner.username}</div>
-            <div id="post-owner-img">
-              <img src={recipe.owner.profile_image} />
-            </div>
-          </div>
-          <div id="recipe-content">
-            <div id="content-top-row">
-              <div id="recipe-likes-content">
-                <button id="feed-like-button" onClick={() => handleLike(getUserID())} disabled={!isAuthenticated()}>
-                  {
-                    likes.includes(getUserID()) ?
-                      <FontAwesomeIcon icon={liked} id="feed-liked" />
-                      :
-                      <FontAwesomeIcon icon={faHeart} />
-                  }
-                </button>
-              </div>
-              <div id="feed-dietary">
+            <div id="recipe-name-section">
+              <h1>{recipe.name}</h1>
+              <div id="recipe-dietary">
                 {recipe.is_vegetarian ?
                   <div id="feed-vegetarian">V</div>
                   :
@@ -226,6 +207,28 @@ const RecipeDetailed = () => {
                 }
               </div>
             </div>
+            {/* <div id="feed-recipe-origin">{recipe.continent}</div> */}
+            <div id="recipe-description-detailed">{recipe.description}</div>
+          </section>
+          <div id="content-top-row">
+            <div id="post-socials">
+              <div id="recipe-likes-content">
+                <button id="feed-like-button" onClick={() => handleLike(getUserID())} disabled={!isAuthenticated()}>
+                  {
+                    likes.includes(getUserID()) ?
+                      <FontAwesomeIcon icon={liked} id="feed-liked" />
+                      :
+                      <FontAwesomeIcon icon={faHeart} />
+                  }
+                </button>
+              </div>
+              <div id="post-owner-recipe">
+                <div id="post-owner-img-recipe">
+                  <img src={recipe.owner.profile_image} />
+                </div>
+                <div id="post-recipe-owner-recipe">{recipe.owner.username}</div>
+              </div>
+            </div>
           </div>
           <section id="recipe-view-buttons">
             <button id="method-view-button" className={isActive.method ? 'view-button active' : 'view-button'} onClick={handleShowMethod}>Method</button>
@@ -235,12 +238,17 @@ const RecipeDetailed = () => {
             <section id="recipe-method" ref={methodRef} style={{ display: showMethod ? 'block' : 'none' }}>
               {recipe && displayMethod()}
             </section>
-            <section id="recipe-ingredients" ref={ingredientsRef} style={{ display: showIngredients ? 'block' : 'none' }}>
+            <section id="recipe-ingredients-section" ref={ingredientsRef} style={{ display: showIngredients ? 'block' : 'none' }}>
+
+              <section id="recipe-ingredients"></section>
               {recipe && displayIngredients()}
+            </section>
+            <div id="button-container">
+
               <button id="add-to-shopping-list" onClick={() => handleAddToShoppingList()}>
                 Add to shopping list
               </button>
-            </section>
+            </div>
           </section>
         </>
         :
