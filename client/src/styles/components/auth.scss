@@ -1,0 +1,75 @@
+.form-page {
+  max-width: 600px;
+}
+
+.auth-form {
+  width: 90%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 13px;
+  border: 1px solid rgb(0, 0, 0, 0.1);
+
+  label {
+    font-size: 14px;
+    display: inline-block;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+  }
+
+  input {
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 0, 0, 0.1);
+    margin: 5px 0;
+    width: calc(100% - 120px);
+    padding: 4px 3px 4px 0;
+  }
+}
+
+#auth-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 15px;
+
+  button,
+  a {
+    color: black;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    text-decoration: none;
+  }
+
+  button {
+    width: 60px;
+  }
+
+  span {
+    margin: 7px;
+  }
+
+  a {
+    width: 90px;
+  }
+}
+
+#submit-registration {
+  margin-top: 10px;
+  margin-bottom: 25px;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+}

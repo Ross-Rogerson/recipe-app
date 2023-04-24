@@ -28,28 +28,22 @@ const Profile = () => {
 
   // Get profile data on mount
   useEffect(() => {
-    const getProfile = async () => {
-      try {
-        const { data } = await axios.create(userTokenFunction()).get(`/api/profile/${getUserID()}`)
-        setProfileData(data)
-        setLikedRecipes(data.liked_by_user)
-        setOwnedRecipes(data.recipes)
+    console.log(getUserID())
+    if (getUserID()) {
+      const getProfile = async () => {
+        try {
+          const { data } = await axios.create(userTokenFunction()).get(`/api/profile/${getUserID()}`)
+          setProfileData(data)
+          setLikedRecipes(data.liked_by_user)
+          setOwnedRecipes(data.recipes)
 
-      } catch (err) {
-        setError(err.message)
+        } catch (err) {
+          setError(err.message)
+        }
       }
+      getProfile()
     }
-    getProfile()
   }, [])
-
-  // Logout
-  const handleLogOut = () => {
-    (location.pathname === '/admin' || location.pathname === `/profile/${userId}/`) ?
-      navigate('/recipes/')
-      :
-      navigate(location)
-    removeToken()
-  }
 
   // Show/Hide Display & Ingredients
   const handleShowOwnedRecipes = () => {
@@ -142,7 +136,6 @@ const Profile = () => {
               {displayOwnedRecipes()}
             </section>
           </section>
-          <button onClick={handleLogOut}>Logout</button>
         </>
 
       }

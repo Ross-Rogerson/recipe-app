@@ -25,6 +25,15 @@ header {
     }
   }
 
+  #logout, #login {
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    a {
+      text-decoration: none;
+      color: black;
+    }
+  }
+
   #logo {
     font-family: $brand-font;
     color: $brand-colour;

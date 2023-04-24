@@ -57,10 +57,10 @@ const Fridge = () => {
     return (
       filteredIngredients.map(ingredient => {
         const { name, plural, id, category } = ingredient
+        const capitalisedPlural = plural.charAt(0).toUpperCase() + plural.slice(1)
         return (
           <button key={id} id="fridge-inrgedient-button" onClick={() => handleAddToFridge(ingredient)} className={fridgeItems.map(item => item.id).includes(id) ? 'selected' : ''}>
-            <h3 id="fridge-inrgedient-name">{plural}</h3>
-            <h4 id="fridge-inrgedient-cat">{category}</h4>
+            <h3 id="fridge-inrgedient-name">{capitalisedPlural}</h3>
           </button>
         )
       })
@@ -86,7 +86,7 @@ const Fridge = () => {
     setShowIngredients(false)
     setShowRecipes(true)
     setShowFridge(false)
-    recipesRef.current.style.display = 'block'
+    recipesRef.current.style.display = 'flex'
     ingredientsRef.current.style.display = 'none'
     fridgeRef.current.style.display = 'none'
     setIsActive({
@@ -119,7 +119,7 @@ const Fridge = () => {
   useEffect(() => {
     const regex = new RegExp(filters.search, 'i')
     const newFilteredIngredients = ingredients.filter(ingredient => {
-      return regex.test(ingredient.name) && (ingredient.category === filters.category || filters.category === 'All')
+      return regex.test(ingredient.name) && (ingredient.category === filters.category.toLowerCase() || filters.category === 'All')
     }).sort((a, b) => a.name > b.name ? 1 : -1)
     setFilteredIngredients(newFilteredIngredients)
   }, [filters, ingredients])
@@ -145,11 +145,12 @@ const Fridge = () => {
     return (
       fridgeItems.map(item => {
         const { name, plural, id, category } = item
+        const capitalisedPlural = plural.charAt(0).toUpperCase() + plural.slice(1)
+        const capitalisedCategories = category.charAt(0).toUpperCase() + category.slice(1)
         return (
           <div key={id} id="fridge-item-button" >
+            <h3 id="fridge-item-name">{capitalisedPlural}</h3>
             <button id="remove-ingredient-button" onClick={() => handleAddToFridge(item)}>Remove</button>
-            <h3 id="fridge-item-name">{plural}</h3>
-            <h4 id="fridge-item-cat">{category}</h4>
           </div>
         )
       })
@@ -175,7 +176,7 @@ const Fridge = () => {
 
   const displayRecipes = () => {
     if (fridgeItems.length === 0) {
-      return <div id="no-recipes">Add ingredients to fridge to find recipes.</div>
+      return <div id="no-recipes">Add ingredients to the fridge to find recipes.</div>
     }
 
     if (recipes.length === 0) {
@@ -185,14 +186,9 @@ const Fridge = () => {
     return recipes.map(recipe => {
       const { name, id, image } = recipe
       return (
-        <Link key={id} to={`/recipes/${id}/`}>
+        <Link key={id} id="fridge-recipe-img" to={`/recipes/${id}/`} style={{ backgroundImage: `url('${image}')` }}>
           <div id="recipe-in-fridge" >
-            <div id="fridge-recipe-img">
-              <img src={image} alt={name} />
-            </div>
-            <div id="firdge-recipe-name">
-              {name}
-            </div>
+            {name}
           </div>
         </Link>
       )
@@ -215,19 +211,23 @@ const Fridge = () => {
             <button id="recipe-view-button" className={isActive.recipes ? 'view-button active' : 'view-button'} onClick={handleShowRecipes}>Recipes</button>
           </section>
           <section id='fridge-ingredients' ref={ingredientsRef} style={{ display: showIngredients ? 'block' : 'none' }}>
-            <section className="fridge-filters">
-              <select name="category" value={filters.category} onChange={handleChange}>
-                <option value="All">All</option>
-                {ingredients &&
-                  [...new Set(ingredients.map(ingredient => ingredient.category))].sort().map(category => {
-                    return <option key={category} value={category}>{category}</option>
-                  })}
-              </select>
-              <input type="text" name="search" placeholder='Search...' onChange={handleChange} value={filters.search} />
-              <button id="thats-everything-button">That&#39;s everything!</button>
-              <button id="ingredients-empty-fridge-button" alt="clear selections" onClick={handleEmptyFridge}>Empty fridge</button>
+            <section id="fridge-search-buttons">
+              <div id="fridge-filters">
+                <select name="category" value={filters.category} onChange={handleChange}>
+                  <option value="All">Search by category</option>
+                  {ingredients &&
+                    [...new Set(ingredients.map(ingredient => ingredient.category.charAt(0).toUpperCase() + ingredient.category.slice(1)))].sort().map(category => {
+                      return <option key={category} value={category}>{category}</option>
+                    })}
+                </select>
+                <input type="text" name="search" placeholder='Search...' onChange={handleChange} value={filters.search} />
+                <button id="find-recipes-button">Find recipes!</button>
+              </div>
+              {/* <button id="ingredients-empty-fridge-button" alt="clear selections" onClick={handleEmptyFridge}>Empty fridge</button> */}
             </section>
-            {ingredients && displayIngredients()}
+            <section id="ingredients-button-display">
+              {ingredients && displayIngredients()}
+            </section>
           </section>
           <section id="fridge-items-in" ref={fridgeRef} style={{ display: showFridge ? 'block' : 'none' }}>
             <div id="fridge-buttons">
@@ -238,9 +238,11 @@ const Fridge = () => {
                   ''
               }
             </div>
-            {ingredients && displayFridgeItems()}
+            <section id="fridge-items-display">
+              {ingredients && displayFridgeItems()}
+            </section>
           </section>
-          <section id="fridge-recipes" ref={recipesRef} style={{ display: showRecipes ? 'block' : 'none' }}>
+          <section id="fridge-recipes" ref={recipesRef} style={{ display: showRecipes ? 'flex' : 'none' }}>
             {ingredients && displayRecipes()}
           </section>
         </>

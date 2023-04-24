@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, Link } from 'react-router-dom'
+import { useLocation, useNavigate, Link, useParams } from 'react-router-dom'
 import { getUserID, isAuthenticated, removeToken } from '../../helpers/auth'
 import { useState, useEffect, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,6 +8,15 @@ const Navbar = () => {
 
   const location = useLocation()
   const navigate = useNavigate()
+
+
+  const { userId } = useParams()
+
+  // Logout
+  const handleLogOut = () => {
+    navigate('/') &
+      removeToken()
+  }
 
   return (
     <header>
@@ -29,25 +38,16 @@ const Navbar = () => {
                 </div>
                 <div id="nav-search">
                   {
-                    location.pathname === '/recipes/' ?
+                    isAuthenticated() ?
                       <>
-                        <button id="search-button">
-                          <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-                        <button id="menu">
-                          <FontAwesomeIcon icon={faSliders} />
-                        </button>
+                        <button id="logout" onClick={handleLogOut}>Logout</button>
                       </>
                       :
-                      (location.pathname === '/admin/' || location.pathname === `/profile/${getUserID()}/`) ?
-                        <>
-                          <button id="filters">
-                            <FontAwesomeIcon icon={faBars} />
-                          </button>
-                        </>
-                        :
-                        <>
-                        </>
+                      <>
+                        <button id="login">
+                          <Link to={'/login/'}>Login</Link>
+                        </button>
+                      </>
                   }
                 </div>
               </>

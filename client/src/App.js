@@ -2,7 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './components/Home'
 import Navbar from './components/common/Navbar'
 import FooterNavbar from './components/common/FooterNavbar'
-import Login from './components/auth/Login'
+import Login from './components/auth/login'
+import Register from './components/auth/Register'
 import Profile from './components/profile/profile'
 import Admin from './components/profile/admin'
 import RecipeDetailed from './components/recipes/RecipeDetailed'
@@ -19,6 +20,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
           <Route path="/Fridge/" element={<Fridge />} />
           <Route path="/Shopping/" element={<Shopping />} />
           <Route path="/Profile/:userId/" element={<Profile />} />

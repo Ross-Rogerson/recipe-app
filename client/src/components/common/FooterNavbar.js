@@ -12,9 +12,6 @@ import home from '../../images/home.png'
 
 const Navbar = () => {
 
-  const location = useLocation()
-  const navigate = useNavigate()
-
   return (
     <footer>
       <nav>
@@ -50,7 +47,7 @@ const Navbar = () => {
         </div>
 
         <div id="profile">
-          <Link to={isAuthenticated() ? `/profile/${getUserID()}/` : '/login/'}>
+          <Link to={`/profile/${getUserID()}/`}>
             <FontAwesomeIcon icon={faCircleUser} />
           </Link>
         </div>
