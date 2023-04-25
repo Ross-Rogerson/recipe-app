@@ -5,7 +5,6 @@ import FooterNavbar from './components/common/FooterNavbar'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import Profile from './components/profile/Profile'
-import Admin from './components/profile/Admin'
 import RecipeDetailed from './components/recipes/RecipeDetailed'
 import EditRecipe from './components/recipes/EditRecipe'
 import AddRecipe from './components/recipes/AddRecipe'
@@ -24,7 +23,6 @@ const App = () => {
           <Route path="/Fridge/" element={<Fridge />} />
           <Route path="/Shopping/" element={<Shopping />} />
           <Route path="/Profile/:userId/" element={<Profile />} />
-          <Route path="/Profile/:userId/admin" element={<Admin />} />
           <Route path="/Recipes/:recipeId/" element={<RecipeDetailed />} />
           <Route path="/Recipes/:recipeId/edit" element={<EditRecipe />} />
           <Route path="/Recipes/add/" element={<AddRecipe />} />

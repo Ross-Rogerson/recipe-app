@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { userTokenFunction } from '../../helpers/auth'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 const Admin = () => {
   const [error, setError] = useState('')
   const [adminData, setAdminData] = useState(null)
 
   const { userId } = useParams()
-  const navigate = useNavigate()
 
   // Get profile data on mount
   useEffect(() => {
