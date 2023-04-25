@@ -26,7 +26,6 @@ const App = () => {
           <Route path="/Recipes/:recipeId/" element={<RecipeDetailed />} />
           <Route path="/Recipes/:recipeId/edit" element={<EditRecipe />} />
           <Route path="/Recipes/add/" element={<AddRecipe />} />
-
         </Routes>
         <FooterNavbar />
       </BrowserRouter>

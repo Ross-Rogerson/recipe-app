@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 const Shopping = () => {
-  const [error, setError] = useState('')
   const [list, setList] = useState([])
   const [recipeList, setRecipeList] = useState([])
   const [itemsToRemove, setItemsToRemove] = useState([])

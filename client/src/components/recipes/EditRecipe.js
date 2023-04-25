@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { userTokenFunction, isAuthenticated } from '../../helpers/auth'
+import { userTokenFunction, isAuthenticated, getUserID } from '../../helpers/auth'
 import { useParams, useNavigate } from 'react-router-dom'
 
 const EditRecipe = () => {
@@ -31,6 +31,8 @@ const EditRecipe = () => {
   const navigate = useNavigate()
   const { recipeId } = useParams()
 
+  const userId = getUserID()
+
   useEffect(() => {
     !isAuthenticated() && navigate('/login')
   }, [navigate])
@@ -39,10 +41,9 @@ const EditRecipe = () => {
   useEffect(() => {
     const getIngredients = async () => {
       try {
-        const { data } = await axios.create(userTokenFunction()).get(`/api/recipes/${recipeId}/edit`)
+        const { data } = await axios.create(userTokenFunction()).get(`/api/recipes/${recipeId}/edit/`)
         setRecipe(data.recipe)
         setIngredients(data.ingredients)
-
       } catch (err) {
         setError(err.response.data.message)
       }
@@ -183,6 +184,7 @@ const EditRecipe = () => {
 
     try {
       await axios.put(`/api/recipes/${recipeId}/edit/`, editBody, userTokenFunction())
+      navigate(`/profile/${userId}/`)
     } catch (err) {
       setError(err.response.data.message)
     }

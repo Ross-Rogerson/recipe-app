@@ -10,6 +10,8 @@ import home from '../../images/home.png'
 
 const Navbar = () => {
 
+  const userId = getUserID()
+
   return (
     <footer>
       <nav>
@@ -39,7 +41,7 @@ const Navbar = () => {
         </div>
 
         <div id="profile">
-          <Link to={`/profile/${getUserID()}/`}>
+          <Link to={`/profile/${userId}/`}>
             <FontAwesomeIcon icon={faCircleUser} />
           </Link>
         </div>

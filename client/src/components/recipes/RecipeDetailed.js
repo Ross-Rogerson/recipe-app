@@ -18,6 +18,7 @@ const RecipeDetailed = () => {
   })
 
   const { recipeId } = useParams()
+  const userId = getUserID()
 
   const [showMethod, setShowMethod] = useState(true)
   const [showIngredients, setShowIngredients] = useState(false)
@@ -49,8 +50,8 @@ const RecipeDetailed = () => {
   useEffect(() => {
     const likedRecipes = []
     if (recipe) {
-      if (recipe.likes_received.map(user => user.id).includes(getUserID())) {
-        likedRecipes.push(getUserID())
+      if (recipe.likes_received.map(user => user.id).includes(userId)) {
+        likedRecipes.push(userId)
       }
       setLikes(likedRecipes)
     }
@@ -213,9 +214,9 @@ const RecipeDetailed = () => {
           <div id="content-top-row">
             <div id="post-socials">
               <div id="recipe-likes-content">
-                <button id="feed-like-button" onClick={() => handleLike(getUserID())} disabled={!isAuthenticated()}>
+                <button id="feed-like-button" onClick={() => handleLike(userId)} disabled={!isAuthenticated()}>
                   {
-                    likes.includes(getUserID()) ?
+                    likes.includes(userId) ?
                       <FontAwesomeIcon icon={liked} id="feed-liked" />
                       :
                       <FontAwesomeIcon icon={faHeart} />

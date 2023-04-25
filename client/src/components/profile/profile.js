@@ -14,6 +14,7 @@ const Profile = () => {
   })
 
   const navigate = useNavigate()
+  const userId = getUserID()
 
   const [showOwnedRecipes, setShowOwnedRecipes] = useState(true)
   const [showLikedRecipes, setShowLikedRecipes] = useState(false)
@@ -26,10 +27,10 @@ const Profile = () => {
 
   // Get profile data on mount
   useEffect(() => {
-    if (getUserID()) {
+    if (userId) {
       const getProfile = async () => {
         try {
-          const { data } = await axios.create(userTokenFunction()).get(`/api/profile/${getUserID()}`)
+          const { data } = await axios.create(userTokenFunction()).get(`/api/profile/${userId}/`)
           setProfileData(data)
           setLikedRecipes(data.liked_by_user)
           setOwnedRecipes(data.recipes)
