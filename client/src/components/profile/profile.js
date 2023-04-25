@@ -24,6 +24,7 @@ const Profile = () => {
     !isAuthenticated() && navigate('/login')
   }, [navigate])
 
+  
   // Get profile data on mount
   useEffect(() => {
     if (getUserID()) {
