@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { userTokenFunction, isAuthenticated, getUserID } from '../../helpers/auth'
-import { useParams, Link, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Profile = () => {
   const [error, setError] = useState('')
