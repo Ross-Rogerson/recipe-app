@@ -24,15 +24,9 @@ const Navbar = () => {
 
         <div id="list">
           <Link to={'/shopping/'}>
-            <img src={list} alt="listIcon" />
-          </Link>
-        </div>
-
-        {/* <div id="list">
-          <Link to={'/'}>
             <FontAwesomeIcon icon={faListCheck} />
           </Link>
-        </div> */}
+        </div>
 
         <div id="add">
           <Link to={'/recipes/add/'}>

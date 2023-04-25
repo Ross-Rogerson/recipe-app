@@ -79,7 +79,7 @@ const Shopping = () => {
           </label>
           <div id="substitutes-container">
             <button id="subs-button">
-              Substitutes
+              {/* Substitutes */}
             </button>
           </div>
           <div id="shopping-list-item-subs" style={{ display: showShoppingList ? 'none' : 'none' }}>
@@ -96,9 +96,6 @@ const Shopping = () => {
       return (
         <Link key={id} to={`/recipes/${id}/`}>
           <div id="recipe-on-list" style={{ backgroundImage: `url('${image}')` }}>
-            {/* <div id="shopping-list-recipe-img">
-              <img src={image} alt={name} />
-            </div> */}
             <div id="shopping-list-recipe-name">
               {name}
             </div>
@@ -114,13 +111,13 @@ const Shopping = () => {
         && ingredient.unit === item.unit)
       if (existingIndex === -1) return item
     })
+    if (list.length === 0) setRecipeList([])
     setList(newList)
     setItemsToRemove([])
     setChecked({})
   }
 
   useEffect(() => {
-    if (list.length === 0) setRecipeList([])
     localStorage.setItem('SHOPPING-LIST', JSON.stringify(list))
   }, [list])
 

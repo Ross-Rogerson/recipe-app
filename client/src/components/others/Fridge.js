@@ -58,8 +58,9 @@ const Fridge = () => {
       filteredIngredients.map(ingredient => {
         const { name, plural, id, category } = ingredient
         const capitalisedPlural = plural.charAt(0).toUpperCase() + plural.slice(1)
+        const classCategory = category.replace(/\s+/g, '-').replace('&', '')
         return (
-          <button key={id} id="fridge-inrgedient-button" onClick={() => handleAddToFridge(ingredient)} className={fridgeItems.map(item => item.id).includes(id) ? 'selected' : ''}>
+          <button key={id} id="fridge-inrgedient-button" onClick={() => handleAddToFridge(ingredient)} className={fridgeItems.map(item => item.id).includes(id) ? `selected-ingredient ${classCategory}` : `${classCategory}`}>
             <h3 id="fridge-inrgedient-name">{capitalisedPlural}</h3>
           </button>
         )
@@ -147,10 +148,10 @@ const Fridge = () => {
         const { name, plural, id, category } = item
         const capitalisedPlural = plural.charAt(0).toUpperCase() + plural.slice(1)
         const capitalisedCategories = category.charAt(0).toUpperCase() + category.slice(1)
+        const classCategory = category.replace(/\s+/g, '-').replace('&', '')
         return (
-          <div key={id} id="fridge-item-button" >
+          <div key={id} id="fridge-item-button" className={classCategory} onClick={() => handleAddToFridge(item)}>
             <h3 id="fridge-item-name">{capitalisedPlural}</h3>
-            <button id="remove-ingredient-button" onClick={() => handleAddToFridge(item)}>Remove</button>
           </div>
         )
       })
@@ -223,7 +224,6 @@ const Fridge = () => {
                 <input type="text" name="search" placeholder='Search ingredients...' onChange={handleChange} value={filters.search} />
                 <button id="find-recipes-button" onClick={handleShowRecipes}>Find recipes!</button>
               </div>
-              {/* <button id="ingredients-empty-fridge-button" alt="clear selections" onClick={handleEmptyFridge}>Empty fridge</button> */}
             </section>
             <section id="ingredients-button-display">
               {ingredients && displayIngredients()}

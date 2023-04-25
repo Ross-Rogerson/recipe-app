@@ -28,7 +28,6 @@ const Profile = () => {
 
   // Get profile data on mount
   useEffect(() => {
-    console.log(getUserID())
     if (getUserID()) {
       const getProfile = async () => {
         try {
@@ -123,7 +122,7 @@ const Profile = () => {
     <main>
       {profileData &&
         <>
-          <h1>Profile Page</h1>
+          <h1>Profile</h1>
           <section id="profile-view-buttons">
             <button id="owned-recipes-view-button" className={isActive.owned ? 'view-button active' : 'view-button'} onClick={handleShowOwnedRecipes}>Owned Recipes</button>
             <button id="liked-recipes-view-button" className={isActive.liked ? 'view-button active right' : 'view-button'} onClick={handleShowLikedRecipes}>Liked Recipes</button>

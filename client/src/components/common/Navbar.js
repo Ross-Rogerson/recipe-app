@@ -34,7 +34,7 @@ const Navbar = () => {
               :
               <>
                 <div id="logo">
-                  <Link to={'/'}>Recipe-App</Link>
+                  <Link to={'/'}>Foodstagram</Link>
                 </div>
                 <div id="nav-search">
                   {

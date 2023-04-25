@@ -8,7 +8,7 @@
 
 #standard-form, #nutrition-form, #ingredients-form {
   font-size: 13px;
-  border: 1px solid rgb(0, 0, 0,0.1);
+  border: 1px solid rgb(0, 0, 0,0.5);
   margin-bottom: 10px;
   border-radius: 5px;
   
@@ -21,20 +21,20 @@
   
   #ingredient-label {
     width: 100%;
-    border-bottom: 1px solid rgb(0, 0, 0,0.1);
+    border-bottom: 1px solid rgb(0, 0, 0,0.5);
     margin-left: 0;
     padding-left: 10px;
   }
 
   #ingredient-div:not(:first-child) {
-    border-top: 1px solid rgb(0, 0, 0,0.1);
+    border-top: 1px solid rgb(0, 0, 0,0.5);
   }
 
   input, select {
     font-size: 13px;
     font-family: "Inter", sans-serif;
     border-radius: 5px;
-    border: 1px solid rgb(0, 0, 0,0.1);
+    border: 1px solid rgb(0, 0, 0,0.3);
     margin: 5px 5px 5px 0;
     width: calc(100% - 160px);
     padding-left: 5px;
@@ -59,3 +59,12 @@
   }
 }
 
+#submitEdit {
+  padding: 5px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+}
