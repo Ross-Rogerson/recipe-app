@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
-import { getToken, userTokenFunction, isAuthenticated, getUserID } from '../../helpers/auth'
-import { useParams, Link, useNavigate, useFetcher } from 'react-router-dom'
+import { userTokenFunction, isAuthenticated, getUserID } from '../../helpers/auth'
+import { useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDisplay, faHeart as liked } from '@fortawesome/free-solid-svg-icons'
+import { faHeart as liked } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
 
 const RecipeDetailed = () => {

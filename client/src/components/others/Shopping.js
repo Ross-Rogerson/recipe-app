@@ -1,12 +1,11 @@
 import { useEffect, useState, useRef } from 'react'
-import { Link, useFetcher, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Shopping = () => {
   const [error, setError] = useState('')
   const [list, setList] = useState([])
   const [recipeList, setRecipeList] = useState([])
   const [itemsToRemove, setItemsToRemove] = useState([])
-  const [checked, setChecked] = useState({})
   const [isActive, setIsActive] = useState({
     shopping: true,
     recipes: false,
@@ -114,7 +113,6 @@ const Shopping = () => {
     if (list.length === 0) setRecipeList([])
     setList(newList)
     setItemsToRemove([])
-    setChecked({})
   }
 
   useEffect(() => {
@@ -125,7 +123,6 @@ const Shopping = () => {
     setList([])
     setRecipeList([])
     setItemsToRemove([])
-    setChecked({})
     localStorage.setItem('SHOPPING-LIST', JSON.stringify([]))
     localStorage.setItem('RECIPE-LIST', JSON.stringify([]))
   }

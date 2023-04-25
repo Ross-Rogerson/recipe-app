@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { getToken, removeToken, userTokenFunction, isAuthenticated } from '../../helpers/auth'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { userTokenFunction, isAuthenticated } from '../../helpers/auth'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const EditRecipe = () => {
   const [error, setError] = useState('')
   const [recipe, setRecipe] = useState([])
   const [ingredients, setIngredients] = useState([])
-  const [ingredientCount, setIngredientCount] = useState()
   const [nutritionData, setNutritionData] = useState({
     calories: '',
     fat: '',
@@ -28,7 +27,6 @@ const EditRecipe = () => {
     method: '',
   })
   const [recipeIngredients, setRecipeIngredients] = useState([])
-  const [currentIngredients, setCurrentIngredients] = useState([])
 
   const navigate = useNavigate()
   const { recipeId } = useParams()
@@ -108,10 +106,6 @@ const EditRecipe = () => {
     })
     setRecipeIngredients(updatedIngredients)
   }
-
-  useEffect(() => {
-    recipeIngredients && setIngredientCount(recipeIngredients.length + 1)
-  }, [recipeIngredients])
 
   const generateIngredientsForm = () => {
     if (recipeIngredients) {

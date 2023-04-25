@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
-import { getToken, removeToken } from '../../helpers/auth'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Fridge = () => {
   const [error, setError] = useState('')
@@ -145,9 +144,8 @@ const Fridge = () => {
     }
     return (
       fridgeItems.map(item => {
-        const { name, plural, id, category } = item
+        const { plural, id, category } = item
         const capitalisedPlural = plural.charAt(0).toUpperCase() + plural.slice(1)
-        const capitalisedCategories = category.charAt(0).toUpperCase() + category.slice(1)
         const classCategory = category.replace(/\s+/g, '-').replace('&', '')
         return (
           <div key={id} id="fridge-item-button" className={classCategory} onClick={() => handleAddToFridge(item)}>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { getToken, removeToken, userTokenFunction } from '../../helpers/auth'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { userTokenFunction } from '../../helpers/auth'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const Admin = () => {
   const [error, setError] = useState('')

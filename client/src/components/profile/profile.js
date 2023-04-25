@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
-import { getToken, removeToken, userTokenFunction, isAuthenticated, getUserID } from '../../helpers/auth'
+import { userTokenFunction, isAuthenticated, getUserID } from '../../helpers/auth'
 import { useParams, Link, useNavigate, useLocation } from 'react-router-dom'
 
 const Profile = () => {
@@ -13,9 +13,7 @@ const Profile = () => {
     liked: false,
   })
 
-  const { userId } = useParams()
   const navigate = useNavigate()
-  const location = useLocation()
 
   const [showOwnedRecipes, setShowOwnedRecipes] = useState(true)
   const [showLikedRecipes, setShowLikedRecipes] = useState(false)
