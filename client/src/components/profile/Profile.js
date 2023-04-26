@@ -88,7 +88,8 @@ const Profile = () => {
       'recipe_id': id,
     }
     try {
-      await axios.delete(`/api/profile/${getUserID()}/`, { data: requestBody, ...userTokenFunction() })
+      await axios.delete(`/api/profile/${userId}/`, { data: requestBody, ...userTokenFunction() })
+      navigate('/')
     } catch (err) {
       setError(err)
     }
