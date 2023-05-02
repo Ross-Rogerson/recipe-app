@@ -154,7 +154,7 @@ const Shopping = () => {
             list.length > 0 ?
               displayRecipes()
               :
-              <div id="no-recipes">Go find some recipes you like and add the ingredients to your shopping list!</div>
+              <div id="no-recipes">Find some recipes you like and add the ingredients to your shopping list!</div>
           }
         </section>
       </section>

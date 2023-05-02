@@ -70,16 +70,18 @@
   align-items: flex-start;
   margin-top: 5px;
   padding: 0 5px;
+  margin-left: 5px;
 }
 
 #content-top-row {
+
   max-width: 600px;
   max-height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 5px;
-  width: calc(100% - 20px);
+  width: calc(100% - 10px);
 }
 
 #recipe-likes-content {
