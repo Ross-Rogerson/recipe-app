@@ -138,10 +138,10 @@ const Shopping = () => {
             list.length > 0 ?
               <div id="clear-button-container">
                 <button id="remove-selected-button" onClick={handleRemoveSelected}>
-                  Remove selected
+                  Remove
                 </button>
                 <button id="clear-list-button" onClick={handleClearList}>
-                  Clear shopping list
+                  Clear list
                 </button>
               </div>
               :

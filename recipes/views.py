@@ -3,15 +3,13 @@ from rest_framework import status
 from rest_framework.response import Response
 from lib.exceptions import exceptions, PermissionDenied
 
-from .models import Recipe, Constituent
+from .models import Recipe
 from .serializers.common import CreateRecipeSerializer, FridgeRecipeSerializer, UpdateRecipeSerializer
 from .serializers.populated import PopulatedRecipeSerializer
-from rest_framework.permissions import IsAdminUser, IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from ingredients.models import Ingredient
 from ingredients.serializers.common import IngredientSerializer
-
-from users.serializers.populated import PopulatedUserSerializer
 
 from django.contrib.auth import get_user_model
 User = get_user_model()

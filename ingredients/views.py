@@ -1,10 +1,9 @@
 from rest_framework.views import APIView
-from rest_framework import status
 from rest_framework.response import Response
 from lib.exceptions import exceptions
 
 from .models import Ingredient
-from .serializers.common import FridgeIngredientSerializer, IngredientSerializer
+from .serializers.common import FridgeIngredientSerializer
 
 from recipes.models import Recipe
 from recipes.serializers.common import FridgeRecipeSerializer

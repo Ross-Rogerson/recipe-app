@@ -2,7 +2,7 @@ import jwt
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers.common import UserSerializer, ProfileSerializer
+from .serializers.common import UserSerializer
 from .serializers.populated import PopulatedUserSerializer, PopulatedAdminSerializer
 from rest_framework import status
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
@@ -17,14 +17,11 @@ from ingredients.serializers.common import IngredientSerializer
 from ingredients.serializers.populated import PopulatedIngredientSerializer
 
 from recipes.models import Recipe
-from recipes.serializers.common import ProfilePageSerializer
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
 # REGISTER ROUTE: POST /api/auth/register/
-
-
 class RegisterView(APIView):
     @exceptions
     def post(self, request):
@@ -34,8 +31,6 @@ class RegisterView(APIView):
         return Response(user_to_add.data, status.HTTP_201_CREATED)
 
 # LOGIN ROUTE: POST /api/auth/login/
-
-
 class LoginView(APIView):
     @exceptions
     def post(self, request):
@@ -57,7 +52,6 @@ class ProfileView(APIView):
     permission_classes = (IsAuthenticated,)
     # GET RECIPES: GET /api/profile/:pk/
     # Gets both recipes liked and owned
-
     @exceptions
     def get(self, request, pk):
         logged_in_user = User.objects.get(pk=pk)

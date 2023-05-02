@@ -148,9 +148,9 @@ const Fridge = () => {
         const capitalisedPlural = plural.charAt(0).toUpperCase() + plural.slice(1)
         const classCategory = category.replace(/\s+/g, '-').replace('&', '')
         return (
-          <div key={id} id="fridge-item-button" className={classCategory} onClick={() => handleAddToFridge(item)}>
+          <button key={id} id="fridge-item-button" className={classCategory} onClick={() => handleAddToFridge(item)}>
             <h3 id="fridge-item-name">{capitalisedPlural}</h3>
-          </div>
+          </button>
         )
       })
     )
