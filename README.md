@@ -103,18 +103,15 @@ Furthermore, I carefully planned small sprints and established realistic timefra
 ![dbd](client/src/images/trello.png)
 
 ## Build Process: Back-end
-I began by collecting and formatting my data, which took longer than expected. Unfortunately, this caused me to miss my initial sprint target deadline and fall behind schedule.
+I started building several models in the back-end, including the `User` model by extending Django's built-in `AbstractUser`, as well as the `Ingredient` and `Recipe` models. I also set up URL patterns, serializers, and views for these models.
 
-During this time, I created several models, including the `User` model by extending Django's built-in `AbstractUser`, as well as the `Ingredient` and `Recipe` models. I also set up URL patterns, serializers, and views for these models.
-
-Developing the `Recipe` model posed a particular challenge, as it required the use of the `Constituent` model as an intermediary through the `through` argument. This allowed me to store the quantity and unit data of the ingredients specific to each recipe. Additionally, I implemented three computed properties on the `Recipe` model to determine the vegan, vegetarian, and gluten-free statuses of recipes based on their underlying ingredients. Please refer to the `Recipe` and `Constituent` models below:
+Developing the `Recipe` model was an interesting learning experience, as it required the use of the `Constituent` model as an intermediary through the `through` argument. This allowed me to store the quantity and unit data of the ingredients specific to each recipe. Additionally, I implemented three computed properties on the `Recipe` model to determine the vegan, vegetarian, and gluten-free statuses of recipes based on their underlying ingredients. Please refer to the `Recipe` and `Constituent` models below:
 
 ![code1](client/src/images/code1.png)
 
 The structure of the `Recipe` model posed interesting challenges when creating a serializer to store data in the database. To accommodate both the input of data from the front-end and the database storage requirements, I defined a `ListField` for the `ingredients` field, which consists of a list of ingredient dictionaries. Additionally, I set the `ingredients` field to be write-only to exclude it during serialization of existing `Recipe` instances.
 
 For creating a new `Recipe` instance from the validated data, I utilised the `create` method. This method extracts the `ingredients` data, iterates over each ingredient dictionary in `ingredients_data`, retrieves the corresponding `Ingredient` instance from the database using the `ingredient_detail` field, and obtains the `qty` and `unit` fields. Subsequently, a new `Constituent` instance is created to associate the ingredient with the recipe. Please refer to the `CreateRecipeSerializer` below:
-
 
 ![code2](client/src/images/code2.png)
 
@@ -126,7 +123,7 @@ I implemented a custom authentication class called `JWTAuthentication` for back-
 I utilised React hooks to declare state variables and leveraged Axios to fetch data from the backend API across the front-end. This combination allowed me to seamlessly import data from the back-end into the corresponding front-end pages.
 
 ### Home page:
-One of the major challenges on the Home page was managing the liking and unliking of recipes by users. To achieve the desired functionality, I implemented a `handleLike` function. This function takes the `id` of the recipe being liked and performs the following actions: first, it checks if the `likes` state variable includes the `id` of the recipe. If the `id` is present, the function removes it from the `likes` state variable and decreases the like count for the recipe in the `likesReceivedCounts` state variable. Conversely, if the `id` is not already in the `likes` state variable, the function adds it to the `likes` state variable and increases the like count for the recipe in the `likesReceivedCounts` state variable. Finally, the function calls the `postLike` function with the `id` of the recipe being liked, sending a POST request to the API to update the like status. Please refer to the `handleLike` function below:
+One of the more challenging aspects of the Home page was managing the liking and 'unliking' of recipes by users. To achieve the desired functionality, I implemented a `handleLike` function. This function takes the `id` of the recipe being liked and performs the following actions: first, it checks if the `likes` state variable includes the `id` of the recipe. If the `id` is present, the function removes it from the `likes` state variable and decreases the like count for the recipe in the `likesReceivedCounts` state variable. Conversely, if the `id` is not already in the `likes` state variable, the function adds it to the `likes` state variable and increases the like count for the recipe in the `likesReceivedCounts` state variable. Finally, the function calls the `postLike` function with the `id` of the recipe being liked, sending a POST request to the API to update the like status. Please refer to the `handleLike` function below:
 
 ![code4](client/src/images/code4.png)
 
