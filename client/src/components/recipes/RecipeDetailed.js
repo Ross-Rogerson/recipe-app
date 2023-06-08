@@ -164,32 +164,34 @@ const RecipeDetailed = () => {
   const displayNutrition = () => {
     if (isActive.nutrition) {
       const { calories, carbohydrates, fat, fibre, protein, salt, saturates, sugars } = recipe
-      console.log(calories)
       return (
         <>
-          <div id="recipe-nutrition-line">
-            Calories: {calories}
+          <div className="recipe-nutrition-line">
+            Calories: {calories ? calories + 'g' : '-'}
           </div>
-          <div id="recipe-nutrition-line">
-            Carbohydrates: {carbohydrates}
+          <div className="recipe-nutrition-line">
+            Carbohydrates: {carbohydrates ? carbohydrates + 'g' : '-'}
           </div>
-          <div id="recipe-nutrition-line">
-            Sugar: {sugars}
+          <div className="recipe-nutrition-line">
+            Sugar: {sugars ? sugars + 'g' : '-'}
           </div>
-          <div id="recipe-nutrition-line">
-            Fat: {fat}
+          <div className="recipe-nutrition-line">
+            Fat: {fat ? fat + 'g' : '-'}
           </div>
-          <div id="recipe-nutrition-line">
-            Saturates: {saturates}
+          <div className="recipe-nutrition-line">
+            Saturates: {saturates ? saturates + 'g' : '-'}
           </div>
-          <div id="recipe-nutrition-line">
-            Fibre: {fibre}
+          <div className="recipe-nutrition-line">
+            Fibre: {fibre ? fibre + 'g' : '-'}
           </div>
-          <div id="recipe-nutrition-line">
-            Protein: {protein}
+          <div className="recipe-nutrition-line">
+            Protein: {protein ? protein + 'g' : '-'}
           </div>
-          <div id="recipe-nutrition-line">
-            Salt: {salt}
+          <div className="recipe-nutrition-line">
+            Salt: {salt ? salt + 'g' : '-'}
+          </div>
+          <div className="recipe-nutrition-caveat">
+            Approximate values per serving.
           </div>
         </>
       )
@@ -231,7 +233,7 @@ const RecipeDetailed = () => {
     setShowNutrition(true)
     ingredientsRef.current.style.display = 'none'
     methodRef.current.style.display = 'none'
-    nutritionRef.current.style.display = 'block'
+    nutritionRef.current.style.display = 'flex'
     setIsActive({
       method: false,
       ingredients: false,
@@ -267,24 +269,22 @@ const RecipeDetailed = () => {
             {/* <div id="feed-recipe-origin">{recipe.continent}</div> */}
             <div id="recipe-description-detailed">{recipe.description}</div>
           </section>
-          <div id="content-top-row">
-            <div id="post-socials">
-              <div id="recipe-likes-content">
-                <button id="feed-like-button" onClick={() => handleLike(userId)} disabled={!isAuthenticated()}>
-                  {
-                    likes.includes(userId) ?
-                      <FontAwesomeIcon icon={liked} id="feed-liked" />
-                      :
-                      <FontAwesomeIcon icon={faHeart} />
-                  }
-                </button>
+          <div id="post-socials">
+            <div id="recipe-likes-content">
+              <button id="feed-like-button" onClick={() => handleLike(userId)} disabled={!isAuthenticated()}>
+                {
+                  likes.includes(userId) ?
+                    <FontAwesomeIcon icon={liked} id="feed-liked" />
+                    :
+                    <FontAwesomeIcon icon={faHeart} />
+                }
+              </button>
+            </div>
+            <div id="post-owner-recipe">
+              <div id="post-owner-img-recipe">
+                <img src={recipe.owner.profile_image} />
               </div>
-              <div id="post-owner-recipe">
-                <div id="post-owner-img-recipe">
-                  <img src={recipe.owner.profile_image} />
-                </div>
-                <div id="post-recipe-owner-recipe">{recipe.owner.username}</div>
-              </div>
+              <div id="post-recipe-owner-recipe">{recipe.owner.username}</div>
             </div>
           </div>
           <section id="recipe-view-buttons">
@@ -296,8 +296,8 @@ const RecipeDetailed = () => {
             <section id="recipe-method" ref={methodRef} style={{ display: showMethod ? 'block' : 'none' }}>
               {recipe && displayMethod()}
             </section>
-            <section id="recipe-ingredients-section" ref={ingredientsRef} style={{ display: showIngredients ? 'block' : 'none' }}>
-              <section id="recipe-ingredients"></section>
+            <section id="recipe-ingredients" ref={ingredientsRef} style={{ display: showIngredients ? 'block' : 'none' }}>
+              {/* <section id="recipe-ingredients"></section> */}
               {recipe && displayIngredients()}
               <div id="button-container">
                 <button id="add-to-shopping-list" onClick={() => handleAddToShoppingList()}>
@@ -305,7 +305,7 @@ const RecipeDetailed = () => {
                 </button>
               </div>
             </section>
-            <section id="recipe-nutrition" ref={nutritionRef} style={{ display: showNutrition ? 'block' : 'none' }}>
+            <section id="recipe-nutrition" ref={nutritionRef} style={{ display: showNutrition ? 'flex' : 'none' }}>
               {recipe && displayNutrition()}
             </section>
           </section>
