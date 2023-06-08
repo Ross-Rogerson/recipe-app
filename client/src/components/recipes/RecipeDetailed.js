@@ -15,6 +15,7 @@ const RecipeDetailed = () => {
   const [isActive, setIsActive] = useState({
     method: true,
     ingredients: false,
+    nutrition: false,
   })
 
   const { recipeId } = useParams()
@@ -22,8 +23,10 @@ const RecipeDetailed = () => {
 
   const [showMethod, setShowMethod] = useState(true)
   const [showIngredients, setShowIngredients] = useState(false)
+  const [showNutrition, setShowNutrition] = useState(false)
   const ingredientsRef = useRef(null)
   const methodRef = useRef(null)
+  const nutritionRef = useRef(null)
 
   // Get data on mount
   useEffect(() => {
@@ -43,7 +46,6 @@ const RecipeDetailed = () => {
 
     const initialRecipeList = localStorage.getItem('RECIPE-LIST') ? JSON.parse(localStorage.getItem('RECIPE-LIST')) : []
     setRecipeList(initialRecipeList)
-
   }, [])
 
   // Initially set likes and recipe like counts
@@ -55,6 +57,7 @@ const RecipeDetailed = () => {
       }
       setLikes(likedRecipes)
     }
+    console.log(recipe)
   }, [recipe])
 
   // Handle like
@@ -123,7 +126,7 @@ const RecipeDetailed = () => {
   }, [list])
 
   const displayIngredients = () => {
-    if (recipe.ingredients) {
+    if (recipe.ingredients && isActive.ingredients) {
       return recipe.ingredients.map((ingredient, i) => {
         const { detail = ingredient['ingredient_detail'], unit, qty } = ingredient
         const { name, plural } = detail
@@ -146,7 +149,7 @@ const RecipeDetailed = () => {
   }
 
   const displayMethod = () => {
-    if (recipe.method) {
+    if (recipe.method && isActive.method) {
       const splitMethod = recipe.method.split('.')
       return splitMethod.map((step, i) => {
         return (
@@ -158,29 +161,82 @@ const RecipeDetailed = () => {
     }
   }
 
+  const displayNutrition = () => {
+    if (isActive.nutrition) {
+      const { calories, carbohydrates, fat, fibre, protein, salt, saturates, sugars } = recipe
+      console.log(calories)
+      return (
+        <>
+          <div id="recipe-nutrition-line">
+            Calories: {calories}
+          </div>
+          <div id="recipe-nutrition-line">
+            Carbohydrates: {carbohydrates}
+          </div>
+          <div id="recipe-nutrition-line">
+            Sugar: {sugars}
+          </div>
+          <div id="recipe-nutrition-line">
+            Fat: {fat}
+          </div>
+          <div id="recipe-nutrition-line">
+            Saturates: {saturates}
+          </div>
+          <div id="recipe-nutrition-line">
+            Fibre: {fibre}
+          </div>
+          <div id="recipe-nutrition-line">
+            Protein: {protein}
+          </div>
+          <div id="recipe-nutrition-line">
+            Salt: {salt}
+          </div>
+        </>
+      )
+    }
+  }
+
   // Show/Hide Display & Ingredients
   const handleShowIngredients = () => {
     setShowIngredients(true)
     setShowMethod(false)
+    setShowNutrition(false)
     ingredientsRef.current.style.display = 'block'
     methodRef.current.style.display = 'none'
+    nutritionRef.current.style.display = 'none'
     setIsActive({
       method: false,
       ingredients: true,
+      nutrition: false,
     })
-
   }
 
   const handleShowMethod = () => {
     setShowIngredients(false)
     setShowMethod(true)
+    setShowNutrition(false)
     ingredientsRef.current.style.display = 'none'
     methodRef.current.style.display = 'block'
+    nutritionRef.current.style.display = 'none'
     setIsActive({
       method: true,
       ingredients: false,
+      nutrition: false,
     })
+  }
 
+  const handleShowNutrition = () => {
+    setShowIngredients(false)
+    setShowMethod(false)
+    setShowNutrition(true)
+    ingredientsRef.current.style.display = 'none'
+    methodRef.current.style.display = 'none'
+    nutritionRef.current.style.display = 'block'
+    setIsActive({
+      method: false,
+      ingredients: false,
+      nutrition: true,
+    })
   }
 
   return (
@@ -234,6 +290,7 @@ const RecipeDetailed = () => {
           <section id="recipe-view-buttons">
             <button id="method-view-button" className={isActive.method ? 'view-button active' : 'view-button'} onClick={handleShowMethod}>Method</button>
             <button id="ingredients-view-button" className={isActive.ingredients ? 'view-button active' : 'view-button'} onClick={handleShowIngredients}>Ingredients</button>
+            <button id="nutrition-view-button" className={isActive.nutrition ? 'view-button active' : 'view-button'} onClick={handleShowNutrition}>Nutrition</button>
           </section>
           <section id="recipe-details">
             <section id="recipe-method" ref={methodRef} style={{ display: showMethod ? 'block' : 'none' }}>
@@ -247,6 +304,9 @@ const RecipeDetailed = () => {
                   Add to shopping list
                 </button>
               </div>
+            </section>
+            <section id="recipe-nutrition" ref={nutritionRef} style={{ display: showNutrition ? 'block' : 'none' }}>
+              {recipe && displayNutrition()}
             </section>
           </section>
         </>
