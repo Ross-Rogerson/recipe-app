@@ -33,19 +33,21 @@
   padding-top: 15px;
 }
 
-#clear-list-button {
-  border-radius: 6px;
-  margin-bottom: 2px;
+#clear-list-button, #copy-button, #remove-selected-button {
   color: black;
-  font-weight: bold;
-  height: 22px;
-  color: rgb(218, 1, 1);
-  background-color: transparent;
   border: none;
-  margin-right: 3px;
+  padding: 5px 0;
+  margin-right: 5px;
   cursor: pointer;
-  font-family: "Inter", sans-serif;
+  background-color: transparent;
   font-size: 16px;
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  border-bottom: 2px solid transparent;
+}
+
+#clear-list-button:hover, #copy-button:hover, #remove-selected-button:hover {
+  border-bottom: 2px solid black;
 }
 
 .strikethrough {
@@ -53,27 +55,11 @@
   text-decoration-thickness: 2px;
 }
 
-#remove-selected-button {
-  border-radius: 6px;
-  margin-bottom: 2px;
-  padding: 3px 5px;
-  color: rgb(233, 171, 0);
-  font-weight: bold;
-  text-align: center;
-  height: 44px;
-  width: 70px;
-  background-color: transparent;
-  border: none;
-  margin-right: 3px;
-  cursor: pointer;
-  font-family: "Inter", sans-serif;
-  font-size: 16px;
-}
-
 #clear-button-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 5px;
 }
 
 #shopping-list-item {
@@ -83,6 +69,7 @@
   align-items: center;
   height: 30px;
   margin-bottom: 5px;
+  margin-left: 5px;
 }
 
 .nameMargin {
@@ -93,6 +80,21 @@
   width: 100%;
   display: flex;
   padding-left: 15px;
+}
+
+.list-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin: 0;
+  width: 13px;
+  height: 11px;
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+.list-checkbox:checked {
+  background-color: black;
 }
 
 #shopping-display {
@@ -113,21 +115,25 @@
   }
 }
 
-#subs-button {
-  border-radius: 6px;
-  margin-bottom: 2px;
-  padding: 3px 5px;
-  color: black;
-  // font-weight: bold;
-  height: 22px;
-  background-color: rgb(255, 255, 255);
-  // border: 0.5px solid rgb(0, 0, 0);
-  border: 0;
-  margin-right: 3px;
-  font-family: "Inter", sans-serif;
-  cursor: pointer;
+#substitutes-button-container {
+  display: flex;
+  height: 70%;
+  margin-right: 15px;
 }
 
+.subs-info {
+  background-image: url('../../images/info.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
 
 #shopping-recipes {
   width: 100%;

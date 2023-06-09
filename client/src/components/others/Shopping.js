@@ -5,13 +5,14 @@ const Shopping = () => {
   const [list, setList] = useState([])
   const [recipeList, setRecipeList] = useState([])
   const [itemsToRemove, setItemsToRemove] = useState([])
+  const [displayItemInfo, setDisplayItemInfo] = useState([])
   const [isActive, setIsActive] = useState({
     shopping: true,
     recipes: false,
   })
-
   const [showRecipes, setShowRecipes] = useState(false)
   const [showShoppingList, setShowShoppingList] = useState(true)
+  const [copyList, setCopyList] = useState([])
   const recipesRef = useRef(null)
   const shoppingRef = useRef(null)
 
@@ -23,6 +24,10 @@ const Shopping = () => {
     const initialRecipeList = localStorage.getItem('RECIPE-LIST') ? JSON.parse(localStorage.getItem('RECIPE-LIST')) : []
     setRecipeList(initialRecipeList)
   }, [])
+
+  useEffect(() => {
+    console.log('LIST ->', list)
+  }, [list])
 
   // Show/Hide Display & Ingredients
   const handleShowShoppingList = () => {
@@ -47,12 +52,37 @@ const Shopping = () => {
     })
   }
 
+  const handleShowInfo = (item) => {
+    if (displayItemInfo.includes(item)) {
+      setDisplayItemInfo(displayItemInfo.filter(itemid => itemid !== itemid))
+    } else {
+      setDisplayItemInfo([...displayItemInfo, item])
+    }
+  }
+
   const handleSelectIngredient = (item) => {
     if (itemsToRemove.includes(item)) {
       setItemsToRemove(itemsToRemove.filter(itemId => itemId !== item))
     } else {
       setItemsToRemove([...itemsToRemove, item])
     }
+  }
+
+  const handleCopyList = () => {
+    const arrayToCopy = list.map((item, i) => {
+      const { name, plural, unit, qty } = item
+      const nameToUse = qty > 1 ? plural : name
+      const formattedListItem = unit ? `${qty} ${unit} ${nameToUse}` : `${qty} ${nameToUse}`
+      return formattedListItem
+    })
+    const textToCopy = arrayToCopy.join('\n')
+    navigator.clipboard.writeText(textToCopy)
+      .then(() => {
+        console.log('Text copied to clipboard')
+      })
+      .catch((err) => {
+        console.error('Error copying text:', err)
+      })
   }
 
   const displayShoppingList = () => {
@@ -63,7 +93,7 @@ const Shopping = () => {
       const selected = itemsToRemove.includes(item)
       return (
         <div id="shopping-list-item" key={i} className={i}>
-          <input type="checkbox" id={`item${id}`} name={`item${id}`} onChange={() => handleSelectIngredient(item)} checked={itemsToRemove.includes(item)} />
+          <input type="checkbox" id={`item${id}`} className="list-checkbox" name={`item${id}`} onChange={() => handleSelectIngredient(item)} checked={itemsToRemove.includes(item)} />
           <label id="shopping-list-item-details" htmlFor={`item${id}`}>
             <div id="shopping-list-item-qty" className={selected ? 'strikethrough' : ''} >
               {qty ? Math.round(qty, 0) : ''}
@@ -75,9 +105,8 @@ const Shopping = () => {
               {qty > 1 ? plural : name}
             </div>
           </label>
-          <div id="substitutes-container">
-            <button id="subs-button">
-              {/* Substitutes */}
+          <div id="substitutes-button-container">
+            <button id={`${id}`} className="subs-info" onChange={() => handleShowInfo(item)}>
             </button>
           </div>
           <div id="shopping-list-item-subs" style={{ display: showShoppingList ? 'none' : 'none' }}>
@@ -114,10 +143,6 @@ const Shopping = () => {
     setItemsToRemove([])
   }
 
-  useEffect(() => {
-    localStorage.setItem('SHOPPING-LIST', JSON.stringify(list))
-  }, [list])
-
   const handleClearList = () => {
     setList([])
     setRecipeList([])
@@ -137,17 +162,30 @@ const Shopping = () => {
           {
             list.length > 0 ?
               <div id="clear-button-container">
-                <button id="remove-selected-button" onClick={handleRemoveSelected}>
-                  Remove
-                </button>
+                <div id="copy-button-container">
+                  <button id="copy-button" onClick={handleCopyList}>
+                    Copy List
+                  </button>
+                  <div id="copy-successful"></div>
+                </div>
                 <button id="clear-list-button" onClick={handleClearList}>
-                  Clear list
+                  Clear List
                 </button>
               </div>
               :
               <div id="no-recipes">Your shopping list is currently empty.</div>
           }
           {displayShoppingList()}
+          {
+            itemsToRemove.length > 0 ?
+              <div id="clear-button-container">
+                <button id="remove-selected-button" onClick={handleRemoveSelected}>
+                  Remove Selected
+                </button>
+              </div>
+              :
+              ''
+          }
         </section>
         <section id="shopping-recipes" ref={recipesRef} style={{ display: showRecipes ? 'flex' : 'none' }}>
           {

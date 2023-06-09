@@ -67,21 +67,20 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   margin-top: 5px;
   padding: 0 5px;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 #content-top-row {
-
   max-width: 600px;
   max-height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 5px;
-  width: calc(100% - 10px);
+  // width: calc(100% - 10px);
+  width: 100%;
 }
 
 #recipe-likes-content {
@@ -92,7 +91,6 @@
 
   button {
     max-width: 25px;
-    max-height: 25px;
     background-color: transparent;
     border: none;
     padding: 0;
@@ -102,9 +100,10 @@
 
     svg{
       max-width: 25px;
-      max-height: 25px;
+      max-height: 30px;
       width: inherit;
       height: inherit;
+      padding: 0;
     }
   }
 }
@@ -141,6 +140,7 @@
   max-width: 600px;
   font-size: 12px;
   margin-bottom: 5px;
+  padding-right: 5px;
 }
 
 #feed-recipe-date {
