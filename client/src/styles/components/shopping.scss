@@ -50,6 +50,42 @@
   border-bottom: 2px solid black;
 }
 
+#copy-button-container {
+  display: flex;
+  align-items: center;
+}
+
+#copy-button {
+  width: 74px;
+}
+
+#copy-button.success-colour {
+  color: rgb(0, 176, 80);
+}
+
+#copy-successful {
+  background-image: url('../../images/tick.png');
+  background-position: center;
+  background-size: 90%;
+  background-repeat: no-repeat;
+  // border: 2px solid rgb(0, 176, 80);
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  margin-bottom: 2px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+
+#copy-successful.fade-in {
+  opacity: 1;
+}
+
+#copy-successful.fade-out {
+  opacity: 0;
+}
+
 .strikethrough {
   text-decoration: line-through;
   text-decoration-thickness: 2px;
@@ -167,6 +203,4 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-
 }

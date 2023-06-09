@@ -12,9 +12,10 @@ const Shopping = () => {
   })
   const [showRecipes, setShowRecipes] = useState(false)
   const [showShoppingList, setShowShoppingList] = useState(true)
-  const [copyList, setCopyList] = useState([])
   const recipesRef = useRef(null)
   const shoppingRef = useRef(null)
+  const [successful, setSuccessful] = useState(false)
+  const [successColour, setSuccessColour] = useState(false)
 
   useEffect(() => {
     // Set lists: if falsey, empty array
@@ -78,12 +79,34 @@ const Shopping = () => {
     const textToCopy = arrayToCopy.join('\n')
     navigator.clipboard.writeText(textToCopy)
       .then(() => {
+        handleFadeIn()
         console.log('Text copied to clipboard')
       })
       .catch((err) => {
         console.error('Error copying text:', err)
       })
   }
+
+  const handleFadeIn = () => {
+    setSuccessful(true)
+    setSuccessColour(true)
+    setTimeout(() => {
+      setSuccessful(false)
+    }, 800)
+  }
+
+  useEffect(() => {
+    const element = document.getElementById('copy-button')
+    if (element) {
+      successful ?
+        element.innerText = 'Copied!'
+        :
+        setTimeout(() => {
+          element.innerText = 'Copy List'
+          setSuccessColour(false)
+        }, 500)
+    }
+  }, [successful])
 
   const displayShoppingList = () => {
     return list.map((item, i) => {
@@ -162,11 +185,11 @@ const Shopping = () => {
           {
             list.length > 0 ?
               <div id="clear-button-container">
-                <div id="copy-button-container">
-                  <button id="copy-button" onClick={handleCopyList}>
+                <div id="copy-button-container" >
+                  <button id="copy-button" onClick={handleCopyList} className={successColour ? 'success-colour' : ''}>
                     Copy List
                   </button>
-                  <div id="copy-successful"></div>
+                  <div id="copy-successful" className={successful ? 'fade-in' : 'fade-out'}></div>
                 </div>
                 <button id="clear-list-button" onClick={handleClearList}>
                   Clear List
