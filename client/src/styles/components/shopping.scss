@@ -37,7 +37,6 @@
   color: black;
   border: none;
   padding: 5px 0;
-  margin-right: 5px;
   cursor: pointer;
   background-color: transparent;
   font-size: 16px;
@@ -103,7 +102,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 30px;
+  min-height: 25px;
   margin-bottom: 5px;
   margin-left: 5px;
 }
@@ -113,9 +112,8 @@
   width: 100%;
   display: flex;
   align-items: center;
-  height: 30px;
-  min-height: 30px;
-  margin-bottom: 5px;
+  height: 25px;
+  min-height: 25px;
   margin-left: 5px;
 }
 
@@ -141,7 +139,9 @@
 }
 
 .shopping-list-item-subs{
-  height: 30px;
+  font-size: 12px;
+  padding: 5px 33px 0 31px;
+  text-align: left;
 }
 
 .list-checkbox:checked {

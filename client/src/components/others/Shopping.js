@@ -136,7 +136,7 @@ const Shopping = () => {
             </div>
           </div>
           <div className="shopping-list-item-subs" style={{ display: displayItemInfo.includes(item) ? 'block' : 'none' }}>
-            {substitutes}
+            Substitutes: {substitutes}
           </div>
         </div>
       )
