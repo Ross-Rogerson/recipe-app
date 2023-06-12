@@ -56,7 +56,7 @@ const Shopping = () => {
 
   const handleShowInfo = (item) => {
     if (displayItemInfo.includes(item)) {
-      setDisplayItemInfo(displayItemInfo.filter(itemid => itemid !== itemid))
+      setDisplayItemInfo(displayItemInfo.filter(itemId => itemId !== item))
     } else {
       setDisplayItemInfo([...displayItemInfo, item])
     }
@@ -135,7 +135,7 @@ const Shopping = () => {
               </button>
             </div>
           </div>
-          <div id="shopping-list-item-subs" style={{ display: displayItemInfo.includes(item) ? 'block' : 'none' }}>
+          <div className="shopping-list-item-subs" style={{ display: displayItemInfo.includes(item) ? 'block' : 'none' }}>
             {substitutes}
           </div>
         </div>

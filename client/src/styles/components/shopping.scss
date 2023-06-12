@@ -114,6 +114,7 @@
   display: flex;
   align-items: center;
   height: 30px;
+  min-height: 30px;
   margin-bottom: 5px;
   margin-left: 5px;
 }
@@ -137,6 +138,10 @@
   height: 11px;
   border: 1px solid black;
   border-radius: 2px;
+}
+
+.shopping-list-item-subs{
+  height: 30px;
 }
 
 .list-checkbox:checked {
