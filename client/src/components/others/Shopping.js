@@ -12,6 +12,7 @@ const Shopping = () => {
   })
   const [showRecipes, setShowRecipes] = useState(false)
   const [showShoppingList, setShowShoppingList] = useState(true)
+  const [showSubs, setShowSubs] = useState(true)
   const recipesRef = useRef(null)
   const shoppingRef = useRef(null)
   const [successful, setSuccessful] = useState(false)
@@ -116,23 +117,25 @@ const Shopping = () => {
       const selected = itemsToRemove.includes(item)
       return (
         <div id="shopping-list-item" key={i} className={i}>
-          <input type="checkbox" id={`item${id}`} className="list-checkbox" name={`item${id}`} onChange={() => handleSelectIngredient(item)} checked={itemsToRemove.includes(item)} />
-          <label id="shopping-list-item-details" htmlFor={`item${id}`}>
-            <div id="shopping-list-item-qty" className={selected ? 'strikethrough' : ''} >
-              {qty ? Math.round(qty, 0) : ''}
+          <div className="standard-item-details">
+            <input type="checkbox" id={`item${id}`} className="list-checkbox" name={`item${id}`} onChange={() => handleSelectIngredient(item)} checked={itemsToRemove.includes(item)} />
+            <label id="shopping-list-item-details" htmlFor={`item${id}`}>
+              <div id="shopping-list-item-qty" className={selected ? 'strikethrough' : ''} >
+                {qty ? Math.round(qty, 0) : ''}
+              </div>
+              <div id="shopping-list-item-unit" className={margin & selected ? 'add-margin strikethrough' : margin ? 'add-margin' : selected ? 'strikethrough' : ''}>
+                {unit}
+              </div>
+              <div id="shopping-list-item-name" className={!nameMargin & selected ? 'add-margin  strikethrough' : !nameMargin ? 'add-margin' : selected ? 'strikethrough' : ''}>
+                {qty > 1 ? plural : name}
+              </div>
+            </label>
+            <div id="substitutes-button-container">
+              <button id={`${id}`} className="subs-info" onClick={() => handleShowInfo(item)}>
+              </button>
             </div>
-            <div id="shopping-list-item-unit" className={margin & selected ? 'add-margin strikethrough' : margin ? 'add-margin' : selected ? 'strikethrough' : ''}>
-              {unit}
-            </div>
-            <div id="shopping-list-item-name" className={!nameMargin & selected ? 'add-margin  strikethrough' : !nameMargin ? 'add-margin' : selected ? 'strikethrough' : ''}>
-              {qty > 1 ? plural : name}
-            </div>
-          </label>
-          <div id="substitutes-button-container">
-            <button id={`${id}`} className="subs-info" onChange={() => handleShowInfo(item)}>
-            </button>
           </div>
-          <div id="shopping-list-item-subs" style={{ display: showShoppingList ? 'none' : 'none' }}>
+          <div id="shopping-list-item-subs" style={{ display: displayItemInfo.includes(item) ? 'block' : 'none' }}>
             {substitutes}
           </div>
         </div>

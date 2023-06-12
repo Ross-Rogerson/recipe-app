@@ -70,6 +70,7 @@
   margin-top: 5px;
   padding: 0 5px;
   margin-left: 10px;
+  margin-right: 10px;
 }
 
 #content-top-row {
@@ -125,10 +126,17 @@
   div {
     max-width: 40px;
     text-align: center;
-    width: 7vw;
+    width: 26.25px;
   }
   div:not(:last-child) {
     border-right: 2px solid rgb(67, 67, 67);
+  }
+  div:last-child {
+    width: 22px;
+    text-align: right;
+  }
+  div:first-child {
+    text-align: center;
   }
 }
 
